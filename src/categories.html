@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Browse all bag categories at Nilco Bags - Backpacks, Handbags, Shoulder Bags, Tote Bags, Crossbody Bags, Clutch Bags, and Wallets." />
+  <link rel="stylesheet" href="@@webRoot/node_modules/swiper/swiper-bundle.min.css" />
+  @@include("partials/head.html")
+  <title>Categories - Nilco Bags</title>
+  <style>
+    .category-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      background-color: #ffffff !important;
+      border-color: #e5e7eb !important;
+    }
+    .category-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+      background-color: #ffffff !important;
+      border-color: #e5e7eb !important;
+    }
+    .category-card:active {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.1);
+      background-color: #ffffff !important;
+      border-color: #e5e7eb !important;
+    }
+    .category-card:focus {
+      outline: none;
+      background-color: #ffffff !important;
+      border-color: #e5e7eb !important;
+    }
+    .category-card:visited {
+      background-color: #ffffff !important;
+      border-color: #e5e7eb !important;
+    }
+    .category-icon {
+      transition: transform 0.3s ease;
+    }
+    .category-card:hover .category-icon {
+      transform: scale(1.1);
+    }
+    /* Mobile App Horizontal Banner Styling */
+    .categories-hero-slider {
+      border-radius: 18px !important;
+      overflow: hidden;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.07);
+    }
+    .categories-slide-item {
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+    }
+    @media (max-width: 767.98px) {
+      .categories-hero-slider .swiper-slide {
+        aspect-ratio: 16 / 7.2 !important;
+        min-height: 145px !important;
+        height: auto !important;
+        border-radius: 18px !important;
+      }
+      .categories-hero-slider .swiper-pagination {
+        bottom: 8px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+      }
+      .categories-hero-slider .swiper-pagination-bullet {
+        width: 5px;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.7);
+        opacity: 1;
+        border: none;
+        border-radius: 9999px;
+        margin: 0 !important;
+        transition: all 0.3s ease;
+      }
+      .categories-hero-slider .swiper-pagination-bullet-active {
+        width: 18px;
+        height: 5px;
+        background: #facc15;
+        border-radius: 9999px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+      }
+    }
+    @media (min-width: 768px) {
+      .categories-hero-slider {
+        border-radius: 24px !important;
+      }
+      .categories-hero-slider .swiper-slide {
+        min-height: 280px;
+        height: 320px;
+      }
+    }
+    .categories-banner-slide-1 {
+      background-image: url(@@webRoot/assets/images/slider/New/slide-01.png);
+    }
+    .categories-banner-slide-2 {
+      background-image: url(@@webRoot/assets/images/banner/banner1.png);
+    }
+    .categories-banner-slide-3 {
+      background-image: url(@@webRoot/assets/images/banner/banner2.png);
+    }
+    #categoryProductsContainer {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      transition: opacity 0.2s ease;
+    }
+    @media (min-width: 640px) {
+      #categoryProductsContainer {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+    }
+    @media (min-width: 1024px) {
+      #categoryProductsContainer {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 20px;
+      }
+    }
+    @media (min-width: 1280px) {
+      #categoryProductsContainer {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 20px;
+      }
+    }
+    .card-product {
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+    }
+    .card-product:hover {
+      box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.1);
+    }
+    .category-empty {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 24px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  @@include("partials/navbar.html")
+  <script type="module" src="js/products.js"></script>
+
+  <main class="pb-12">
+    <!-- Mobile App Horizontal Hero Banner -->
+    <section class="mt-2.5 sm:mt-4 md:mt-6 mb-3">
+      <div class="container max-w-7xl mx-auto px-3 sm:px-4">
+        <div class="swiper-container swiper categories-hero-slider overflow-hidden" id="swiper-categories" data-pagination-type="" data-speed="500"
+          data-space-between="20" data-pagination="true" data-navigation="false" data-autoplay="true"
+          data-autoplay-delay="3500" data-effect="slide"
+          data-breakpoints='{"480": {"slidesPerView": 1}, "768": {"slidesPerView": 1}, "1024": {"slidesPerView": 1}}'>
+          <div class="swiper-wrapper">
+            <div class="swiper-slide categories-slide-item categories-banner-slide-1"></div>
+            <div class="swiper-slide categories-slide-item categories-banner-slide-2"></div>
+            <div class="swiper-slide categories-slide-item categories-banner-slide-3"></div>
+          </div>
+          <!-- App Pill Pagination -->
+          <div class="swiper-pagination !bottom-3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="mt-8 sm:mt-12">
+      <div class="container max-w-7xl mx-auto px-4">
+        <h1 class="text-lg font-bold text-gray-900 mb-6">Bag Categories</h1>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6">
+          
+          <!-- Backpacks -->
+          <div class="category-card bg-white rounded-xl border border-gray-200 p-4 sm:p-5 flex flex-col items-center text-center shadow-sm" data-category="Backpacks">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+              <img src="assets/images/products/new-products/p1.png" alt="Backpacks" class="w-full h-full object-contain p-1.5" />
+            </div>
+            <h3 class="text-sm sm:text-base font-bold text-gray-900 mb-1">Backpacks</h3>
+            <p class="text-xs sm:text-sm text-gray-600">Travel & School Bags</p>
+          </div>
+
+          <!-- Handbags -->
+          <div class="category-card bg-white rounded-xl border border-gray-200 p-4 sm:p-5 flex flex-col items-center text-center shadow-sm" data-category="Handbags">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+              <img src="assets/images/products/new-products/p2.png" alt="Handbags" class="w-full h-full object-contain p-1.5" />
+            </div>
+            <h3 class="text-sm sm:text-base font-bold text-gray-900 mb-1">Handbags</h3>
+            <p class="text-xs sm:text-sm text-gray-600">Elegant & Stylish</p>
+          </div>
+
+          <!-- Shoulder Bags -->
+          <div class="category-card bg-white rounded-xl border border-gray-200 p-4 sm:p-5 flex flex-col items-center text-center shadow-sm" data-category="Shoulder Bags">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+              <img src="assets/images/products/new-products/p3.png" alt="Shoulder Bags" class="w-full h-full object-contain p-1.5" />
+            </div>
+            <h3 class="text-sm sm:text-base font-bold text-gray-900 mb-1">Shoulder Bags</h3>
+            <p class="text-xs sm:text-sm text-gray-600">Comfort & Style</p>
+          </div>
+
+          <!-- Tote Bags -->
+          <div class="category-card bg-white rounded-xl border border-gray-200 p-4 sm:p-5 flex flex-col items-center text-center shadow-sm" data-category="Tote Bags">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+              <img src="assets/images/products/new-products/p4.png" alt="Tote Bags" class="w-full h-full object-contain p-1.5" />
+            </div>
+            <h3 class="text-sm sm:text-base font-bold text-gray-900 mb-1">Tote Bags</h3>
+            <p class="text-xs sm:text-sm text-gray-600">Spacious & Practical</p>
+          </div>
+
+          <!-- Crossbody Bags -->
+          <div class="category-card bg-white rounded-xl border border-gray-200 p-4 sm:p-5 flex flex-col items-center text-center shadow-sm" data-category="Crossbody Bags">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+              <img src="assets/images/products/new-products/p5.png" alt="Crossbody Bags" class="w-full h-full object-contain p-1.5" />
+            </div>
+            <h3 class="text-sm sm:text-base font-bold text-gray-900 mb-1">Crossbody Bags</h3>
+            <p class="text-xs sm:text-sm text-gray-600">Hands-Free Convenience</p>
+          </div>
+
+          <!-- Clutch Bags -->
+          <div class="category-card bg-white rounded-xl border border-gray-200 p-4 sm:p-5 flex flex-col items-center text-center shadow-sm" data-category="Clutch Bags">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+              <img src="assets/images/products/new-products/p6.png" alt="Clutch Bags" class="w-full h-full object-contain p-1.5" />
+            </div>
+            <h3 class="text-sm sm:text-base font-bold text-gray-900 mb-1">Clutch Bags</h3>
+            <p class="text-xs sm:text-sm text-gray-600">Evening & Party</p>
+          </div>
+
+          <!-- Wallets -->
+          <div class="category-card bg-white rounded-xl border border-gray-200 p-4 sm:p-5 flex flex-col items-center text-center shadow-sm" data-category="Wallets">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+              <img src="assets/images/products/new-products/p7.png" alt="Wallets" class="w-full h-full object-contain p-1.5" />
+            </div>
+            <h3 class="text-sm sm:text-base font-bold text-gray-900 mb-1">Wallets</h3>
+            <p class="text-xs sm:text-sm text-gray-600">Compact & Secure</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Category Products Section (Hidden by default, shown when category is clicked) -->
+    <section id="categoryProductsSection" class="mt-8 sm:mt-12 hidden">
+      <div class="container max-w-7xl mx-auto px-4">
+        <div class="flex items-center justify-between mb-6">
+          <h2 id="categoryTitle" class="text-xl sm:text-2xl font-bold text-gray-900">Category Products</h2>
+          <button id="backToCategories" class="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium text-sm transition">
+            ← Back to Categories
+          </button>
+        </div>
+        <div id="categoryProductsContainer">
+          <!-- Products will be loaded here -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  @@include("partials/footer.html")
+
+  <script src="@@webRoot/assets/js/vendors/countdown.js"></script>
+  <script src="@@webRoot/node_modules/tiny-slider/dist/min/tiny-slider.js"></script>
+  <script src="@@webRoot/assets/js/vendors/tns-slider.js"></script>
+  <script src="@@webRoot/assets/js/vendors/zoom.js"></script>
+  <script src="@@webRoot/assets/js/vendors/language.js"></script>
+  <script src="@@webRoot/node_modules/swiper/swiper-bundle.min.js"></script>
+  <script src="@@webRoot/assets/js/vendors/swiper.js"></script>
+
+  <script type="module">
+    import { createProductCard, fetchProductsFromSupabase } from './js/products.js';
+
+    let allProducts = [];
+    let currentCategory = null;
+
+    // Load all products on page load
+    async function loadProducts() {
+      try {
+        allProducts = await fetchProductsFromSupabase();
+      } catch (error) {
+        console.error('Error loading products:', error);
+      }
+    }
+
+    // Show products for selected category
+    function showCategoryProducts(category) {
+      currentCategory = category;
+      const filteredProducts = allProducts.filter(p => 
+        p.category && p.category.toLowerCase() === category.toLowerCase()
+      );
+
+      const container = document.getElementById('categoryProductsContainer');
+      const title = document.getElementById('categoryTitle');
+      const section = document.getElementById('categoryProductsSection');
+      const categoriesSection = document.querySelector('.grid.grid-cols-2');
+
+      title.textContent = `${category} Products`;
+
+      if (filteredProducts.length === 0) {
+        container.innerHTML = `
+          <div class="category-empty">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-4">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+              <line x1="9" y1="9" x2="9.01" y2="9"/>
+              <line x1="15" y1="9" x2="15.01" y2="9"/>
+            </svg>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">No products found</h3>
+            <p class="text-gray-600">We don't have any products in this category yet.</p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = filteredProducts.map(product => createProductCard(product)).join('');
+      }
+
+      // Hide categories section and show products section
+      categoriesSection.style.display = 'none';
+      section.classList.remove('hidden');
+      
+      // Scroll to products section
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Back to categories
+    function backToCategories() {
+      const section = document.getElementById('categoryProductsSection');
+      const categoriesSection = document.querySelector('.grid.grid-cols-2');
+
+      section.classList.add('hidden');
+      categoriesSection.style.display = 'grid';
+      currentCategory = null;
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadProducts();
+
+      // Add click handlers to category cards
+      document.querySelectorAll('.category-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const category = card.dataset.category;
+          showCategoryProducts(category);
+        });
+      });
+
+      // Back button handler
+      document.getElementById('backToCategories').addEventListener('click', backToCategories);
+    });
+  </script>
+  @@include("partials/buy-template.html")
+  @@include("partials/ad-modal.html")
+</body>
+</html>

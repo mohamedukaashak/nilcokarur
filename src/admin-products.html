@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Libs CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Display:wght@400;700&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Product Management - Nilco Bags Admin</title>
+    <style>
+        :root {
+            --admin-primary: #facc15;
+            --admin-primary-dark: #eab308;
+            --admin-dark: #0f172a;
+            --admin-secondary: #64748b;
+            --admin-bg: #f8fafc;
+        }
+
+        body {
+            background-color: var(--admin-bg);
+            font-family: 'Google Sans', 'Product Sans', sans-serif;
+            color: #0f172a;
+        }
+
+        .admin-header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1.15rem 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .admin-header h1 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin: 0;
+            color: #0f172a;
+            letter-spacing: -0.01em;
+        }
+
+        .admin-brand-icon {
+            background: #0f172a;
+            color: #facc15;
+            border-radius: 0.75rem;
+            padding: 0.55rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .admin-card {
+            background: white;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .admin-card-header {
+            padding: 1.15rem 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffff;
+        }
+
+        .admin-card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 0;
+            color: #0f172a;
+        }
+
+        .admin-card-body {
+            padding: 1.5rem;
+        }
+
+        .btn-admin {
+            background: #facc15;
+            border-color: #facc15;
+            color: #0f172a;
+            font-weight: 700;
+            border-radius: 0.6rem;
+            padding: 0.45rem 1rem;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-admin:hover {
+            background: #eab308;
+            border-color: #eab308;
+            color: #0f172a;
+            transform: translateY(-1px);
+        }
+
+        .table-responsive {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .table-admin th {
+            background: #f8fafc;
+            font-weight: 700;
+            color: #475569;
+            border-bottom: 2px solid #e2e8f0;
+            padding: 0.85rem 1rem;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .table-admin td {
+            padding: 0.85rem 1rem;
+            vertical-align: middle;
+            font-size: 0.875rem;
+        }
+
+        .badge-admin-active {
+            background: #ffffff;
+            color: #047857;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.35rem 0.65rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            border: none;
+            white-space: nowrap;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.10), 0 0.5px 2px rgba(0,0,0,0.07);
+        }
+
+        .badge-admin-inactive {
+            background: #ffffff;
+            color: #b91c1c;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.35rem 0.65rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            border: none;
+            white-space: nowrap;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.10), 0 0.5px 2px rgba(0,0,0,0.07);
+        }
+
+        .badge-featured {
+            background: #ffffff;
+            color: #854d0e;
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 9999px;
+            border: none;
+            white-space: nowrap;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.10), 0 0.5px 2px rgba(0,0,0,0.07);
+        }
+
+        .product-image-preview {
+            width: 54px;
+            height: 54px;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            padding: 2px;
+        }
+
+        /* Upload Dropzone Styles */
+        .dropzone-box {
+            border: 2px dashed #cbd5e1;
+            border-radius: 0.85rem;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            background: #f8fafc;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dropzone-box:hover, .dropzone-box.dragover {
+            border-color: #facc15;
+            background: #fefce8;
+        }
+
+        .uploaded-photo-card {
+            position: relative;
+            width: 82px;
+            height: 82px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            background: #fff;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+
+        .uploaded-photo-card img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .uploaded-photo-card .remove-photo-btn {
+            position: absolute;
+            top: 3px;
+            right: 3px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+
+        .uploaded-photo-card .remove-photo-btn:hover {
+            transform: scale(1.15);
+            background: #dc2626;
+        }
+
+        .uploaded-photo-card .primary-photo-badge {
+            position: absolute;
+            bottom: 2px;
+            left: 2px;
+            right: 2px;
+            background: rgba(15, 23, 42, 0.85);
+            color: #facc15;
+            font-size: 9px;
+            font-weight: 700;
+            text-align: center;
+            border-radius: 3px;
+            padding: 1px 0;
+            text-transform: uppercase;
+        }
+
+        /* Toast Notifications */
+        .notification {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            padding: 0.85rem 1.25rem;
+            border-radius: 0.75rem;
+            color: white;
+            font-weight: 600;
+            z-index: 99999;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease;
+            max-width: calc(100vw - 40px);
+        }
+
+        .notification.success { background: #0f172a; border-left: 4px solid #facc15; color: #fff; }
+        .notification.error { background: #dc2626; }
+        .notification.info { background: #0284c7; }
+
+        /* Bootstrap green overrides → Nilco Yellow */
+        .bg-success { background-color: #facc15 !important; color: #0f172a !important; }
+        .text-success { color: #854d0e !important; }
+        .border-success { border-color: #facc15 !important; }
+        .badge.bg-success { background-color: #ffffff !important; color: #047857 !important; border: none !important; box-shadow: 0 1px 4px rgba(0,0,0,0.10), 0 0.5px 2px rgba(0,0,0,0.07) !important; }
+        .btn-outline-success { color: #854d0e; border-color: #fde047; background-color: #fefce8; font-weight: 600; }
+        .btn-outline-success:hover { background-color: #facc15; border-color: #facc15; color: #0f172a; }
+        .form-control:focus, .form-select:focus { border-color: #facc15; box-shadow: 0 0 0 0.2rem rgba(250,204,21,0.25); }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .tag-pill {
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s;
+        }
+
+        /* ── Sidebar layout (matches admin-dashboard) ── */
+        :root {
+            --corp-bg: #f8fafc;
+            --corp-surface: #ffffff;
+            --corp-border: #e2e8f0;
+            --corp-text-main: #0f172a;
+            --corp-text-muted: #64748b;
+            --corp-sidebar-width: 260px;
+        }
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+        .admin-sidebar {
+            width: var(--corp-sidebar-width);
+            background: #ffffff;
+            border-right: 1px solid var(--corp-border);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+            transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+            display: flex;
+            flex-direction: column;
+        }
+        .admin-sidebar-header {
+            padding: 1.25rem 1.35rem;
+            border-bottom: 1px solid var(--corp-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .admin-sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--corp-text-main);
+        }
+        .admin-nav {
+            padding: 1rem 0.75rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .admin-nav-section {
+            padding: 0.85rem 0.75rem 0.35rem;
+            font-size: 0.675rem;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .admin-nav-item {
+            display: flex;
+            align-items: center;
+            padding: 0.6rem 0.85rem;
+            color: #475569;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.875rem;
+            border-radius: 8px;
+            transition: all 0.15s ease;
+            gap: 10px;
+        }
+        .admin-nav-item:hover { background: #f1f5f9; color: #0f172a; }
+        .admin-nav-item.active { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .admin-nav-item svg, .admin-nav-item i { font-size: 1.15rem; color: #64748b; flex-shrink: 0; }
+        .admin-nav-item.active i { color: #0f172a; }
+        .admin-sidebar-footer {
+            padding: 0.85rem;
+            border-top: 1px solid var(--corp-border);
+            margin-top: auto;
+        }
+        .admin-main {
+            flex: 1;
+            margin-left: var(--corp-sidebar-width);
+            transition: margin-left 0.25s ease;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .corp-page-header {
+            background: #ffffff;
+            border-bottom: 1px solid var(--corp-border);
+            padding: 0.85rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .corp-page-header h1 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0;
+            color: #0f172a;
+            letter-spacing: -0.015em;
+        }
+        .corp-page-header p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--corp-text-muted);
+        }
+        .admin-user-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 4px 10px 4px 4px;
+            background: #f8fafc;
+            border: 1px solid var(--corp-border);
+            border-radius: 9999px;
+        }
+        .admin-avatar-sm {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: #0f172a;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .admin-user-name { font-weight: 600; color: #0f172a; font-size: 0.825rem; line-height: 1.2; }
+        .admin-user-role { font-size: 0.7rem; color: var(--corp-text-muted); line-height: 1; }
+        .btn-live-store {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 0.45rem 0.85rem; border-radius: 8px;
+            border: 1px solid var(--corp-border);
+            background: #ffffff; color: #475569;
+            font-size: 0.825rem; font-weight: 600;
+            text-decoration: none; transition: all 0.15s ease;
+        }
+        .btn-live-store:hover { background: #f8fafc; color: #0f172a; border-color: #cbd5e1; }
+        .mobile-menu-toggle {
+            display: none;
+            background: #f8fafc;
+            border: 1px solid var(--corp-border);
+            border-radius: 8px;
+            padding: 0.4rem 0.55rem;
+            cursor: pointer;
+            color: #0f172a;
+        }
+        .corp-content { padding: 2rem; flex: 1; }
+        @media (max-width: 1024px) {
+            .admin-sidebar { transform: translateX(-100%); box-shadow: 0 0 35px rgba(0,0,0,0.15); }
+            .admin-sidebar.open { transform: translateX(0); }
+            .admin-main { margin-left: 0; }
+            .mobile-menu-toggle { display: block; }
+            .corp-page-header { padding: 0.75rem 1.25rem; }
+            .corp-content { padding: 1.25rem 1rem; }
+        }
+        @media (max-width: 576px) {
+            .corp-page-header h1 { font-size: 1rem; }
+            .admin-user-info { display: none; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Mobile Sidebar Overlay -->
+    <div id="sidebarOverlay" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.5); backdrop-filter:blur(2px); z-index:999;"></div>
+
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="admin-sidebar-header">
+                <a href="admin-dashboard.html" class="admin-sidebar-brand">
+                    <img src="assets/images/logo/logo.png" alt="Nilco Bags" style="max-height: 38px; width: auto; object-fit: contain;" />
+                </a>
+                <button id="sidebarCloseBtn" style="display:none; background:none; border:none; color:#64748b; font-size:1.25rem; line-height:1; cursor:pointer; padding:0.25rem;" aria-label="Close sidebar">&times;</button>
+            </div>
+
+            <nav class="admin-nav">
+                <div class="admin-nav-section">Overview</div>
+                <a href="admin-dashboard.html" class="admin-nav-item">
+                    <i class="ti ti-dashboard"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <div class="admin-nav-section">Catalog</div>
+                <a href="admin-products.html" class="admin-nav-item active">
+                    <i class="ti ti-box"></i>
+                    <span>Products</span>
+                </a>
+
+                <div class="admin-nav-section">Access &amp; Security</div>
+                <a href="admin-users.html" class="admin-nav-item">
+                    <i class="ti ti-users"></i>
+                    <span>Admin Users</span>
+                </a>
+
+                <div class="admin-nav-section">System</div>
+                <a href="admin-dashboard.html#settings" class="admin-nav-item">
+                    <i class="ti ti-settings"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="admin-sidebar-footer">
+                <a href="#" id="adminLogoutBtn" class="admin-nav-item text-danger w-100">
+                    <i class="ti ti-logout text-danger"></i>
+                    <span>Sign Out</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Page Header -->
+            <header class="corp-page-header">
+                <div class="d-flex align-items-center gap-2">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                        <i class="ti ti-menu-2 fs-5"></i>
+                    </button>
+                    <div>
+                        <h1>Product Catalog</h1>
+                        <p class="d-none d-sm-block">Manage inventory, upload photos &amp; publish bags</p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="index.html" target="_blank" class="btn-live-store d-none d-sm-flex">
+                        <i class="ti ti-external-link"></i>
+                        <span>Live Store</span>
+                    </a>
+                    <button class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1" id="seedDemoProductsBtn" title="Populate with demo bags">
+                        <i class="ti ti-database-import"></i>
+                        <span class="d-none d-md-inline">Seed Bags</span>
+                    </button>
+                    <button class="btn btn-sm btn-dark d-inline-flex align-items-center gap-1" id="addProductBtn">
+                        <i class="ti ti-plus"></i>
+                        <span>Add Product</span>
+                    </button>
+                    <div class="admin-user-pill d-none d-md-flex">
+                        <div class="admin-avatar-sm" style="background:transparent; overflow:hidden;">
+                            <img src="assets/user-profile.png" alt="Admin" style="width:24px; height:24px; object-fit:contain;" />
+                        </div>
+                        <div class="admin-user-info">
+                            <div class="admin-user-name" id="adminName">Admin User</div>
+                            <div class="admin-user-role" id="adminRole">Administrator</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="corp-content">
+                <!-- Products Table Card -->
+                <div class="admin-card">
+                    <div class="admin-card-header flex-wrap gap-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <h3 class="admin-card-title">All Products</h3>
+                            <span class="badge bg-success rounded-pill" id="productsCountBadge">0</span>
+                        </div>
+
+                        <!-- Filters & Search Toolbar (hidden, kept for JS) -->
+                        <div style="display:none;">
+                            <div class="input-group input-group-sm admin-toolbar-item flex-grow-1" style="min-width: 200px; max-width: 100%;">
+                                <span class="input-group-text bg-white border-end-0"><i class="ti ti-search text-muted"></i></span>
+                                <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Search products...">
+                            </div>
+                            <select id="categoryFilter" class="form-select form-select-sm">
+                                <option value="all">All Categories</option>
+                                <option value="Backpacks">Backpacks</option>
+                                <option value="Tote Bags">Tote Bags</option>
+                                <option value="Shoulder Bags">Shoulder Bags</option>
+                                <option value="Crossbody Bags">Crossbody Bags</option>
+                                <option value="Handbags">Handbags</option>
+                                <option value="Laptop Bags">Laptop Bags</option>
+                                <option value="Travel Bags">Travel Bags</option>
+                                <option value="Wallets">Wallets</option>
+                                <option value="Clutch Bags">Clutch Bags</option>
+                            </select>
+                            <select id="statusFilter" class="form-select form-select-sm">
+                                <option value="all">All Status</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                            <button class="btn btn-sm btn-outline-secondary" id="refreshBtn" title="Refresh Table">
+                                <i class="ti ti-refresh"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="admin-card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-admin align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 70px;">Image</th>
+                                        <th style="min-width: 180px;">Product Details</th>
+                                        <th style="min-width: 110px;">Category</th>
+                                        <th style="min-width: 100px;">Price</th>
+                                        <th style="min-width: 110px;">Stock</th>
+                                        <th style="min-width: 90px;">Featured</th>
+                                        <th style="min-width: 100px;">Status</th>
+                                        <th style="width: 120px;" class="text-end">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productsTable">
+                                    <tr>
+                                        <td colspan="8" class="text-center py-5 text-muted">
+                                            <div class="spinner-border spinner-border-sm text-success me-2" role="status"></div>
+                                            Loading products from Supabase...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Product Add / Edit Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content border-0 shadow-lg rounded-3">
+                <div class="modal-header bg-light border-bottom py-3 px-3 px-md-4">
+                    <h5 class="modal-title fw-bold fs-5" id="productModalTitle">Add Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-3 p-md-4">
+                    <form id="productForm">
+                        <input type="hidden" id="editProductId">
+                        <div class="row g-3">
+                            <!-- Product Name -->
+                            <div class="col-12 col-md-8">
+                                <label class="form-label fw-semibold">Product Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="productName" placeholder="e.g. Leather Explorer Backpack" required>
+                            </div>
+
+                            <!-- Category -->
+                            <div class="col-12 col-md-4">
+                                <label class="form-label fw-semibold">Category <span class="text-danger">*</span></label>
+                                <select class="form-select" id="productCategory" required>
+                                    <option value="">Select Category</option>
+                                    <option value="Backpacks">Backpacks</option>
+                                    <option value="Tote Bags">Tote Bags</option>
+                                    <option value="Shoulder Bags">Shoulder Bags</option>
+                                    <option value="Crossbody Bags">Crossbody Bags</option>
+                                    <option value="Handbags">Handbags</option>
+                                    <option value="Laptop Bags">Laptop Bags</option>
+                                    <option value="Travel Bags">Travel Bags</option>
+                                    <option value="Wallets">Wallets</option>
+                                    <option value="Clutch Bags">Clutch Bags</option>
+                                </select>
+                            </div>
+
+                            <!-- Selling Price -->
+                            <div class="col-6 col-md-4">
+                                <label class="form-label fw-semibold">Price (₹) <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input type="number" class="form-control" id="productPrice" step="0.01" min="0" placeholder="2075.00" required>
+                                </div>
+                            </div>
+
+                            <!-- Original Price -->
+                            <div class="col-6 col-md-4">
+                                <label class="form-label fw-semibold">Orig. Price (₹)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input type="number" class="form-control" id="productOriginalPrice" step="0.01" min="0" placeholder="2905.00">
+                                </div>
+                            </div>
+
+                            <!-- Stock Quantity -->
+                            <div class="col-12 col-md-4">
+                                <label class="form-label fw-semibold">Stock Quantity <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="productStock" min="0" value="20" required>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Product Description</label>
+                                <textarea class="form-control" id="productDescription" rows="3" placeholder="Detailed specifications, materials, and benefits..."></textarea>
+                            </div>
+
+                            <!-- PHOTO UPLOAD SECTION -->
+                            <div class="col-12">
+                                <div class="d-flex flex-wrap justify-content-between align-items-center mb-1 gap-1">
+                                    <label class="form-label fw-semibold mb-0">
+                                        <i class="ti ti-camera text-success me-1"></i> Product Photos (Upload) <span class="text-danger">*</span>
+                                    </label>
+                                    <span class="text-muted small">Auto-stored in Supabase Storage Bucket</span>
+                                </div>
+
+                                <!-- Drag & Drop File Upload Box -->
+                                <div class="dropzone-box" id="photoDropzone">
+                                    <input type="file" id="productPhotoFiles" multiple accept="image/png, image/jpeg, image/jpg, image/webp, image/gif" class="d-none">
+                                    <div class="py-1">
+                                        <div class="text-success mb-2">
+                                            <i class="ti ti-cloud-upload fs-1"></i>
+                                        </div>
+                                        <h6 class="fw-bold mb-1 fs-6">Click to browse or drag &amp; drop photos here</h6>
+                                        <p class="text-muted small mb-2">Supports JPG, PNG, WEBP (Multiple photos supported)</p>
+                                        <button type="button" class="btn btn-sm btn-outline-success px-3" onclick="document.getElementById('productPhotoFiles').click()">
+                                            <i class="ti ti-photo-plus me-1"></i> Choose Photos
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Uploaded Photos Live Preview Cards -->
+                                <div class="mt-3" id="photoPreviewSection" style="display: none;">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-semibold small text-secondary">Selected Photos (<span id="photoCountText">0</span>):</span>
+                                        <button type="button" class="btn btn-link text-danger p-0 text-decoration-none small" id="clearPhotosBtn">Clear All</button>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-2" id="uploadedPhotosContainer"></div>
+                                </div>
+
+                                <!-- Collapsible Alternative: Preset & URL Option -->
+                                <div class="mt-2 text-end">
+                                    <a class="text-decoration-none small text-muted" data-bs-toggle="collapse" href="#customUrlCollapse" role="button">
+                                        <i class="ti ti-link me-1"></i> Or enter image URL / use sample presets
+                                    </a>
+                                </div>
+                                <div class="collapse mt-2" id="customUrlCollapse">
+                                    <div class="card card-body bg-light border p-3">
+                                        <label class="form-label small fw-semibold text-secondary mb-1">Image URLs (comma-separated):</label>
+                                        <input type="text" class="form-control form-control-sm" id="productImages" placeholder="assets/images/products/new-products/p1.png, https://...">
+                                        <div class="d-flex flex-wrap gap-1 mt-2">
+                                            <span class="text-muted small me-2 align-self-center">Sample Presets:</span>
+                                            <button type="button" class="preset-img-btn" data-img="assets/images/products/new-products/p1.png">Bag 1</button>
+                                            <button type="button" class="preset-img-btn" data-img="assets/images/products/new-products/p2.png">Bag 2</button>
+                                            <button type="button" class="preset-img-btn" data-img="assets/images/products/new-products/p3.png">Bag 3</button>
+                                            <button type="button" class="preset-img-btn" data-img="assets/images/products/new-products/p4.png">Bag 4</button>
+                                            <button type="button" class="preset-img-btn" data-img="assets/images/products/new-products/p5.png">Bag 5</button>
+                                            <button type="button" class="preset-img-btn" data-img="assets/images/products/new-products/p6.png">Bag 6</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sizes -->
+                            <div class="col-12 col-md-6">
+                                <label class="form-label fw-semibold">Available Sizes</label>
+                                <input type="text" class="form-control" id="productSizes" placeholder="Small, Medium, Large">
+                                <div class="d-flex flex-wrap gap-1 mt-1">
+                                    <span class="badge bg-light text-dark border tag-pill" onclick="addTagToInput('productSizes', 'Small')">+ Small</span>
+                                    <span class="badge bg-light text-dark border tag-pill" onclick="addTagToInput('productSizes', 'Medium')">+ Medium</span>
+                                    <span class="badge bg-light text-dark border tag-pill" onclick="addTagToInput('productSizes', 'Large')">+ Large</span>
+                                    <span class="badge bg-light text-dark border tag-pill" onclick="addTagToInput('productSizes', 'One Size')">+ One Size</span>
+                                </div>
+                            </div>
+
+                            <!-- Colors -->
+                            <div class="col-12 col-md-6">
+                                <label class="form-label fw-semibold">Available Colors</label>
+                                <input type="text" class="form-control" id="productColors" placeholder="Black, Brown, Tan, Navy">
+                                <div class="d-flex flex-wrap gap-1 mt-1">
+                                    <span class="badge bg-light text-dark border tag-pill" onclick="addTagToInput('productColors', 'Black')">+ Black</span>
+                                    <span class="badge bg-light text-dark border tag-pill" onclick="addTagToInput('productColors', 'Brown')">+ Brown</span>
+                                    <span class="badge bg-light text-dark border tag-pill" onclick="addTagToInput('productColors', 'Tan')">+ Tan</span>
+                                    <span class="badge bg-light text-dark border tag-pill" onclick="addTagToInput('productColors', 'Olive')">+ Olive</span>
+                                </div>
+                            </div>
+
+                            <!-- Toggles -->
+                            <div class="col-6 mt-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="productFeatured">
+                                    <label class="form-check-label fw-medium" for="productFeatured">Featured</label>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mt-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="productActive" checked>
+                                    <label class="form-check-label fw-medium" for="productActive">Active in Store</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer bg-light border-top d-flex flex-wrap justify-content-between align-items-center py-2 px-3 px-md-4 gap-2">
+                    <div id="uploadStatusText" class="small text-muted"></div>
+                    <div class="d-flex gap-2 ms-auto">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-admin btn-sm px-3" id="saveProductBtn">Save Product</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/admin-products.js"></script>
+    <script>
+        function addTagToInput(inputId, tag) {
+            const input = document.getElementById(inputId);
+            if (!input) return;
+            const currentVals = input.value.split(',').map(s => s.trim()).filter(Boolean);
+            if (!currentVals.includes(tag)) {
+                currentVals.push(tag);
+                input.value = currentVals.join(', ');
+            }
+        }
+
+        // Sidebar toggle (mirrors admin-dashboard behaviour)
+        (function() {
+            const sidebar = document.getElementById('adminSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            const closeBtn = document.getElementById('sidebarCloseBtn');
+            const toggle  = document.getElementById('mobileMenuToggle');
+
+            function openSidebar() {
+                sidebar.classList.add('open');
+                overlay.style.display = 'block';
+                if (closeBtn) closeBtn.style.display = 'block';
+            }
+            function closeSidebar() {
+                sidebar.classList.remove('open');
+                overlay.style.display = 'none';
+                if (closeBtn) closeBtn.style.display = 'none';
+            }
+            if (toggle) toggle.addEventListener('click', () => sidebar.classList.contains('open') ? closeSidebar() : openSidebar());
+            if (overlay) overlay.addEventListener('click', closeSidebar);
+            if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+        })();
+    </script>
+</body>
+
+</html>
+

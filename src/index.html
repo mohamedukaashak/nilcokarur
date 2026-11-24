@@ -1,0 +1,1334 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<link href="@@webRoot/node_modules/tiny-slider/dist/tiny-slider.css" rel="stylesheet" />
+	<link rel="stylesheet" href="@@webRoot/node_modules/swiper/swiper-bundle.min.css" />
+	@@include("partials/head.html")
+
+	<title>Nilco Bags - Premium Bags Collection</title>
+</head>
+
+<body>
+	@@include("partials/navbar.html")
+	<script type="module" src="js/products.js"></script>
+	<main>
+		<section class="mt-2.5 sm:mt-4 md:mt-8">
+			<div class="container px-3 sm:px-4">
+				<div class="swiper-container swiper hero-slider-main rounded-2xl md:rounded-xl overflow-hidden shadow-sm md:shadow-none"
+					id="swiper-1" data-pagination-type="" data-speed="400" data-space-between="100"
+					data-pagination="true" data-navigation="false" data-autoplay="true" data-autoplay-delay="3000"
+					data-effect="fade"
+					data-breakpoints='{"480": {"slidesPerView": 1}, "768": {"slidesPerView": 1}, "1024": {"slidesPerView": 1}}'>
+					<div class="swiper-wrapper">
+						<style>
+							.hero-slide-item {
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+							}
+
+							/* Mobile Native App Banner Style */
+							@media (max-width: 767.98px) {
+								.hero-slider-main {
+									border-radius: 18px !important;
+									box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08) !important;
+								}
+
+								.hero-slider-main .swiper-slide {
+									aspect-ratio: 864 / 1417 !important;
+									min-height: auto !important;
+									height: auto !important;
+									width: 100% !important;
+									border-radius: 18px !important;
+								}
+
+								/* Modern App Pill Pagination */
+								.hero-slider-main .swiper-pagination {
+									bottom: 12px !important;
+									display: flex;
+									align-items: center;
+									justify-content: center;
+									gap: 4px;
+								}
+
+								.hero-slider-main .swiper-pagination-bullet {
+									width: 6px;
+									height: 6px;
+									background: rgba(255, 255, 255, 0.65);
+									opacity: 1;
+									border: none;
+									border-radius: 9999px;
+									margin: 0 !important;
+									transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+								}
+
+								.hero-slider-main .swiper-pagination-bullet-active {
+									width: 22px;
+									height: 6px;
+									background: #facc15;
+									border-radius: 9999px;
+									box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+								}
+							}
+
+							@media (min-width: 768px) {
+								.hero-slide-item {
+									border-radius: 0.75rem;
+								}
+							}
+
+							.hero-slide-1 {
+								background-image: url(@@webRoot/assets/images/slider/mobile-slide-01.png);
+							}
+
+							@media (min-width: 768px) {
+								.hero-slide-1 {
+									background-image: url(@@webRoot/assets/images/slider/New/slide-01.png);
+								}
+							}
+
+							.hero-slide-2 {
+								background-image: url(@@webRoot/assets/images/slider/mobile-slide-02.png);
+							}
+
+							@media (min-width: 768px) {
+								.hero-slide-2 {
+									background-image: url(@@webRoot/assets/images/slider/New/slide-02.png);
+								}
+							}
+						</style>
+						<div class="swiper-slide hero-slide-item hero-slide-1 md:min-h-[460px] lg:min-h-[520px]">
+						</div>
+						<div class="swiper-slide hero-slide-item hero-slide-2 md:min-h-[460px] lg:min-h-[520px]">
+						</div>
+					</div>
+					<!-- Add Pagination -->
+					<div class="swiper-pagination !bottom-4"></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Featured Brands Section -->
+		<section class="mt-6 sm:mt-8 md:mt-10">
+			<div class="container px-3 sm:px-4">
+				<div class="flex items-center justify-between mb-4 sm:mb-6">
+					<div>
+						<h2 class="text-lg">Featured Brands</h2>
+						
+					</div>
+					<div class="flex items-center gap-2">
+						<button type="button" id="brands-btn-prev" class="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gray-100 hover:bg-yellow-400 text-gray-700 hover:text-gray-900 transition-colors shadow-xs focus:outline-none cursor-pointer" aria-label="Previous Brand">
+							<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M15 6l-6 6l6 6"/>
+							</svg>
+						</button>
+						<button type="button" id="brands-btn-next" class="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gray-100 hover:bg-yellow-400 text-gray-700 hover:text-gray-900 transition-colors shadow-xs focus:outline-none cursor-pointer" aria-label="Next Brand">
+							<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M9 6l6 6l-6 6"/>
+							</svg>
+						</button>
+					</div>
+				</div>
+
+				<style>
+					#swiper-brands .swiper-slide {
+						height: auto;
+					}
+					#swiper-brands .brand-card {
+						min-height: 125px;
+						height: 100%;
+					}
+					@media (min-width: 768px) {
+						#swiper-brands .brand-card {
+							min-height: 140px;
+						}
+					}
+				</style>
+
+				<div class="swiper-container swiper" id="swiper-brands"
+					data-speed="500"
+					data-space-between="16"
+					data-pagination="false"
+					data-navigation="true"
+					data-next-el="#brands-btn-next"
+					data-prev-el="#brands-btn-prev"
+					data-autoplay="true"
+					data-autoplay-delay="2500"
+					data-loop="true"
+					data-effect="slide"
+					data-breakpoints='{"320": {"slidesPerView": 2, "spaceBetween": 12}, "480": {"slidesPerView": 3, "spaceBetween": 14}, "768": {"slidesPerView": 4, "spaceBetween": 16}, "1024": {"slidesPerView": 6, "spaceBetween": 18}}'>
+					<div class="swiper-wrapper py-2">
+						<!-- Slide 1: American Tourister -->
+						<div class="swiper-slide">
+							<a href="all-products.html" class="group block h-full">
+								<div class="brand-card relative rounded-xl border bg-white border-gray-200 p-3 sm:p-4 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-yellow-400 group-hover:shadow-md hover:-translate-y-1">
+									<div class="w-full h-14 sm:h-16 flex items-center justify-center p-1">
+										<img src="assets/images/our-brands/615-2023_03_31-AT_Logo_200x50__1.avif" alt="American Tourister" class="max-h-full max-w-[85%] object-contain transition-transform duration-300 group-hover:scale-105" />
+									</div>
+									<span class="mt-2 text-xs sm:text-sm font-medium text-gray-700 group-hover:text-yellow-600 transition-colors text-center line-clamp-1">American Tourister</span>
+								</div>
+							</a>
+						</div>
+						<!-- Slide 2: Skybags -->
+						<div class="swiper-slide">
+							<a href="all-products.html" class="group block h-full">
+								<div class="brand-card relative rounded-xl border bg-white border-gray-200 p-3 sm:p-4 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-yellow-400 group-hover:shadow-md hover:-translate-y-1">
+									<div class="w-full h-14 sm:h-16 flex items-center justify-center p-1">
+										<img src="assets/images/our-brands/8fe7d8235868445.Y3JvcCw2OTAsNTQwLDU2LDA.jpg" alt="Skybags" class="max-h-full max-w-[85%] object-contain transition-transform duration-300 group-hover:scale-105" />
+									</div>
+									<span class="mt-2 text-xs sm:text-sm font-medium text-gray-700 group-hover:text-yellow-600 transition-colors text-center line-clamp-1">Skybags</span>
+								</div>
+							</a>
+						</div>
+						<!-- Slide 3: VIP -->
+						<div class="swiper-slide">
+							<a href="all-products.html" class="group block h-full">
+								<div class="brand-card relative rounded-xl border bg-white border-gray-200 p-3 sm:p-4 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-yellow-400 group-hover:shadow-md hover:-translate-y-1">
+									<div class="w-full h-14 sm:h-16 flex items-center justify-center p-1">
+										<img src="assets/images/our-brands/VIP_Industries.svg.webp" alt="VIP" class="max-h-full max-w-[85%] object-contain transition-transform duration-300 group-hover:scale-105" />
+									</div>
+									<span class="mt-2 text-xs sm:text-sm font-medium text-gray-700 group-hover:text-yellow-600 transition-colors text-center line-clamp-1">VIP</span>
+								</div>
+							</a>
+						</div>
+						<!-- Slide 4: Lavie -->
+						<div class="swiper-slide">
+							<a href="all-products.html" class="group block h-full">
+								<div class="brand-card relative rounded-xl border bg-white border-gray-200 p-3 sm:p-4 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-yellow-400 group-hover:shadow-md hover:-translate-y-1">
+									<div class="w-full h-14 sm:h-16 flex items-center justify-center p-1">
+										<img src="assets/images/our-brands/images.png" alt="Lavie" class="max-h-full max-w-[85%] object-contain transition-transform duration-300 group-hover:scale-105" />
+									</div>
+									<span class="mt-2 text-xs sm:text-sm font-medium text-gray-700 group-hover:text-yellow-600 transition-colors text-center line-clamp-1">Lavie</span>
+								</div>
+							</a>
+						</div>
+						<!-- Slide 5: Aristocrat -->
+						<div class="swiper-slide">
+							<a href="all-products.html" class="group block h-full">
+								<div class="brand-card relative rounded-xl border bg-white border-gray-200 p-3 sm:p-4 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-yellow-400 group-hover:shadow-md hover:-translate-y-1">
+									<div class="w-full h-14 sm:h-16 flex items-center justify-center p-1">
+										<img src="assets/images/our-brands/758020491fe6471d1e3b9bfa750b8790.jpg" alt="Aristocrat" class="max-h-full max-w-[85%] rounded-md object-contain transition-transform duration-300 group-hover:scale-105" />
+									</div>
+									<span class="mt-2 text-xs sm:text-sm font-medium text-gray-700 group-hover:text-yellow-600 transition-colors text-center line-clamp-1">Aristocrat</span>
+								</div>
+							</a>
+						</div>
+						<!-- Slide 6: Nilco Bags -->
+						<div class="swiper-slide">
+							<a href="all-products.html" class="group block h-full">
+								<div class="brand-card relative rounded-xl border bg-white border-gray-200 p-3 sm:p-4 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-yellow-400 group-hover:shadow-md hover:-translate-y-1">
+									<div class="w-full h-14 sm:h-16 flex items-center justify-center p-1">
+										<img src="assets/images/our-brands/nilco.png" alt="Nilco Bags" class="max-h-full max-w-[85%] object-contain transition-transform duration-300 group-hover:scale-105" />
+									</div>
+									<span class="mt-2 text-xs sm:text-sm font-medium text-gray-700 group-hover:text-yellow-600 transition-colors text-center line-clamp-1">Nilco Bags</span>
+								</div>
+							</a>
+						</div>
+						<!-- Slide 7: Kamiliant Sport -->
+						<div class="swiper-slide">
+							<a href="all-products.html" class="group block h-full">
+								<div class="brand-card relative rounded-xl border bg-white border-gray-200 p-3 sm:p-4 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-yellow-400 group-hover:shadow-md hover:-translate-y-1">
+									<div class="w-full h-14 sm:h-16 flex items-center justify-center p-1">
+										<img src="assets/images/our-brands/images (1).png" alt="Kamiliant Edition" class="max-h-full max-w-[85%] rounded-md object-contain transition-transform duration-300 group-hover:scale-105" />
+									</div>
+									<span class="mt-2 text-xs sm:text-sm font-medium text-gray-700 group-hover:text-yellow-600 transition-colors text-center line-clamp-1">Kamiliant Edition</span>
+								</div>
+							</a>
+						</div>
+
+						<!-- Duplicated slides for seamless continuous loop -->
+						<!-- Slide 8: American Tourister -->
+						<div class="swiper-slide">
+							<a href="all-products.html" class="group block h-full">
+								<div class="brand-card relative rounded-xl border bg-white border-gray-200 p-3 sm:p-4 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-yellow-400 group-hover:shadow-md hover:-translate-y-1">
+									<div class="w-full h-14 sm:h-16 flex items-center justify-center p-1">
+										<img src="assets/images/our-brands/615-2023_03_31-AT_Logo_200x50__1.avif" alt="American Tourister" class="max-h-full max-w-[85%] object-contain transition-transform duration-300 group-hover:scale-105" />
+									</div>
+									<span class="mt-2 text-xs sm:text-sm font-medium text-gray-700 group-hover:text-yellow-600 transition-colors text-center line-clamp-1">American Tourister</span>
+								</div>
+							</a>
+						</div>
+						<!-- Slide 9: Skybags -->
+						<div class="swiper-slide">
+							<a href="all-products.html" class="group block h-full">
+								<div class="brand-card relative rounded-xl border bg-white border-gray-200 p-3 sm:p-4 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-yellow-400 group-hover:shadow-md hover:-translate-y-1">
+									<div class="w-full h-14 sm:h-16 flex items-center justify-center p-1">
+										<img src="assets/images/our-brands/8fe7d8235868445.Y3JvcCw2OTAsNTQwLDU2LDA.jpg" alt="Skybags" class="max-h-full max-w-[85%] object-contain transition-transform duration-300 group-hover:scale-105" />
+									</div>
+									<span class="mt-2 text-xs sm:text-sm font-medium text-gray-700 group-hover:text-yellow-600 transition-colors text-center line-clamp-1">Skybags</span>
+								</div>
+							</a>
+						</div>
+						<!-- Slide 10: VIP -->
+						<div class="swiper-slide">
+							<a href="all-products.html" class="group block h-full">
+								<div class="brand-card relative rounded-xl border bg-white border-gray-200 p-3 sm:p-4 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-yellow-400 group-hover:shadow-md hover:-translate-y-1">
+									<div class="w-full h-14 sm:h-16 flex items-center justify-center p-1">
+										<img src="assets/images/our-brands/VIP_Industries.svg.webp" alt="VIP" class="max-h-full max-w-[85%] object-contain transition-transform duration-300 group-hover:scale-105" />
+									</div>
+									<span class="mt-2 text-xs sm:text-sm font-medium text-gray-700 group-hover:text-yellow-600 transition-colors text-center line-clamp-1">VIP</span>
+								</div>
+							</a>
+						</div>
+						<!-- Slide 11: Lavie -->
+						<div class="swiper-slide">
+							<a href="all-products.html" class="group block h-full">
+								<div class="brand-card relative rounded-xl border bg-white border-gray-200 p-3 sm:p-4 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-yellow-400 group-hover:shadow-md hover:-translate-y-1">
+									<div class="w-full h-14 sm:h-16 flex items-center justify-center p-1">
+										<img src="assets/images/our-brands/images.png" alt="Lavie" class="max-h-full max-w-[85%] object-contain transition-transform duration-300 group-hover:scale-105" />
+									</div>
+									<span class="mt-2 text-xs sm:text-sm font-medium text-gray-700 group-hover:text-yellow-600 transition-colors text-center line-clamp-1">Lavie</span>
+								</div>
+							</a>
+						</div>
+						<!-- Slide 12: Aristocrat -->
+						<div class="swiper-slide">
+							<a href="all-products.html" class="group block h-full">
+								<div class="brand-card relative rounded-xl border bg-white border-gray-200 p-3 sm:p-4 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-yellow-400 group-hover:shadow-md hover:-translate-y-1">
+									<div class="w-full h-14 sm:h-16 flex items-center justify-center p-1">
+										<img src="assets/images/our-brands/758020491fe6471d1e3b9bfa750b8790.jpg" alt="Aristocrat" class="max-h-full max-w-[85%] rounded-md object-contain transition-transform duration-300 group-hover:scale-105" />
+									</div>
+									<span class="mt-2 text-xs sm:text-sm font-medium text-gray-700 group-hover:text-yellow-600 transition-colors text-center line-clamp-1">Aristocrat</span>
+								</div>
+							</a>
+						</div>
+						<!-- Slide 13: Nilco Bags -->
+						<div class="swiper-slide">
+							<a href="all-products.html" class="group block h-full">
+								<div class="brand-card relative rounded-xl border bg-white border-gray-200 p-3 sm:p-4 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-yellow-400 group-hover:shadow-md hover:-translate-y-1">
+									<div class="w-full h-14 sm:h-16 flex items-center justify-center p-1">
+										<img src="assets/images/our-brands/nilco.png" alt="Nilco Bags" class="max-h-full max-w-[85%] object-contain transition-transform duration-300 group-hover:scale-105" />
+									</div>
+									<span class="mt-2 text-xs sm:text-sm font-medium text-gray-700 group-hover:text-yellow-600 transition-colors text-center line-clamp-1">Nilco Bags</span>
+								</div>
+							</a>
+						</div>
+						<!-- Slide 14: Kamiliant Sport -->
+						<div class="swiper-slide">
+							<a href="all-products.html" class="group block h-full">
+								<div class="brand-card relative rounded-xl border bg-white border-gray-200 p-3 sm:p-4 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-yellow-400 group-hover:shadow-md hover:-translate-y-1">
+									<div class="w-full h-14 sm:h-16 flex items-center justify-center p-1">
+										<img src="assets/images/our-brands/images (1).png" alt="Kamiliant Edition" class="max-h-full max-w-[85%] rounded-md object-contain transition-transform duration-300 group-hover:scale-105" />
+									</div>
+									<span class="mt-2 text-xs sm:text-sm font-medium text-gray-700 group-hover:text-yellow-600 transition-colors text-center line-clamp-1">Kamiliant Edition</span>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="mt-8">
+			<div class="container">
+				<div class="flex flex-wrap">
+					<div class="w-full">
+						<h2 class="text-lg absolute z-10">Bag Categories</h2>
+					</div>
+				</div>
+				<style>
+					/* Bag Categories Card Consistent Sizing */
+					#swiper-categories .swiper-slide {
+						height: auto;
+					}
+					#swiper-categories .swiper-slide > a > div {
+						min-height: 140px;
+						height: 140px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+					}
+					#swiper-categories .swiper-slide img {
+						max-height: 85px;
+						max-width: 85px;
+						object-fit: contain;
+					}
+					@media (min-width: 768px) {
+						#swiper-categories .swiper-slide > a > div {
+							min-height: 160px;
+							height: 160px;
+						}
+						#swiper-categories .swiper-slide img {
+							max-height: 95px;
+							max-width: 95px;
+						}
+					}
+				</style>
+				<div class="swiper-container swiper" id="swiper-categories" data-pagination-type="" data-speed="400"
+					data-space-between="15" data-pagination="false" data-navigation="true" data-autoplay="true"
+					data-autoplay-delay="3000" data-effect="slide"
+					data-breakpoints='{"320": {"slidesPerView": 2}, "480": {"slidesPerView": 2}, "768": {"slidesPerView": 3}, "1024": {"slidesPerView": 6}}'>
+					<div class="swiper-wrapper py-12">
+						<div class="swiper-slide">
+							<a href="#!">
+								<div
+									class="relative rounded-lg break-words border bg-white border-gray-300 transition duration-75 hover:transition hover:duration-500 ease-in-out hover:shadow-md">
+									<div class="py-8 text-center">
+										<img src="assets/images/products/new-products/p1.png"
+											alt="Grocery Ecommerce Template" class="mb-3 m-auto" />
+										<div class="text-base">Backpacks</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#!">
+								<div
+									class="relative rounded-lg break-words border bg-white border-gray-300 transition duration-75 hover:transition hover:duration-500 ease-in-out hover:shadow-md">
+									<div class="py-8 text-center">
+										<img src="assets/images/products/new-products/p2.png"
+											alt="Grocery Ecommerce Template" class="mb-3 m-auto" />
+										<div class="text-base">Handbags</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#!">
+								<div
+									class="relative rounded-lg break-words border bg-white border-gray-300 transition duration-75 hover:transition hover:duration-500 ease-in-out hover:shadow-md">
+									<div class="py-8 text-center">
+										<img src="assets/images/products/new-products/p3.png"
+											alt="Grocery Ecommerce Template" class="mb-3 m-auto" />
+										<div class="text-base">Shoulder Bags</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#!">
+								<div
+									class="relative rounded-lg break-words border bg-white border-gray-300 transition duration-75 hover:transition hover:duration-500 ease-in-out hover:shadow-md">
+									<div class="py-8 text-center">
+										<img src="assets/images/products/new-products/p4.png"
+											alt="Grocery Ecommerce Template" class="mb-3 m-auto" />
+										<div class="text-base">Tote Bags</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#!">
+								<div
+									class="relative rounded-lg break-words border bg-white border-gray-300 transition duration-75 hover:transition hover:duration-500 ease-in-out hover:shadow-md">
+									<div class="py-8 text-center">
+										<img src="assets/images/products/new-products/p5.png"
+											alt="Grocery Ecommerce Template" class="mb-3 m-auto" />
+										<div class="text-base">Crossbody Bags</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#!">
+								<div
+									class="relative rounded-lg break-words border bg-white border-gray-300 transition duration-75 hover:transition hover:duration-500 ease-in-out hover:shadow-md">
+									<div class="py-8 text-center">
+										<img src="assets/images/products/new-products/p6.png"
+											alt="Grocery Ecommerce Template" class="mb-3 m-auto" />
+										<div class="text-base">Clutch Bags</div>
+									</div>
+								</div>
+							</a>
+						</div>
+
+						<div class="swiper-slide">
+							<a href="#!">
+								<div
+									class="relative rounded-lg break-words border bg-white border-gray-300 transition duration-75 hover:transition hover:duration-500 ease-in-out hover:shadow-md">
+									<div class="py-8 text-center">
+										<img src="assets/images/products/new-products/p7.png"
+											alt="Grocery Ecommerce Template" class="mb-3 m-auto" />
+										<div class="text-base">Satchel Bags</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#!">
+								<div
+									class="relative rounded-lg break-words border bg-white border-gray-300 transition duration-75 hover:transition hover:duration-500 ease-in-out hover:shadow-md">
+									<div class="py-8 text-center">
+										<img src="assets/images/products/new-products/p8.png"
+											alt="Grocery Ecommerce Template" class="mb-3 m-auto" />
+										<div class="text-base">Wallets</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#!">
+								<div
+									class="relative rounded-lg break-words border bg-white border-gray-300 transition duration-75 hover:transition hover:duration-500 ease-in-out hover:shadow-md">
+									<div class="py-8 text-center">
+										<img src="assets/images/products/new-products/p9.png"
+											alt="Grocery Ecommerce Template" class="mb-3 m-auto" />
+										<div class="text-base">Travel Bags</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="swiper-slide">
+							<a href="#!">
+								<div
+									class="relative rounded-lg break-words border bg-white border-gray-300 transition duration-75 hover:transition hover:duration-500 ease-in-out hover:shadow-md">
+									<div class="py-8 text-center">
+										<img src="assets/images/products/new-products/p10.png"
+											alt="Grocery Ecommerce Template" class="mb-3 m-auto" />
+										<div class="text-base">Laptop Bags</div>
+									</div>
+								</div>
+							</a>
+						</div>
+
+						<!-- Add more slides as needed -->
+					</div>
+					<!-- Add Pagination -->
+					<div class="swiper-pagination"></div>
+					<!-- Add Navigation -->
+					<div class="swiper-navigation">
+						<div class="swiper-button-next top-[28px]"></div>
+						<div class="swiper-button-prev top-[28px] !right-0 !left-auto mx-10"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<div class="container">
+				<div class="flex md:space-x-2 lg:space-x-6 flex-wrap md:flex-nowrap">
+					<div class="w-full md:w-1/2 mb-3 lg:">
+						<div class="py-10 px-8 rounded-lg"
+							style="background: url(@@webRoot/assets/images/banner/banner1.png) no-repeat; background-size: cover; background-position: center">
+							<div class="flex flex-col gap-5">
+								<div class="flex flex-col gap-1">
+									<h2 class="font-bold text-xl">Premium Handbags</h2>
+									<p>
+										Get Upto
+										<span class="font-bold text-gray-800">30%</span>
+										Off
+									</p>
+								</div>
+
+								<div class="flex flex-wrap">
+									<a href="#!"
+										class="btn inline-flex items-center gap-x-2 bg-gray-800 text-white border-gray-800 disabled:opacity-50 disabled:pointer-events-none hover:text-white hover:bg-gray-900 hover:border-gray-900 active:bg-gray-900 active:border-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300">
+										View Collection
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="w-full md:w-1/2">
+						<div class="py-10 px-8 rounded-lg"
+							style="background: url(@@webRoot/assets/images/banner/banner2.png) no-repeat; background-size: cover; background-position: center">
+							<div class="flex flex-col gap-5">
+								<div class="flex flex-col gap-1">
+									<h2 class="font-bold text-xl">New Arrivals</h2>
+									<p>
+										Get Upto
+										<span class="font-bold text-gray-800">25%</span>
+										Off
+									</p>
+								</div>
+
+								<div class="flex flex-wrap">
+									<a href="#!"
+										class="btn inline-flex items-center gap-x-2 bg-gray-800 text-white border-gray-800 disabled:opacity-50 disabled:pointer-events-none hover:text-white hover:bg-gray-900 hover:border-gray-900 active:bg-gray-900 active:border-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300">
+										Shop Now
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Popular Products Start-->
+		<section class="lg:my-14 my-8">
+			<div class="container">
+				<div class="flex flex-wrap">
+					<div class="w-full mb-6">
+						<div class="flex justify-between items-center">
+							<h2 class="text-lg">Popular Bags</h2>
+						</div>
+					</div>
+				</div>
+
+				<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-5" id="productsContainer">
+					<!-- Products will be dynamically loaded by products.js -->
+				</div>
+			</div>
+		</section>
+		<!-- Popular Products End-->
+
+		<section>
+			<div class="container">
+				<div class="flex flex-wrap">
+					<div class="md:w-full mb-6">
+						<h2 class="text-lg">Daily Best Sells</h2>
+					</div>
+				</div>
+				<div class="block w-full overflow-x-auto scrolling-touch pb-6">
+					<div class="xl:grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-4 flex-nowrap flex">
+						<div class="flex-0 block w-full md:w-auto">
+							<div class="pt-8 px-6 rounded-lg"
+								style="background: url(@@webRoot/assets/images/banner0012.jpeg) no-repeat center; background-size: cover; height: 470px">
+							</div>
+						</div>
+						<div class="flex-0 block w-full md:w-auto">
+							<div
+								class="relative flex flex-col min-w-0 rounded-lg break-words border bg-white border-gray-300 card-product">
+								<div class="flex-auto p-4">
+									<div class="text-center relative flex justify-center">
+										<a href="#!"><img src="assets/images/products/new-products/p11.png"
+												alt="Grocery Ecommerce Template"
+												class="mb-3 m-auto max-w-full h-auto" /></a>
+
+										<div
+											class="absolute w-full bottom-[15%] opacity-0 invisible card-product-action">
+											<a href="#!"
+												class="h-[34px] w-[34px] leading-[34px] bg-white shadow inline-flex items-center justify-center rounded-lg hover:bg-yellow-300 hover:text-gray-900"
+												data-bs-toggle="tooltip" data-bs-html="true" title="Quick View">
+												<span data-bs-toggle="modal" data-bs-target="#quickViewModal">
+													<svg xmlns="http://www.w3.org/2000/svg"
+														class="icon icon-tabler icon-tabler-eye" width="16" height="16"
+														viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+														fill="none" stroke-linecap="round" stroke-linejoin="round">
+														<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+														<path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+														<path
+															d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+													</svg>
+												</span>
+											</a>
+											<a href="#!"
+												class="h-[34px] w-[34px] leading-[34px] bg-white shadow inline-flex items-center justify-center rounded-lg hover:bg-yellow-300 hover:text-gray-900"
+												data-bs-toggle="tooltip" data-bs-html="true" title="Wishlist">
+												<svg xmlns="http://www.w3.org/2000/svg"
+													class="icon icon-tabler icon-tabler-heart" width="16" height="16"
+													viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+													fill="none" stroke-linecap="round" stroke-linejoin="round">
+													<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+													<path
+														d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
+												</svg>
+											</a>
+											<a href="#!"
+												class="h-[34px] w-[34px] leading-[34px] bg-white shadow inline-flex items-center justify-center rounded-lg hover:bg-yellow-300 hover:text-gray-900"
+												data-bs-toggle="tooltip" data-bs-html="true" title="Compare">
+												<svg xmlns="http://www.w3.org/2000/svg"
+													class="icon icon-tabler icon-tabler-arrows-exchange" width="16"
+													height="16" viewBox="0 0 24 24" stroke-width="2"
+													stroke="currentColor" fill="none" stroke-linecap="round"
+													stroke-linejoin="round">
+													<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+													<path d="M7 10h14l-4 -4" />
+													<path d="M17 14h-14l4 4" />
+												</svg>
+											</a>
+										</div>
+									</div>
+									<div class="flex flex-col gap-3">
+										<a href="#!" class="text-decoration-none text-gray-500"><small>Backpacks</small></a>
+										<div class="flex flex-col gap-2">
+											<h3 class="text-base truncate"><a href="#!">Premium Leather Backpack</a></h3>
+
+											<div class="flex justify-between items-center">
+												<div>
+													<span class="text-gray-900 font-semibold">₹1,079</span>
+													<span class="line-through text-gray-500">₹1,494</span>
+												</div>
+												<div>
+													<div class="flex items-center">
+														<small class="text-yellow-500 flex items-center">
+															<svg xmlns="http://www.w3.org/2000/svg"
+																class="icon icon-tabler icon-tabler-star-filled"
+																width="14" height="14" viewBox="0 0 24 24"
+																stroke-width="2" stroke="currentColor" fill="none"
+																stroke-linecap="round" stroke-linejoin="round">
+																<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+																<path
+																	d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+																	stroke-width="0" fill="currentColor" />
+															</svg>
+															<svg xmlns="http://www.w3.org/2000/svg"
+																class="icon icon-tabler icon-tabler-star-filled"
+																width="14" height="14" viewBox="0 0 24 24"
+																stroke-width="2" stroke="currentColor" fill="none"
+																stroke-linecap="round" stroke-linejoin="round">
+																<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+																<path
+																	d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+																	stroke-width="0" fill="currentColor" />
+															</svg>
+															<svg xmlns="http://www.w3.org/2000/svg"
+																class="icon icon-tabler icon-tabler-star-filled"
+																width="14" height="14" viewBox="0 0 24 24"
+																stroke-width="2" stroke="currentColor" fill="none"
+																stroke-linecap="round" stroke-linejoin="round">
+																<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+																<path
+																	d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+																	stroke-width="0" fill="currentColor" />
+															</svg>
+															<svg xmlns="http://www.w3.org/2000/svg"
+																class="icon icon-tabler icon-tabler-star-filled"
+																width="14" height="14" viewBox="0 0 24 24"
+																stroke-width="2" stroke="currentColor" fill="none"
+																stroke-linecap="round" stroke-linejoin="round">
+																<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+																<path
+																	d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+																	stroke-width="0" fill="currentColor" />
+															</svg>
+															<svg xmlns="http://www.w3.org/2000/svg"
+																class="icon icon-tabler icon-tabler-star-half-filled"
+																width="14" height="14" viewBox="0 0 24 24"
+																stroke-width="2" stroke="currentColor" fill="none"
+																stroke-linecap="round" stroke-linejoin="round">
+																<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+																<path
+																	d="M12 1a.993 .993 0 0 1 .823 .443l.067 .116l2.852 5.781l6.38 .925c.741 .108 1.08 .94 .703 1.526l-.07 .095l-.078 .086l-4.624 4.499l1.09 6.355a1.001 1.001 0 0 1 -1.249 1.135l-.101 -.035l-.101 -.046l-5.693 -3l-5.706 3c-.105 .055 -.212 .09 -.32 .106l-.106 .01a1.003 1.003 0 0 1 -1.038 -1.06l.013 -.11l1.09 -6.355l-4.623 -4.5a1.001 1.001 0 0 1 .328 -1.647l.113 -.036l.114 -.023l6.379 -.925l2.853 -5.78a.968 .968 0 0 1 .904 -.56zm0 3.274v12.476a1 1 0 0 1 .239 .029l.115 .036l.112 .05l4.363 2.299l-.836 -4.873a1 1 0 0 1 .136 -.696l.07 -.099l.082 -.09l3.546 -3.453l-4.891 -.708a1 1 0 0 1 -.62 -.344l-.073 -.097l-.06 -.106l-2.183 -4.424z"
+																	stroke-width="0" fill="currentColor" />
+															</svg>
+														</small>
+														<span class="text-gray-700 text-sm ml-2">4.5</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="grid">
+											<button type="button"
+												class="btn bg-yellow-400 text-gray-900 font-bold border-yellow-400 disabled:opacity-50 disabled:pointer-events-none hover:text-gray-900 hover:bg-yellow-300 active:bg-yellow-400 active:border-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-200"
+												onclick="addToCartFromButton(this)">
+												<svg xmlns="http://www.w3.org/2000/svg"
+													class="icon icon-tabler icon-tabler-plus" width="14" height="14"
+													viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
+													fill="none" stroke-linecap="round" stroke-linejoin="round">
+													<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+													<path d="M12 5l0 14"></path>
+													<path d="M5 12l14 0"></path>
+												</svg>
+												<span class="ml-1">Add to Cart</span>
+											</button>
+										</div>
+										<div class="flex justify-start text-center">
+											<div class="deals-countdown w-full" data-countdown="2028/10/10 00:00:00">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flex-0 block w-full md:w-auto">
+							<div
+								class="relative flex flex-col min-w-0 rounded-lg break-words border bg-white border-gray-300 card-product">
+								<div class="flex-auto p-4">
+									<div class="text-center relative flex justify-center">
+										<a href="#!"><img src="assets/images/products/new-products/p1.png"
+												alt="Grocery Ecommerce Template"
+												class="mb-3 m-auto max-w-full h-auto" /></a>
+										<div
+											class="absolute w-full bottom-[15%] opacity-0 invisible card-product-action">
+											<a href="#!"
+												class="h-[34px] w-[34px] leading-[34px] bg-white shadow inline-flex items-center justify-center rounded-lg hover:bg-yellow-300 hover:text-gray-900"
+												data-bs-toggle="tooltip" data-bs-html="true" title="Quick View">
+												<span data-bs-toggle="modal" data-bs-target="#quickViewModal">
+													<svg xmlns="http://www.w3.org/2000/svg"
+														class="icon icon-tabler icon-tabler-eye" width="16" height="16"
+														viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+														fill="none" stroke-linecap="round" stroke-linejoin="round">
+														<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+														<path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+														<path
+															d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+													</svg>
+												</span>
+											</a>
+											<a href="#!"
+												class="h-[34px] w-[34px] leading-[34px] bg-white shadow inline-flex items-center justify-center rounded-lg hover:bg-yellow-300 hover:text-gray-900"
+												data-bs-toggle="tooltip" data-bs-html="true" title="Wishlist">
+												<svg xmlns="http://www.w3.org/2000/svg"
+													class="icon icon-tabler icon-tabler-heart" width="16" height="16"
+													viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+													fill="none" stroke-linecap="round" stroke-linejoin="round">
+													<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+													<path
+														d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
+												</svg>
+											</a>
+											<a href="#!"
+												class="h-[34px] w-[34px] leading-[34px] bg-white shadow inline-flex items-center justify-center rounded-lg hover:bg-yellow-300 hover:text-gray-900"
+												data-bs-toggle="tooltip" data-bs-html="true" title="Compare">
+												<svg xmlns="http://www.w3.org/2000/svg"
+													class="icon icon-tabler icon-tabler-arrows-exchange" width="16"
+													height="16" viewBox="0 0 24 24" stroke-width="2"
+													stroke="currentColor" fill="none" stroke-linecap="round"
+													stroke-linejoin="round">
+													<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+													<path d="M7 10h14l-4 -4" />
+													<path d="M17 14h-14l4 4" />
+												</svg>
+											</a>
+										</div>
+									</div>
+									<div class="flex flex-col gap-3">
+										<a href="#!" class="text-decoration-none text-gray-500"><small>Handbags</small></a>
+
+										<div class="flex flex-col gap-2">
+											<h3 class="text-base truncate"><a href="#!">Designer Handbag</a>
+											</h3>
+											<div class="flex justify-between items-center">
+												<div>
+													<span class="text-gray-900 font-semibold">₹1,079</span>
+													<span class="line-through text-gray-500">₹1,494</span>
+												</div>
+												<div>
+													<div class="flex items-center">
+														<small class="text-yellow-500 flex items-center">
+															<svg xmlns="http://www.w3.org/2000/svg"
+																class="icon icon-tabler icon-tabler-star-filled"
+																width="14" height="14" viewBox="0 0 24 24"
+																stroke-width="2" stroke="currentColor" fill="none"
+																stroke-linecap="round" stroke-linejoin="round">
+																<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+																<path
+																	d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+																	stroke-width="0" fill="currentColor" />
+															</svg>
+															<svg xmlns="http://www.w3.org/2000/svg"
+																class="icon icon-tabler icon-tabler-star-filled"
+																width="14" height="14" viewBox="0 0 24 24"
+																stroke-width="2" stroke="currentColor" fill="none"
+																stroke-linecap="round" stroke-linejoin="round">
+																<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+																<path
+																	d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+																	stroke-width="0" fill="currentColor" />
+															</svg>
+															<svg xmlns="http://www.w3.org/2000/svg"
+																class="icon icon-tabler icon-tabler-star-filled"
+																width="14" height="14" viewBox="0 0 24 24"
+																stroke-width="2" stroke="currentColor" fill="none"
+																stroke-linecap="round" stroke-linejoin="round">
+																<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+																<path
+																	d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+																	stroke-width="0" fill="currentColor" />
+															</svg>
+															<svg xmlns="http://www.w3.org/2000/svg"
+																class="icon icon-tabler icon-tabler-star-filled"
+																width="14" height="14" viewBox="0 0 24 24"
+																stroke-width="2" stroke="currentColor" fill="none"
+																stroke-linecap="round" stroke-linejoin="round">
+																<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+																<path
+																	d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+																	stroke-width="0" fill="currentColor" />
+															</svg>
+															<svg xmlns="http://www.w3.org/2000/svg"
+																class="icon icon-tabler icon-tabler-star-half-filled"
+																width="14" height="14" viewBox="0 0 24 24"
+																stroke-width="2" stroke="currentColor" fill="none"
+																stroke-linecap="round" stroke-linejoin="round">
+																<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+																<path
+																	d="M12 1a.993 .993 0 0 1 .823 .443l.067 .116l2.852 5.781l6.38 .925c.741 .108 1.08 .94 .703 1.526l-.07 .095l-.078 .086l-4.624 4.499l1.09 6.355a1.001 1.001 0 0 1 -1.249 1.135l-.101 -.035l-.101 -.046l-5.693 -3l-5.706 3c-.105 .055 -.212 .09 -.32 .106l-.106 .01a1.003 1.003 0 0 1 -1.038 -1.06l.013 -.11l1.09 -6.355l-4.623 -4.5a1.001 1.001 0 0 1 .328 -1.647l.113 -.036l.114 -.023l6.379 -.925l2.853 -5.78a.968 .968 0 0 1 .904 -.56zm0 3.274v12.476a1 1 0 0 1 .239 .029l.115 .036l.112 .05l4.363 2.299l-.836 -4.873a1 1 0 0 1 .136 -.696l.07 -.099l.082 -.09l3.546 -3.453l-4.891 -.708a1 1 0 0 1 -.62 -.344l-.073 -.097l-.06 -.106l-2.183 -4.424z"
+																	stroke-width="0" fill="currentColor" />
+															</svg>
+														</small>
+														<span class="text-gray-700 text-sm ml-2">4.5</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="grid">
+											<button type="button"
+												class="btn bg-yellow-400 text-gray-900 font-bold border-yellow-400 disabled:opacity-50 disabled:pointer-events-none hover:text-gray-900 hover:bg-yellow-300 active:bg-yellow-400 active:border-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-200"
+												onclick="addToCartFromButton(this)">
+												<svg xmlns="http://www.w3.org/2000/svg"
+													class="icon icon-tabler icon-tabler-plus" width="14" height="14"
+													viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
+													fill="none" stroke-linecap="round" stroke-linejoin="round">
+													<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+													<path d="M12 5l0 14"></path>
+													<path d="M5 12l14 0"></path>
+												</svg>
+												<span class="ml-1">Add to Cart</span>
+											</button>
+										</div>
+										<div class="flex justify-start text-center w-full">
+											<div class="deals-countdown w-full" data-countdown="2028/12/9 00:00:00">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flex-0 block w-full md:w-auto">
+							<div
+								class="relative flex flex-col min-w-0 rounded-lg break-words border bg-white border-gray-300 card-product">
+								<div class="flex-auto p-4">
+									<div class="text-center relative flex justify-center">
+										<a href="#!"><img src="assets/images/products/new-products/p2.png"
+												alt="Grocery Ecommerce Template"
+												class="mb-3 m-auto max-w-full h-auto" /></a>
+										<div
+											class="absolute w-full bottom-[15%] opacity-0 invisible card-product-action">
+											<a href="#!"
+												class="h-[34px] w-[34px] leading-[34px] bg-white shadow inline-flex items-center justify-center rounded-lg hover:bg-yellow-300 hover:text-gray-900"
+												data-bs-toggle="tooltip" data-bs-html="true" title="Quick View">
+												<span data-bs-toggle="modal" data-bs-target="#quickViewModal">
+													<svg xmlns="http://www.w3.org/2000/svg"
+														class="icon icon-tabler icon-tabler-eye" width="16" height="16"
+														viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+														fill="none" stroke-linecap="round" stroke-linejoin="round">
+														<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+														<path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+														<path
+															d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+													</svg>
+												</span>
+											</a>
+											<a href="#!"
+												class="h-[34px] w-[34px] leading-[34px] bg-white shadow inline-flex items-center justify-center rounded-lg hover:bg-yellow-300 hover:text-gray-900"
+												data-bs-toggle="tooltip" data-bs-html="true" title="Wishlist">
+												<svg xmlns="http://www.w3.org/2000/svg"
+													class="icon icon-tabler icon-tabler-heart" width="16" height="16"
+													viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+													fill="none" stroke-linecap="round" stroke-linejoin="round">
+													<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+													<path
+														d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
+												</svg>
+											</a>
+											<a href="#!"
+												class="h-[34px] w-[34px] leading-[34px] bg-white shadow inline-flex items-center justify-center rounded-lg hover:bg-yellow-300 hover:text-gray-900"
+												data-bs-toggle="tooltip" data-bs-html="true" title="Compare">
+												<svg xmlns="http://www.w3.org/2000/svg"
+													class="icon icon-tabler icon-tabler-arrows-exchange" width="16"
+													height="16" viewBox="0 0 24 24" stroke-width="2"
+													stroke="currentColor" fill="none" stroke-linecap="round"
+													stroke-linejoin="round">
+													<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+													<path d="M7 10h14l-4 -4" />
+													<path d="M17 14h-14l4 4" />
+												</svg>
+											</a>
+										</div>
+									</div>
+									<div>
+										<div class="flex flex-col gap-3">
+											<a href="#!" class="text-decoration-none text-gray-500"><small>Shoulder Bags</small></a>
+
+											<div class="flex flex-col gap-2">
+												<h3 class="text-base truncate"><a href="#!">Canvas Shoulder Bag</a></h3>
+												<div class="flex justify-between items-center">
+													<div>
+														<span class="text-gray-900 font-semibold">₹1,079</span>
+														<span class="line-through text-gray-500">₹1,494</span>
+													</div>
+													<div class="flex items-center">
+														<small class="text-yellow-500 flex items-center">
+															<svg xmlns="http://www.w3.org/2000/svg"
+																class="icon icon-tabler icon-tabler-star-filled"
+																width="14" height="14" viewBox="0 0 24 24"
+																stroke-width="2" stroke="currentColor" fill="none"
+																stroke-linecap="round" stroke-linejoin="round">
+																<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+																<path
+																	d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+																	stroke-width="0" fill="currentColor" />
+															</svg>
+															<svg xmlns="http://www.w3.org/2000/svg"
+																class="icon icon-tabler icon-tabler-star-filled"
+																width="14" height="14" viewBox="0 0 24 24"
+																stroke-width="2" stroke="currentColor" fill="none"
+																stroke-linecap="round" stroke-linejoin="round">
+																<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+																<path
+																	d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+																	stroke-width="0" fill="currentColor" />
+															</svg>
+															<svg xmlns="http://www.w3.org/2000/svg"
+																class="icon icon-tabler icon-tabler-star-filled"
+																width="14" height="14" viewBox="0 0 24 24"
+																stroke-width="2" stroke="currentColor" fill="none"
+																stroke-linecap="round" stroke-linejoin="round">
+																<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+																<path
+																	d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+																	stroke-width="0" fill="currentColor" />
+															</svg>
+															<svg xmlns="http://www.w3.org/2000/svg"
+																class="icon icon-tabler icon-tabler-star-filled"
+																width="14" height="14" viewBox="0 0 24 24"
+																stroke-width="2" stroke="currentColor" fill="none"
+																stroke-linecap="round" stroke-linejoin="round">
+																<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+																<path
+																	d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+																	stroke-width="0" fill="currentColor" />
+															</svg>
+															<svg xmlns="http://www.w3.org/2000/svg"
+																class="icon icon-tabler icon-tabler-star-half-filled"
+																width="14" height="14" viewBox="0 0 24 24"
+																stroke-width="2" stroke="currentColor" fill="none"
+																stroke-linecap="round" stroke-linejoin="round">
+																<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+																<path
+																	d="M12 1a.993 .993 0 0 1 .823 .443l.067 .116l2.852 5.781l6.38 .925c.741 .108 1.08 .94 .703 1.526l-.07 .095l-.078 .086l-4.624 4.499l1.09 6.355a1.001 1.001 0 0 1 -1.249 1.135l-.101 -.035l-.101 -.046l-5.693 -3l-5.706 3c-.105 .055 -.212 .09 -.32 .106l-.106 .01a1.003 1.003 0 0 1 -1.038 -1.06l.013 -.11l1.09 -6.355l-4.623 -4.5a1.001 1.001 0 0 1 .328 -1.647l.113 -.036l.114 -.023l6.379 -.925l2.853 -5.78a.968 .968 0 0 1 .904 -.56zm0 3.274v12.476a1 1 0 0 1 .239 .029l.115 .036l.112 .05l4.363 2.299l-.836 -4.873a1 1 0 0 1 .136 -.696l.07 -.099l.082 -.09l3.546 -3.453l-4.891 -.708a1 1 0 0 1 -.62 -.344l-.073 -.097l-.06 -.106l-2.183 -4.424z"
+																	stroke-width="0" fill="currentColor" />
+															</svg>
+														</small>
+														<span class="text-gray-700 text-sm ml-2">4.5</span>
+													</div>
+												</div>
+											</div>
+											<div class="grid">
+												<button type="button"
+													class="btn bg-yellow-400 text-gray-900 font-bold border-yellow-400 disabled:opacity-50 disabled:pointer-events-none hover:text-gray-900 hover:bg-yellow-300 active:bg-yellow-400 active:border-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-200"
+													onclick="addToCartFromButton(this)">
+													<svg xmlns="http://www.w3.org/2000/svg"
+														class="icon icon-tabler icon-tabler-plus" width="14" height="14"
+														viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
+														fill="none" stroke-linecap="round" stroke-linejoin="round">
+														<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+														<path d="M12 5l0 14"></path>
+														<path d="M5 12l14 0"></path>
+													</svg>
+													<span class="ml-1">Add to Cart</span>
+												</button>
+											</div>
+											<div class="flex justify-start text-center">
+												<div class="deals-countdown w-full"
+													data-countdown="2028/11/11 00:00:00"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="lg:my-14 my-8">
+			<style>
+				.feature-icon {
+					filter: brightness(0) saturate(100%) invert(52%) sepia(89%) saturate(1234%) hue-rotate(2deg) brightness(101%) contrast(101%);
+				}
+			</style>
+			<div class="container">
+				<div class="flex flex-wrap gap-y-6">
+					<div class="md:w-1/2 lg:w-1/4 px-3">
+						<div class="flex flex-col gap-4">
+							<div class="inline-block"><img src="assets/images/icons/clock.svg" alt="" class="feature-icon" /></div>
+							<div class="flex flex-col gap-2">
+								<h3 class="text-md">Fast Delivery</h3>
+								<p>Get your bags delivered to your doorstep quickly from Nilco Bags with reliable shipping.</p>
+							</div>
+						</div>
+					</div>
+					<div class="md:w-1/2 lg:w-1/4 px-3">
+						<div class="flex flex-col gap-4">
+							<div class="inline-block"><img src="assets/images/icons/gift.svg" alt="" class="feature-icon" /></div>
+							<div class="flex flex-col gap-2">
+								<h3 class="text-md">Best Prices & Offers</h3>
+								<p>Competitive prices on premium bags with great discounts and seasonal offers.</p>
+							</div>
+						</div>
+					</div>
+					<div class="md:w-1/2 lg:w-1/4 px-3">
+						<div class="flex flex-col gap-4">
+							<div class="inline-block"><img src="assets/images/icons/package.svg" alt="" class="feature-icon" /></div>
+							<div class="flex flex-col gap-2">
+								<h3 class="text-md">Wide Assortment</h3>
+								<p>Choose from 100+ bag styles including backpacks, handbags, shoulder bags, totes, crossbody bags, clutches, wallets, and more.</p>
+							</div>
+						</div>
+					</div>
+					<div class="md:w-1/2 lg:w-1/4 px-3">
+						<div class="flex flex-col gap-4">
+							<div class="inline-block"><img src="assets/images/icons/refresh-cw.svg" alt="" class="feature-icon" /></div>
+							<div class="flex flex-col gap-2">
+								<h3 class="text-md">Easy Returns</h3>
+								<p>
+									Not satisfied with your bag? Return it easily and get a refund within 7 days. No questions
+									asked
+									<a href="return-policy.html" class="text-yellow-600">policy</a>
+									.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	@@include("partials/footer.html") @@include("partials/modal-product.html")
+	@@include("partials/scripts.html")
+
+	<script src="@@webRoot/assets/js/vendors/countdown.js"></script>
+
+	<script src="@@webRoot/node_modules/tiny-slider/dist/min/tiny-slider.js"></script>
+	<script src="@@webRoot/assets/js/vendors/tns-slider.js"></script>
+	<script src="@@webRoot/assets/js/vendors/zoom.js"></script>
+	<script src="@@webRoot/assets/js/vendors/language.js"></script>
+	<!-- Swiper JS -->
+	<script src="@@webRoot/node_modules/swiper/swiper-bundle.min.js"></script>
+	<script src="@@webRoot/assets/js/vendors/swiper.js"></script>
+	<script src="@@webRoot/assets/js/vendors/validation.js"></script>
+
+	<!-- Global Currency Toggle Script -->
+	<script>
+		// Price conversion rate (1 USD = 83 INR)
+		const USD_TO_INR_RATE = 83;
+
+		// Initialize on DOM load
+		document.addEventListener('DOMContentLoaded', function () {
+			// Store original prices for all product cards
+			document.querySelectorAll('.card-product').forEach(card => {
+				const priceEl = card.querySelector('.text-gray-900.font-semibold');
+				const originalPriceEl = card.querySelector('.line-through.text-gray-500');
+
+				if (priceEl && !card.dataset.usdPrice) {
+					const priceText = priceEl.textContent.trim();
+					const usdPrice = parseFloat(priceText.replace(/[^0-9.]/g, ''));
+					if (!isNaN(usdPrice)) {
+						card.dataset.usdPrice = usdPrice;
+					}
+				}
+
+				if (originalPriceEl && !card.dataset.usdOriginalPrice) {
+					const originalPriceText = originalPriceEl.textContent.trim();
+					const usdOriginalPrice = parseFloat(originalPriceText.replace(/[^0-9.]/g, ''));
+					if (!isNaN(usdOriginalPrice)) {
+						card.dataset.usdOriginalPrice = usdOriginalPrice;
+					}
+				}
+			});
+
+			// Update all prices on page load
+			updateAllPrices();
+		});
+
+		// Global function to update all prices across the website
+		function updateAllPrices() {
+			// Update product cards
+			document.querySelectorAll('.card-product').forEach(card => {
+				const priceEl = card.querySelector('.text-gray-900.font-semibold, .text-gray-900.font-bold, .text-base.font-bold.text-gray-900');
+				const originalPriceEl = card.querySelector('.line-through.text-gray-500');
+
+				// Update current price
+				if (priceEl && card.dataset.usdPrice) {
+					const usdPrice = parseFloat(card.dataset.usdPrice);
+					priceEl.textContent = formatPrice(usdPrice);
+				}
+
+				// Update original price (if exists)
+				if (originalPriceEl && card.dataset.usdOriginalPrice) {
+					const usdOriginalPrice = parseFloat(card.dataset.usdOriginalPrice);
+					originalPriceEl.textContent = formatPrice(usdOriginalPrice);
+				}
+			});
+
+			// Update modal prices
+			updateModalPrices();
+
+			// Update cart prices (if cart exists)
+			updateCartPrices();
+		}
+
+		// Format price as INR
+		function formatPrice(usdAmount) {
+			const inrPrice = Math.round(usdAmount * USD_TO_INR_RATE);
+			return '₹' + inrPrice;
+		}
+
+		// Convert price string to amount
+		function priceToUSD(priceString) {
+			const cleanPrice = priceString.replace(/[^0-9.]/g, '');
+			return parseFloat(cleanPrice) || 0;
+		}
+
+		// Update modal prices
+		function updateModalPrices() {
+			const modal = document.getElementById('quickViewModal');
+			if (!modal) return;
+
+			const modalPrice = modal.querySelector('.text-gray-900.font-semibold.text-lg');
+			const modalOriginalPrice = modal.querySelector('.line-through.text-gray-500');
+
+			// Store prices in modal if not already stored
+			if (modalPrice && !modal.dataset.usdPrice) {
+				const priceText = modalPrice.textContent.trim();
+				const usdPrice = priceToUSD(priceText);
+				if (usdPrice > 0) {
+					modal.dataset.usdPrice = usdPrice;
+				}
+			}
+
+			if (modalOriginalPrice && !modal.dataset.usdOriginalPrice) {
+				const originalPriceText = modalOriginalPrice.textContent.trim();
+				const usdOriginalPrice = priceToUSD(originalPriceText);
+				if (usdOriginalPrice > 0) {
+					modal.dataset.usdOriginalPrice = usdOriginalPrice;
+				}
+			}
+
+			// Update modal display
+			if (modalPrice && modal.dataset.usdPrice) {
+				const usdPrice = parseFloat(modal.dataset.usdPrice);
+				modalPrice.textContent = formatPrice(usdPrice);
+			}
+
+			if (modalOriginalPrice && modal.dataset.usdOriginalPrice) {
+				const usdOriginalPrice = parseFloat(modal.dataset.usdOriginalPrice);
+				modalOriginalPrice.textContent = formatPrice(usdOriginalPrice);
+			}
+		}
+
+		// Update cart prices
+		function updateCartPrices() {
+			const USD_TO_INR_RATE = 83;
+
+			// Update individual cart item prices
+			document.querySelectorAll('#cartItemsList li[data-usd-price]').forEach(item => {
+				const usdPrice = parseFloat(item.dataset.usdPrice) || 0;
+				const priceElement = item.querySelector('.cart-item-price');
+
+				if (priceElement) {
+					priceElement.textContent = formatPrice(usdPrice);
+				}
+			});
+
+			// Update cart total
+			updateCartTotal();
+		}
+
+		// Make updateAllPrices globally accessible
+		window.updateAllPrices = updateAllPrices;
+		window.formatPrice = formatPrice;
+	</script>
+
+	<!-- Quick View Modal Script -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			// Quick View Modal functionality with event delegation
+			document.addEventListener('click', function (e) {
+				const btn = e.target.closest('.quick-view-btn, [data-bs-target="#quickViewModal"]');
+				if (!btn) return;
+
+				// Get the parent product card
+				const card = btn.closest('.card-product');
+				if (!card) return;
+
+				const modal = document.getElementById('quickViewModal');
+				if (!modal) return;
+
+				// Get product data from attributes
+				const productName = card.dataset.productName || 'Product Name';
+				const productCategory = card.dataset.productCategory || 'Category';
+				const productPrice = card.dataset.productPrice || '₹0';
+				const productOriginalPrice = card.dataset.productOriginalPrice || '';
+				const productDiscount = card.dataset.productDiscount || '';
+				const productRating = card.dataset.productRating || '5';
+				const productReviews = card.dataset.productReviews || '0';
+				const productCode = card.dataset.productCode || 'N/A';
+				const productType = card.dataset.productType || 'N/A';
+				const productAvailability = card.dataset.productAvailability || 'In Stock';
+				const productShipping = card.dataset.productShipping || 'N/A';
+				const productImages = card.dataset.productImages || '';
+				const productSizes = card.dataset.productSizes || '';
+
+				// Parse images & guarantee 4 diverse photos for the auto-slider
+				const rawImages = productImages.split(',').map(img => img.trim()).filter(Boolean);
+				const diverseImages = typeof window.getDiverseProductImages === 'function'
+					? window.getDiverseProductImages(rawImages, productName)
+					: (rawImages.length > 0 ? rawImages : ['assets/images/products/new-products/p1.png']);
+
+				// Update modal images and start auto-slide
+				if (typeof window.setModalSliderImages === 'function') {
+					window.setModalSliderImages(diverseImages);
+				} else {
+					const modalMainImage = document.getElementById('modalMainImage');
+					const modalImage2 = document.getElementById('modalImage2');
+					const modalImage3 = document.getElementById('modalImage3');
+					const modalImage4 = document.getElementById('modalImage4');
+					const modalThumb1 = document.getElementById('modalThumb1');
+					const modalThumb2 = document.getElementById('modalThumb2');
+					const modalThumb3 = document.getElementById('modalThumb3');
+					const modalThumb4 = document.getElementById('modalThumb4');
+
+					if (modalMainImage) modalMainImage.src = diverseImages[0] || '';
+					if (modalImage2) modalImage2.src = diverseImages[1] || diverseImages[0] || '';
+					if (modalImage3) modalImage3.src = diverseImages[2] || diverseImages[0] || '';
+					if (modalImage4) modalImage4.src = diverseImages[3] || diverseImages[0] || '';
+
+					if (modalThumb1) modalThumb1.src = diverseImages[0] || '';
+					if (modalThumb2) modalThumb2.src = diverseImages[1] || diverseImages[0] || '';
+					if (modalThumb3) modalThumb3.src = diverseImages[2] || diverseImages[0] || '';
+					if (modalThumb4) modalThumb4.src = diverseImages[3] || diverseImages[0] || '';
+				}
+
+				// Update product details
+				const modalCategory = modal.querySelector('a.text-yellow-600');
+				const modalTitle = modal.querySelector('h1');
+				const modalPrice = modal.querySelector('.text-gray-900.font-semibold.text-lg');
+				const modalOriginalPrice = modal.querySelector('.line-through.text-gray-500');
+				const modalDiscount = modal.querySelector('.text-red-600');
+				const modalReviews = modal.querySelector('a[href="#"].text-yellow-600');
+				const modalProductCode = modal.querySelector('tbody tr:nth-child(1) td:last-child');
+				const modalAvailability = modal.querySelector('tbody tr:nth-child(2) td:last-child');
+				const modalType = modal.querySelector('tbody tr:nth-child(3) td:last-child');
+				const modalShipping = modal.querySelector('tbody tr:nth-child(4) td small');
+
+				if (modalCategory) modalCategory.textContent = productCategory;
+				if (modalTitle) modalTitle.textContent = productName;
+				if (modalPrice) {
+					modalPrice.textContent = productPrice;
+					const usdPrice = parseFloat(card.dataset.usdPrice) || priceToUSD(productPrice);
+					if (usdPrice > 0) modal.dataset.usdPrice = usdPrice;
+				}
+				if (modalOriginalPrice) {
+					modalOriginalPrice.textContent = productOriginalPrice;
+					const usdOriginalPrice = parseFloat(card.dataset.usdOriginalPrice) || priceToUSD(productOriginalPrice);
+					if (usdOriginalPrice > 0) modal.dataset.usdOriginalPrice = usdOriginalPrice;
+				}
+				if (modalDiscount) modalDiscount.textContent = productDiscount ? productDiscount + ' Off' : '';
+				if (modalReviews) modalReviews.textContent = `(${productReviews} reviews)`;
+				if (modalProductCode) modalProductCode.textContent = productCode;
+				if (modalAvailability) modalAvailability.textContent = productAvailability;
+				if (modalType) modalType.textContent = productType;
+				if (modalShipping) modalShipping.textContent = productShipping;
+
+				// Update modal prices to INR
+				updateModalPrices();
+
+				// Update size buttons
+				const sizeButtons = modal.querySelectorAll('.flex-wrap.gap-2 button');
+				const sizesArray = productSizes.split(',').map(size => size.trim()).filter(size => size);
+				sizeButtons.forEach((btn, index) => {
+					if (sizesArray[index]) {
+						btn.textContent = sizesArray[index];
+						btn.style.display = 'inline-block';
+					} else if (sizesArray.length > 0) {
+						btn.style.display = 'none';
+					}
+				});
+			});
+		});
+	</script>
+	@@include("partials/buy-template.html")
+	@@include("partials/ad-modal.html")
+</body>
+
+</html>

@@ -1,0 +1,2017 @@
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-xs">
+    <!-- navbar -->
+    <div>
+        <div class="py-2.5 lg:py-4">
+            <div class="container px-4">
+                <div class="flex flex-wrap w-full items-center justify-between gap-y-2">
+                    <!-- Brand Logo -->
+                    <div class="lg:w-1/6 md:w-1/3 w-2/5 flex items-center">
+                        <a class="navbar-brand flex items-center" href="@@webRoot/index.html">
+                            <img src="@@webRoot/assets/images/logo/logo.png"
+                                alt="Nilco Bags" style="max-width:120px;height:auto;" class="transition-transform active:scale-95" />
+                        </a>
+                    </div>
+
+                    <!-- Desktop Search Bar -->
+                    <div class="lg:w-2/5 hidden lg:block">
+                        <form action="#">
+                            <div class="relative">
+                                <label for="searchProducts" class="invisible hidden">Search</label>
+                                <input
+                                    class="border border-gray-300 text-gray-900 rounded-full focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2 px-4 disabled:opacity-50 disabled:pointer-events-none w-full text-base bg-gray-50/50"
+                                    type="search" placeholder="Search for bags, backpacks, travel..." id="searchProducts" />
+                                <button class="absolute right-0 top-0 p-3 text-gray-500 hover:text-yellow-600 transition-colors" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search"
+                                        width="18" height="18" viewBox="0 0 24 24" stroke-width="2"
+                                        stroke="currentColor" fill="none" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                                        <path d="M21 21l-6 -6" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Location Selector (Desktop) -->
+                    <div class="lg:w-1/6 hidden lg:block text-center">
+                        <button type="button"
+                            class="btn inline-flex items-center gap-x-2 bg-gray-50 text-gray-700 border-gray-200 rounded-full hover:bg-yellow-50 hover:border-yellow-300 hover:text-yellow-900 focus:outline-none focus:ring-4 focus:ring-yellow-200 transition-all text-sm py-2 px-3.5"
+                            data-bs-toggle="modal" data-bs-target="#locationModal">
+                            <span class="flex items-center gap-1.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin text-yellow-500"
+                                    width="16" height="16" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                                    <path
+                                        d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
+                                </svg>
+                                <span class="font-medium">Location</span>
+                            </span>
+                        </button>
+                    </div>
+
+                    <!-- Right Actions (Wishlist, Account, Cart, Menu) -->
+                    <div class="lg:w-1/4 text-end md:w-2/3 w-3/5">
+                        <div class="flex gap-2.5 sm:gap-4 items-center justify-end">
+                            <!-- Wishlist -->
+                            <div>
+                                <a href="#!" class="relative p-2 rounded-full text-gray-700 hover:bg-gray-100 active:scale-95 inline-flex items-center justify-center transition-all" title="Wishlist">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart"
+                                        width="22" height="22" viewBox="0 0 24 24" stroke-width="1.8"
+                                        stroke="currentColor" fill="none" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
+                                    </svg>
+                                    <span
+                                        class="absolute top-0 right-0 rounded-full h-4 w-4 bg-yellow-400 text-gray-900 font-bold text-[10px] flex items-center justify-center shadow-xs">
+                                        5
+                                    </span>
+                                </a>
+                            </div>
+
+                            <!-- User Account Icon (Desktop Dropdown) -->
+                            <div class="dropdown hidden md:block">
+                                <!-- User Icon - Shows when NOT logged in -->
+                                <a href="#!" id="userIconLogin" class="text-gray-700 p-2 rounded-full hover:bg-gray-100 active:scale-95 inline-flex items-center justify-center transition-all" data-bs-toggle="modal" data-bs-target="#userModal" title="Sign In">
+                                    <img src="@@webRoot/assets/user-profile.png" alt="Sign In" width="22" height="22" style="object-fit:contain;" />
+                                </a>
+                                
+                                <!-- User Dropdown - Shows when logged in -->
+                                <div id="userDropdown" class="hidden">
+                                    <button type="button" id="userDropdownArea" data-bs-toggle="dropdown" aria-expanded="false"
+                                        class="flex items-center gap-2 bg-transparent border-0 cursor-pointer">
+                                        <img id="userAvatar" src="@@webRoot/assets/images/avatar/avatar.jpg" 
+                                            alt="User Avatar" 
+                                            class="w-8 h-8 rounded-full object-cover hidden border border-yellow-400" />
+                                        <img id="defaultUserIcon" src="@@webRoot/assets/user-profile.png" 
+                                            alt="User Profile" 
+                                            class="w-6 h-6 object-contain" />
+                                        <span id="userName" class="text-sm font-medium text-gray-700 hidden"></span>
+                                    </button>
+                                    
+                                    <!-- Dropdown Menu -->
+                                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 py-2 rounded-xl" style="min-width: 200px;">
+                                        <li class="px-4 py-2 border-b">
+                                            <p class="text-sm font-semibold text-gray-800 mb-0" id="dropdownUserName">User</p>
+                                            <p class="text-xs text-gray-500 mb-0" id="dropdownUserEmail">user@example.com</p>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item py-2 px-4 flex items-center hover:bg-yellow-50" href="#!" id="viewProfileBtn">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user mr-2 text-gray-600" 
+                                                    width="18" height="18" viewBox="0 0 24 24" stroke-width="2" 
+                                                    stroke="currentColor" fill="none" stroke-linecap="round" 
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                                </svg>
+                                                View Profile
+                                            </a>
+                                        </li>
+                                        <li class="border-t">
+                                            <a class="dropdown-item py-2 px-4 text-red-600 flex items-center hover:bg-red-50" href="#!" id="logoutBtn">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout mr-2" 
+                                                    width="18" height="18" viewBox="0 0 24 24" stroke-width="2" 
+                                                    stroke="currentColor" fill="none" stroke-linecap="round" 
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                                                    <path d="M9 12h12l-3 -3" />
+                                                    <path d="M18 15l3 -3l-3 -3" />
+                                                </svg>
+                                                Logout
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Cart Button -->
+                            <div>
+                                <button type="button" class="text-gray-700 p-2 rounded-full hover:bg-gray-100 active:scale-95 inline-flex items-center justify-center transition-all relative" data-bs-toggle="offcanvas"
+                                    data-bs-target="#offcanvasRight" role="button" aria-controls="offcanvasRight" title="Cart">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="icon icon-tabler icon-tabler-shopping-bag" width="22" height="22"
+                                        viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z" />
+                                        <path d="M9 11v-5a3 3 0 0 1 6 0v5" />
+                                    </svg>
+                                    <span id="cartCount"
+                                        class="absolute top-0 right-0 rounded-full h-4 w-4 bg-yellow-400 text-gray-900 font-bold text-[10px] flex items-center justify-center shadow-xs">
+                                        0
+                                    </span>
+                                </button>
+                            </div>
+
+                            <!-- Mobile Menu Hamburger Button -->
+                            <div class="lg:hidden leading-none">
+                                <button class="p-2 rounded-full text-gray-800 hover:bg-gray-100 active:scale-95 inline-flex items-center justify-center transition-all" type="button" data-bs-toggle="offcanvas"
+                                    data-bs-target="#navbar-default" aria-controls="navbar-default"
+                                    aria-label="Toggle navigation">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="icon icon-tabler icon-tabler-menu-2 text-gray-800" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M4 6l16 0" />
+                                        <path d="M4 12l16 0" />
+                                        <path d="M4 18l16 0" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile App Search Row (Immediately Accessible on Phone) -->
+                    <div class="w-full block lg:hidden pt-1">
+                        <form action="#" onsubmit="event.preventDefault();">
+                            <div class="relative flex items-center">
+                                <span class="absolute left-3.5 text-gray-400 pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/>
+                                        <path d="M21 21l-6 -6"/>
+                                    </svg>
+                                </span>
+                                <input
+                                    class="w-full pl-10 pr-4 py-2 bg-gray-100 border border-transparent rounded-full text-sm text-gray-900 placeholder-gray-400 focus:bg-white focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30 focus:outline-none transition-all shadow-inner"
+                                    type="search" placeholder="Search for bags, backpacks, travel..." id="mobileQuickSearch" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar relative navbar-expand-lg lg:flex lg:flex-wrap items-center content-between text-black navbar-default"
+            aria-label="Offcanvas navbar large">
+            <div class="container max-w-7xl mx-auto w-full xl:px-4 lg:px-0">
+                <div class="offcanvas offcanvas-left lg:visible" tabindex="-1" id="navbar-default">
+                    <div class="offcanvas-header pb-1">
+                        <a href="@@webRoot/index.html"><img src="@@webRoot/assets/images/logo/logo.png"
+                                alt="Nilco Bags" style="max-width: 120px; height: auto;" /></a>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x text-gray-700"
+                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M18 6l-12 12" />
+                                <path d="M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="offcanvas-body lg:flex lg:items-center">
+                        <div class="block lg:hidden mb-4">
+                            <form action="#">
+                                <div class="relative">
+                                    <label for="searhNavbar" class="invisible hidden">Search</label>
+                                    <input
+                                        class="border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                                        type="search" placeholder="Search for bags" id="searhNavbar" />
+                                    <button class="absolute right-0 top-0 p-3" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-search" width="16" height="16"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                                            <path d="M21 21l-6 -6" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Mobile User Account Section -->
+                        <div class="block lg:hidden mb-4">
+                            <!-- Mobile User Login Button (Not Logged In) -->
+                            <div id="mobileUserLogin">
+                                <button type="button" 
+                                    class="w-full btn inline-flex items-center justify-center gap-x-2 bg-yellow-400 text-gray-900 font-bold border-yellow-400 disabled:opacity-50 disabled:pointer-events-none hover:bg-yellow-300 hover:border-yellow-300 active:bg-yellow-400 active:border-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-200"
+                                    data-bs-toggle="modal" data-bs-target="#userModal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                    </svg>
+                                    Sign In / Sign Up
+                                </button>
+                            </div>
+                            
+                            <!-- Mobile User Profile (Logged In) -->
+                            <div id="mobileUserProfile" class="hidden">
+                                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <img id="mobileUserAvatar" src="@@webRoot/assets/images/avatar/avatar.jpg" 
+                                            alt="User Avatar" 
+                                            class="w-12 h-12 rounded-full object-cover hidden" />
+                                        <img id="mobileDefaultUserIcon" src="@@webRoot/assets/user-profile.png" 
+                                            alt="User Profile" 
+                                            class="w-10 h-10 object-contain" />
+                                        <div class="flex-1">
+                                            <p class="text-sm font-semibold text-gray-800 mb-0" id="mobileUserName">User</p>
+                                            <p class="text-xs text-gray-500 mb-0" id="mobileUserEmail">user@example.com</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col gap-2">
+                                        <a href="#!" id="mobileViewProfileBtn" 
+                                            class="btn inline-flex items-center justify-center gap-x-2 bg-white text-gray-800 border-gray-300 border disabled:opacity-50 disabled:pointer-events-none hover:text-white hover:bg-gray-700 hover:border-gray-700 active:bg-gray-700 active:border-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300 text-sm">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                            </svg>
+                                            View Profile
+                                        </a>
+                                        <a href="#!" id="mobileLogoutBtn" 
+                                            class="btn inline-flex items-center justify-center gap-x-2 bg-red-50 text-red-600 border-red-200 border disabled:opacity-50 disabled:pointer-events-none hover:text-white hover:bg-red-600 hover:border-red-600 active:bg-red-600 active:border-red-600 focus:outline-none focus:ring-4 focus:ring-red-300 text-sm">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                                                <path d="M9 12h12l-3 -3" />
+                                                <path d="M18 15l3 -3l-3 -3" />
+                                            </svg>
+                                            Logout
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block lg:hidden mb-4">
+                            <a class="btn inline-flex items-center gap-x-2 bg-yellow-400 text-gray-900 font-bold border-yellow-400 disabled:opacity-50 disabled:pointer-events-none hover:bg-yellow-300 hover:border-yellow-300 active:bg-yellow-400 active:border-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-200 justify-center rounded-full"
+                                data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                                aria-controls="collapseExample">
+                                All Categories
+                            </a>
+                            <div class="collapse mt-2" id="collapseExample">
+                                <div class="card card-body">
+                                    <ul class="list-unstyled">
+                                        <li><a class="dropdown-item" href="#!">Backpacks</a></li>
+                                        <li><a class="dropdown-item" href="#!">Handbags</a></li>
+                                        <li><a class="dropdown-item" href="#!">Shoulder Bags</a></li>
+                                        <li><a class="dropdown-item" href="#!">Tote Bags</a></li>
+                                        <li><a class="dropdown-item" href="#!">Crossbody Bags</a></li>
+                                        <li><a class="dropdown-item" href="#!">Clutch Bags</a></li>
+                                        <li><a class="dropdown-item" href="#!">Wallets</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown hidden lg:block">
+                            <button
+                                class="mr-4 btn inline-flex items-center gap-x-2 bg-yellow-400 text-gray-900 font-bold border-yellow-400 disabled:opacity-50 disabled:pointer-events-none hover:bg-yellow-300 hover:border-yellow-300 active:bg-yellow-400 active:border-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-200 rounded-full"
+                                type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                All Categories
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#!">Backpacks</a></li>
+                                <li><a class="dropdown-item" href="#!">Handbags</a></li>
+                                <li><a class="dropdown-item" href="#!">Shoulder Bags</a></li>
+                                <li><a class="dropdown-item" href="#!">Tote Bags</a></li>
+                                <li><a class="dropdown-item" href="#!">Crossbody Bags</a></li>
+                                <li><a class="dropdown-item" href="#!">Clutch Bags</a></li>
+                                <li><a class="dropdown-item" href="#!">Wallets</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul class="navbar-nav lg:flex gap-3 lg:items-center">
+                                <li class="nav-item dropdown w-full lg:w-auto">
+                                    <a class="nav-link " href="@@webRoot/index.html" role="button">Home</a>
+
+                                </li>
+                                <li class="nav-item dropdown w-full lg:w-auto">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false">Dropdown Menu</a>
+                                    <ul class="dropdown-menu">
+
+                                        <li>
+                                            <a class="dropdown-item" href="#!">
+                                                Dropdown Link
+
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#!">
+                                                Dropdown Link
+
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#!">
+                                                Dropdown Link
+
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#!">
+                                                Dropdown Link
+
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item dropdown w-full lg:w-auto dropdown-fullwidth">
+                                    <a class="nav-link " href="#!">Mega
+                                        menu
+                                    </a>
+
+                                </li>
+
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="categories.html">Categories</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="compare.html">Compare</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="contact.html">Contact</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="shop-location.html">Shop Locations</a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- Mobile Floating Bottom Navigation (App Style) - Only visible on mobile -->
+<div class="md:hidden mobile-nav-container">
+    <div class="mobile-nav-wrapper">
+        <!-- Home -->
+        <a href="index.html" class="mobile-nav-item active">
+            <div class="icon-wrapper">
+                <img src="@@webRoot/assets/home.png" alt="Home" class="nav-icon" width="22" height="22" style="object-fit:contain;" />
+            </div>
+            <span class="nav-label">Home</span>
+        </a>
+        
+        <!-- All Products -->
+        <a href="all-products.html" class="mobile-nav-item" data-page="allproducts">
+            <div class="icon-wrapper">
+                <img src="@@webRoot/assets/products.png" alt="Products" class="nav-icon" width="22" height="22" style="object-fit:contain;" />
+            </div>
+            <span class="nav-label">Products</span>
+        </a>
+        
+        <!-- Cart (Center Floating App Button) -->
+        <button type="button" class="mobile-nav-item mobile-nav-cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
+            <div class="icon-wrapper cart-icon-wrapper">
+                <img src="@@webRoot/assets/cart.png" alt="Cart" width="24" height="24" style="object-fit:contain;" />
+                <span id="mobileCartCount" class="cart-badge">0</span>
+            </div>
+            <span class="nav-label text-gray-900 font-bold">Cart</span>
+        </button>
+        
+        <!-- Contact -->
+        <a href="contact.html" class="mobile-nav-item">
+            <div class="icon-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+            </div>
+            <span class="nav-label">Contact</span>
+        </a>
+        
+        <!-- Profile / Account -->
+        <button type="button" class="mobile-nav-item" data-bs-toggle="modal" data-bs-target="#userModal">
+            <div class="icon-wrapper">
+                <img src="@@webRoot/assets/user-profile.png" alt="Account" width="22" height="22" style="object-fit:contain;" />
+            </div>
+            <span class="nav-label">Account</span>
+        </button>
+    </div>
+</div>
+
+<!-- Modern Mobile Navigation Styles -->
+<style>
+    /* Floating Mobile Navigation Container */
+    .mobile-nav-container {
+        position: fixed;
+        bottom: 14px;
+        left: 12px;
+        right: 12px;
+        margin: 0 auto;
+        max-width: 440px;
+        width: calc(100% - 24px);
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(226, 232, 240, 0.85);
+        border-radius: 36px;
+        box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+        z-index: 50;
+        padding: 4px 6px;
+    }
+    
+    @media (max-width: 767px) {
+        body {
+            padding-bottom: 5.5rem;
+        }
+        
+        /* Safe area for iOS devices */
+        .mobile-nav-container {
+            bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+        }
+
+        /* Offcanvas sidebar must NOT be clipped by body padding-bottom */
+        .offcanvas.offcanvas-left,
+        .offcanvas.offcanvas-right {
+            top: 0 !important;
+            bottom: 0 !important;
+            height: 100dvh !important;
+            padding-bottom: 0 !important;
+        }
+        .offcanvas-body {
+            flex: 1 1 auto;
+            overflow-y: auto;
+            padding-bottom: env(safe-area-inset-bottom, 1rem) !important;
+        }
+        /* Offcanvas & its backdrop sit above the floating nav */
+        .offcanvas {
+            z-index: 1045 !important;
+        }
+        .offcanvas-backdrop {
+            z-index: 1040 !important;
+        }
+    }
+    
+    /* Navigation Wrapper */
+    .mobile-nav-wrapper {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 56px;
+        padding: 0 4px;
+    }
+    
+    /* Navigation Items */
+    .mobile-nav-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 4px 2px;
+        text-decoration: none;
+        color: #64748b;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Icon Wrapper */
+    .mobile-nav-item .icon-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        transition: all 0.2s ease;
+        margin-bottom: 2px;
+    }
+    
+    .mobile-nav-item .nav-icon {
+        width: 20px;
+        height: 20px;
+        transition: all 0.2s ease;
+    }
+    
+    /* Label */
+    .mobile-nav-item .nav-label {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.1px;
+        transition: all 0.2s ease;
+        line-height: 1;
+    }
+    
+    /* Active State */
+    .mobile-nav-item.active {
+        color: #0f172a;
+    }
+    
+    .mobile-nav-item.active .icon-wrapper {
+        background: rgba(250, 204, 21, 0.28);
+        color: #0f172a;
+        border-radius: 9999px;
+        transform: translateY(-2px);
+    }
+    
+    .mobile-nav-item.active .nav-icon {
+        stroke: #0f172a;
+        stroke-width: 2.2;
+    }
+    
+    .mobile-nav-item.active .nav-label {
+        color: #0f172a;
+        font-weight: 700;
+    }
+    
+    /* Hover / Active Tap State */
+    .mobile-nav-item:active {
+        transform: scale(0.92);
+    }
+    
+    /* Center Cart Floating Button (Primary App Action) */
+    .mobile-nav-cart .icon-wrapper {
+        background: #fde047;
+        box-shadow: none;
+        transform: translateY(-8px) scale(1.1);
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        margin-bottom: -6px;
+        border: none;
+    }
+    
+    .mobile-nav-cart .nav-icon {
+        stroke: #0f172a !important;
+        stroke-width: 2.2;
+        width: 22px;
+        height: 22px;
+    }
+    
+    .mobile-nav-cart .nav-label {
+        color: #0f172a;
+        font-weight: 700;
+        font-size: 10px;
+        margin-top: 6px;
+    }
+    
+    .mobile-nav-cart:active .icon-wrapper {
+        transform: translateY(-6px) scale(1.05);
+        box-shadow: none;
+    }
+    
+    /* Dynamic Cart Badge */
+    .mobile-nav-cart .cart-badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        background: #ef4444;
+        color: #ffffff;
+        border: 2px solid #ffffff;
+        box-shadow: 0 2px 6px rgba(239, 68, 68, 0.5);
+        min-width: 18px;
+        height: 18px;
+        font-size: 10px;
+        font-weight: 800;
+        border-radius: 9999px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 0 3px;
+        animation: cartBadgePulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes cartBadgePulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.15);
+        }
+    }
+    
+    /* Location Modal - Compact & Optimized for Mobile */
+    @media (max-width: 767px) {
+        #locationModal .modal-dialog {
+            max-width: 92%;
+            width: 92%;
+            margin: 1rem auto;
+        }
+        
+        #locationModal .modal-content {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        #locationModal .modal-body {
+            padding: 1rem;
+        }
+        
+        /* Compact header */
+        #locationModal h5 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        #locationModal .modal-body > div:first-child p {
+            font-size: 0.75rem;
+            margin-bottom: 0;
+        }
+        
+        /* Compact form fields */
+        #locationModal .form-control {
+            font-size: 0.875rem;
+            padding: 0.625rem 0.75rem;
+            border-radius: 8px;
+        }
+        
+        #locationModal label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 0.35rem;
+        }
+        
+        /* Compact buttons */
+        #locationModal .btn {
+            padding: 0.625rem 1rem;
+            font-size: 0.875rem;
+            border-radius: 8px;
+        }
+        
+        /* Reduce gaps */
+        #addressForm {
+            gap: 0.75rem !important;
+            margin-top: 0.75rem !important;
+        }
+        
+        /* Close button size */
+        #locationModal .btn-close svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    /* ========================================================
+       User Auth Modal (Login / Sign Up) - PC & Mobile Styles
+       ======================================================== */
+    #userModal .modal-dialog {
+        max-width: 440px;
+        margin: 1.75rem auto;
+        transition: transform 0.25s ease-out;
+    }
+
+    #userModal .auth-modal-card {
+        border-radius: 20px;
+        border: 1px solid rgba(226, 232, 240, 0.9);
+        background: #ffffff;
+        box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.04);
+        overflow: hidden;
+        padding: 1.5rem !important;
+    }
+
+    #userModal .auth-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    #userModal .auth-modal-title {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #0f172a;
+        letter-spacing: -0.015em;
+        margin: 0;
+        font-family: 'Google Sans', sans-serif;
+    }
+
+    #userModal .auth-close-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #f1f5f9;
+        color: #64748b;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        padding: 0;
+    }
+
+    #userModal .auth-close-btn:hover {
+        background: #e2e8f0;
+        color: #0f172a;
+    }
+
+    #userModal .auth-close-btn:active {
+        transform: scale(0.92);
+    }
+
+    /* Segmented Tabs Nav */
+    #userModal .auth-tabs-nav {
+        display: flex;
+        background: #f1f5f9;
+        padding: 4px;
+        border-radius: 12px;
+        margin-bottom: 1.25rem;
+        border: 1px solid #e2e8f0;
+        gap: 4px;
+    }
+
+    #userModal .auth-tab-btn {
+        flex: 1;
+        padding: 0.55rem 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #64748b;
+        text-align: center;
+        border-radius: 9px;
+        border: none;
+        background: transparent;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+    }
+
+    #userModal .auth-tab-btn.active {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+        font-weight: 700;
+        border-bottom: none !important;
+    }
+
+    #userModal .auth-tab-btn:hover:not(.active) {
+        color: #334155;
+    }
+
+    /* Modal Body Scroll Area */
+    #userModal .modal-body {
+        max-height: calc(80dvh - 140px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        padding: 2px 2px 4px 2px !important;
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e1 transparent;
+    }
+
+    #userModal .modal-body::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    #userModal .modal-body::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    #userModal .modal-body::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+    }
+
+    /* Form Controls */
+    #userModal .form-label-auth {
+        display: block;
+        font-size: 0.825rem;
+        font-weight: 600;
+        color: #334155;
+        margin-bottom: 0.35rem;
+    }
+
+    #userModal .form-control {
+        font-size: 0.9375rem;
+        padding: 0.65rem 0.85rem;
+        border-radius: 10px;
+        border: 1px solid #d1d5db;
+        color: #0f172a;
+        background-color: #ffffff;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        width: 100%;
+    }
+
+    #userModal .form-control:focus {
+        border-color: #facc15 !important;
+        box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.25) !important;
+        outline: none;
+    }
+
+    #userModal .form-group-auth {
+        margin-bottom: 0.875rem;
+    }
+
+    #userModal .btn-auth-submit {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 0.7rem 1rem;
+        background: #facc15;
+        color: #0f172a;
+        font-weight: 700;
+        font-size: 0.9375rem;
+        border: 1px solid #facc15;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        margin-top: 0.35rem;
+    }
+
+    #userModal .btn-auth-submit:hover {
+        background: #eab308;
+        border-color: #eab308;
+        color: #0f172a;
+    }
+
+    #userModal .btn-auth-submit:active {
+        transform: scale(0.99);
+    }
+
+    #userModal .auth-footer {
+        border-top: 1px solid #f1f5f9;
+        padding-top: 0.85rem;
+        margin-top: 0.85rem;
+        text-align: center;
+        font-size: 0.825rem;
+        color: #64748b;
+    }
+
+    #userModal .auth-link {
+        color: #ca8a04;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    #userModal .auth-link:hover {
+        text-decoration: underline;
+        color: #a16207;
+    }
+
+    /* Mobile Specific Responsive Tweaks */
+    @media (max-width: 576px) {
+        #userModal .modal-dialog {
+            margin: 0.5rem auto;
+            width: calc(100% - 1.25rem);
+            max-width: 100%;
+        }
+        
+        #userModal .auth-modal-card {
+            padding: 1.15rem 1rem !important;
+            border-radius: 16px;
+        }
+        
+        #userModal .auth-modal-title {
+            font-size: 1.2rem;
+        }
+        
+        #userModal .form-control {
+            font-size: 16px; /* Prevents auto-zoom on iOS */
+            padding: 0.6rem 0.75rem;
+            border-radius: 8px;
+        }
+        
+        #userModal .form-label-auth {
+            font-size: 0.8rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        #userModal .form-group-auth {
+            margin-bottom: 0.75rem;
+        }
+        
+        #userModal .modal-body {
+            max-height: calc(82dvh - 130px);
+        }
+        
+        #userModal .btn-auth-submit {
+            padding: 0.65rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        #userModal .auth-tabs-nav {
+            margin-bottom: 1rem;
+            padding: 3px;
+        }
+        
+        #userModal .auth-tab-btn {
+            padding: 0.45rem 0.5rem;
+            font-size: 0.825rem;
+        }
+    }
+</style>
+
+<!-- User Authentication Modal (Login & Sign Up) -->
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content auth-modal-card">
+            <!-- Header -->
+            <div class="auth-modal-header">
+                <h3 class="auth-modal-title" id="userModalLabel">Login</h3>
+                <button type="button" class="auth-close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M18 6l-12 12" />
+                        <path d="M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Segmented Pill Tabs -->
+            <div class="auth-tabs-nav">
+                <button type="button" id="loginTab" class="auth-tab-btn active">
+                    Login
+                </button>
+                <button type="button" id="signupTab" class="auth-tab-btn">
+                    Sign Up
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Notification Container -->
+                <div id="authNotification" class="mb-3"></div>
+                
+                <!-- Login Form -->
+                <form id="loginForm" class="needs-validation" novalidate>
+                    <div class="form-group-auth">
+                        <label for="loginEmail" class="form-label-auth">Email Address</label>
+                        <input type="email"
+                            class="form-control border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2.5 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                            id="loginEmail" placeholder="Enter your email" autocomplete="email" required />
+                    </div>
+                    
+                    <div class="form-group-auth">
+                        <label for="loginPassword" class="form-label-auth">Password</label>
+                        <input type="password"
+                            class="form-control border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2.5 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                            id="loginPassword" placeholder="Enter your password" required />
+                    </div>
+                    
+                    <button type="submit" id="loginSubmitBtn" class="btn-auth-submit">
+                        <span class="btn-text">Login</span>
+                        <span class="btn-loading hidden">
+                            <svg class="animate-spin h-5 w-5 text-gray-900 inline me-1.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <span class="loading-text">Logging in...</span>
+                        </span>
+                    </button>
+                </form>
+                
+                <!-- Signup Form -->
+                <form id="signupForm" class="needs-validation hidden" novalidate>
+                    <div class="form-group-auth">
+                        <label for="signupFullName" class="form-label-auth">Full Name <span class="text-danger">*</span></label>
+                        <input type="text"
+                            class="form-control border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2.5 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                            id="signupFullName" placeholder="Enter your full name" required />
+                    </div>
+                    
+                    <div class="form-group-auth">
+                        <label for="signupEmail" class="form-label-auth">Email Address <span class="text-danger">*</span></label>
+                        <input type="email"
+                            class="form-control border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2.5 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                            id="signupEmail" placeholder="Enter your email" autocomplete="email" required />
+                    </div>
+                    
+                    <div class="form-group-auth">
+                        <label for="signupPhone" class="form-label-auth">Phone Number <span class="text-danger">*</span></label>
+                        <input type="tel"
+                            class="form-control border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2.5 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                            id="signupPhone" placeholder="Enter your phone number" required />
+                    </div>
+                    
+                    <div class="form-group-auth">
+                        <label for="signupPassword" class="form-label-auth">Password <span class="text-danger">*</span></label>
+                        <input type="password"
+                            class="form-control border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2.5 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                            id="signupPassword" placeholder="Min. 6 characters" required />
+                    </div>
+                    
+                    <div class="form-group-auth">
+                        <label for="signupConfirmPassword" class="form-label-auth">Confirm Password <span class="text-danger">*</span></label>
+                        <input type="password"
+                            class="form-control border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2.5 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                            id="signupConfirmPassword" placeholder="Re-enter your password" required />
+                    </div>
+                    
+                    <div class="form-group-auth">
+                        <label for="profileImageInput" class="form-label-auth">Profile Photo (Optional)</label>
+                        <input type="file"
+                            class="form-control border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2.5 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                            id="profileImageInput" accept="image/*" />
+                        <div id="profileImagePreview" class="mt-2 text-center"></div>
+                    </div>
+                    
+                    <div class="form-group-auth flex items-start gap-2 pt-1">
+                        <input type="checkbox" id="signupTerms" class="mt-1 h-4 w-4 text-yellow-600 border-gray-300 rounded focus:ring-yellow-400 flex-shrink-0 cursor-pointer" required />
+                        <label for="signupTerms" class="text-xs text-gray-600 leading-snug cursor-pointer mb-0">
+                            I agree to the <a href="#!" class="text-yellow-600 font-semibold hover:underline">Terms of Service</a> and <a href="#!" class="text-yellow-600 font-semibold hover:underline">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" id="signupSubmitBtn" class="btn-auth-submit">
+                        <span class="btn-text">Sign Up</span>
+                        <span class="btn-loading hidden">
+                            <svg class="animate-spin h-5 w-5 text-gray-900 inline me-1.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <span class="loading-text">Creating Account...</span>
+                        </span>
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Footer Switcher -->
+            <div class="auth-footer">
+                <p class="mb-0">
+                    <span id="loginFooter">Don't have an account? <a href="#!" id="signupLink" class="auth-link" onclick="document.getElementById('signupTab').click(); return false;">Sign up</a></span>
+                    <span id="signupFooter" class="hidden">Already have an account? <a href="#!" id="loginLink" class="auth-link" onclick="document.getElementById('loginTab').click(); return false;">Login</a></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- User Profile Modal -->
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content p-6">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-bold text-2xl text-gray-800" id="profileModalLabel">My Profile</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x text-gray-700"
+                        width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M18 6l-12 12" />
+                        <path d="M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Notification Area -->
+            <div id="profileNotification" class="mb-4"></div>
+            
+            <!-- Profile Content -->
+            <form id="profileForm" class="needs-validation" novalidate>
+                <!-- Profile Image -->
+                <div class="mb-6 text-center">
+                    <div id="profileImagePreviewEdit" class="mb-3">
+                        <img src="@@webRoot/assets/images/avatar/avatar.jpg" class="w-24 h-24 rounded-full object-cover mx-auto" alt="Profile" />
+                    </div>
+                    <label for="profileImageInputEdit" class="btn inline-flex items-center gap-x-2 bg-transparent text-gray-600 border border-gray-300 disabled:opacity-50 disabled:pointer-events-none hover:text-white hover:bg-gray-700 hover:border-gray-700 active:bg-gray-700 active:border-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300 text-sm py-2 px-4 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-camera" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                            <path d="M12 13m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                        </svg>
+                        Change Photo
+                    </label>
+                    <input type="file" id="profileImageInputEdit" accept="image/*" class="hidden" />
+                </div>
+                
+                <!-- Personal Information -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b">Personal Information</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="editFullName" class="mb-2 block text-gray-700 font-medium">Full Name</label>
+                            <input type="text"
+                                class="form-control border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2.5 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                                id="editFullName" placeholder="Enter your full name" required />
+                        </div>
+                        
+                        <div>
+                            <label for="editEmail" class="mb-2 block text-gray-700 font-medium">Email</label>
+                            <input type="email"
+                                class="form-control border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2.5 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base bg-gray-100"
+                                id="editEmail" placeholder="Your email" disabled />
+                        </div>
+                        
+                        <div>
+                            <label for="editPhone" class="mb-2 block text-gray-700 font-medium">Phone Number</label>
+                            <input type="tel"
+                                class="form-control border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2.5 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                                id="editPhone" placeholder="Enter your phone number" />
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Address Information -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b">Address Information</h4>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div>
+                            <label for="editAddress" class="mb-2 block text-gray-700 font-medium">Street Address</label>
+                            <input type="text"
+                                class="form-control border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2.5 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                                id="editAddress" placeholder="Enter your street address" />
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label for="editCity" class="mb-2 block text-gray-700 font-medium">City</label>
+                                <input type="text"
+                                    class="form-control border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2.5 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                                    id="editCity" placeholder="City" />
+                            </div>
+                            
+                            <div>
+                                <label for="editState" class="mb-2 block text-gray-700 font-medium">State</label>
+                                <input type="text"
+                                    class="form-control border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2.5 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                                    id="editState" placeholder="State" />
+                            </div>
+                            
+                            <div>
+                                <label for="editPinCode" class="mb-2 block text-gray-700 font-medium">Pin Code</label>
+                                <input type="text"
+                                    class="form-control border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2.5 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                                    id="editPinCode" placeholder="Pin Code" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Save Button -->
+                <button type="submit" id="profileSaveBtn"
+                    class="btn inline-flex items-center justify-center gap-x-2 w-full bg-yellow-400 text-gray-900 font-bold border-yellow-400 disabled:opacity-50 disabled:pointer-events-none hover:bg-yellow-300 hover:border-yellow-300 active:bg-yellow-400 active:border-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-200 py-2.5 rounded-lg font-semibold">
+                    <span class="btn-text">Save Changes</span>
+                    <span class="btn-loading hidden">
+                        <svg class="animate-spin h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span class="loading-text ml-2">Saving...</span>
+                    </span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Shop Cart -->
+
+<div class="offcanvas offcanvas-right" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header border-b">
+        <div>
+            <h5 id="offcanvasRightLabel">Shop Cart</h5>
+            <span>Location in 382480</span>
+        </div>
+        <button type="button" class="btn-close text-inherit" data-bs-dismiss="offcanvas" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x text-gray-700" width="24"
+                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M18 6l-12 12" />
+                <path d="M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+    <div class="offcanvas-body p-4">
+        <div>
+            <!-- alert -->
+            <div class="bg-yellow-400 bg-opacity-25 text-yellow-800 mb-3 rounded-lg p-4" role="alert">
+                You've got FREE delivery. Start
+                <a href="#!" class="alert-link">checkout now!</a>
+            </div>
+            <ul class="list-none" id="cartItemsList">
+                <!-- Cart items will be dynamically added here -->
+                <li class="py-3 text-center text-gray-500">Your cart is empty</li>
+            </ul>
+            <!-- btn -->
+            <div class="flex justify-between mt-4">
+                <a href="#!"
+                    class="btn inline-flex items-center gap-x-2 bg-yellow-400 text-gray-900 font-bold border-yellow-400 disabled:opacity-50 disabled:pointer-events-none hover:bg-yellow-300 hover:border-yellow-300 active:bg-yellow-400 active:border-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-200">
+                    Continue Shopping
+                </a>
+                <a href="#!"
+                    class="btn inline-flex items-center gap-x-2 bg-gray-800 text-white border-gray-800 disabled:opacity-50 disabled:pointer-events-none hover:text-white hover:bg-gray-900 hover:border-gray-900 active:bg-gray-900 active:border-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300"
+                    onclick="sendOrderToWhatsApp()">
+                    Order Now
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function removeCartItem(element) {
+    // Find the parent li element and remove it
+    const cartItem = element.closest('li');
+    if (cartItem) {
+        cartItem.remove();
+        
+        // Update cart count
+        updateCartCount();
+        
+        // Check if cart is empty
+        const cartItems = document.querySelectorAll('#offcanvasRight ul.list-none li');
+        if (cartItems.length === 0) {
+            const cartList = document.querySelector('#offcanvasRight ul.list-none');
+            if (cartList) {
+                cartList.innerHTML = '<li class="py-3 text-center text-gray-500">Your cart is empty</li>';
+            }
+        }
+    }
+}
+
+function updateCartCount() {
+    const cartItems = document.querySelectorAll('#offcanvasRight ul.list-none li');
+    const cartCountElement = document.getElementById('cartCount');
+    const mobileCartCountElement = document.getElementById('mobileCartCount');
+    
+    const count = cartItems.length;
+    
+    // Update desktop cart count
+    if (cartCountElement) {
+        cartCountElement.textContent = count;
+    }
+    
+    // Update mobile cart count
+    if (mobileCartCountElement) {
+        mobileCartCountElement.textContent = count;
+        // Hide badge if cart is empty
+        if (count === 0) {
+            mobileCartCountElement.style.display = 'none';
+        } else {
+            mobileCartCountElement.style.display = 'flex';
+        }
+    }
+}
+
+function updateCartTotal() {
+    const cartItems = document.querySelectorAll('#offcanvasRight ul.list-none li[data-usd-price]');
+    const cartTotalElement = document.getElementById('cartTotal');
+    const USD_TO_INR_RATE = 83;
+    
+    let totalUSD = 0;
+    
+    cartItems.forEach(item => {
+        const usdPrice = parseFloat(item.dataset.usdPrice) || 0;
+        const quantity = parseInt(item.querySelector('.quantity-field')?.value || 1);
+        totalUSD += usdPrice * quantity;
+    });
+    
+    // Format total as INR
+    const formattedTotal = '₹' + Math.round(totalUSD * USD_TO_INR_RATE);
+    
+    if (cartTotalElement) {
+        cartTotalElement.textContent = formattedTotal;
+    }
+}
+
+// Address Management Functions
+function saveAddress(addressData) {
+    localStorage.setItem('deliveryAddress', JSON.stringify(addressData));
+}
+
+function loadAddress() {
+    const savedAddress = localStorage.getItem('deliveryAddress');
+    if (savedAddress) {
+        const address = JSON.parse(savedAddress);
+        
+        // Fill form fields
+        document.getElementById('customerName').value = address.customerName || '';
+        document.getElementById('phoneNumber').value = address.phoneNumber || '';
+        document.getElementById('streetAddress').value = address.streetAddress || '';
+        document.getElementById('city').value = address.city || '';
+        document.getElementById('state').value = address.state || '';
+        document.getElementById('pinCode').value = address.pinCode || '';
+        
+        // Show saved address info
+        showSavedAddressInfo(address);
+        
+        return address;
+    }
+    return null;
+}
+
+function clearAddress() {
+    localStorage.removeItem('deliveryAddress');
+    
+    // Clear form fields
+    document.getElementById('addressForm').reset();
+    
+    // Hide saved address info
+    document.getElementById('savedAddressInfo').classList.add('hidden');
+    
+    alert('Address cleared successfully!');
+}
+
+function showSavedAddressInfo(address) {
+    const savedAddressInfo = document.getElementById('savedAddressInfo');
+    const savedAddressText = document.getElementById('savedAddressText');
+    
+    savedAddressText.textContent = `${address.customerName}, ${address.city}, ${address.state} - ${address.pinCode}`;
+    savedAddressInfo.classList.remove('hidden');
+}
+
+// Initialize address form when modal opens
+document.addEventListener('DOMContentLoaded', function() {
+    const locationModal = document.getElementById('locationModal');
+    if (locationModal) {
+        locationModal.addEventListener('show.bs.modal', function() {
+            loadAddress();
+        });
+    }
+    
+    // Handle address form submission
+    const addressForm = document.getElementById('addressForm');
+    if (addressForm) {
+        addressForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const addressData = {
+                customerName: document.getElementById('customerName').value.trim(),
+                phoneNumber: document.getElementById('phoneNumber').value.trim(),
+                streetAddress: document.getElementById('streetAddress').value.trim(),
+                city: document.getElementById('city').value.trim(),
+                state: document.getElementById('state').value.trim(),
+                pinCode: document.getElementById('pinCode').value.trim()
+            };
+            
+            // Validate all fields
+            if (!addressData.customerName || !addressData.phoneNumber || 
+                !addressData.streetAddress || !addressData.city || 
+                !addressData.state || !addressData.pinCode) {
+                alert('Please fill in all required fields!');
+                return;
+            }
+            
+            // Save address
+            saveAddress(addressData);
+            
+            // Show success message
+            showSavedAddressInfo(addressData);
+            
+            // Show success alert
+            alert('Address saved successfully! It will be used for your orders.');
+            
+            // Close modal after short delay
+            setTimeout(() => {
+                const modal = bootstrap.Modal.getInstance(document.getElementById('locationModal'));
+                if (modal) {
+                    modal.hide();
+                }
+            }, 1000);
+        });
+    }
+    
+    // Handle clear button
+    const clearAddressBtn = document.getElementById('clearAddressBtn');
+    if (clearAddressBtn) {
+        clearAddressBtn.addEventListener('click', function() {
+            if (confirm('Are you sure you want to clear the saved address?')) {
+                clearAddress();
+            }
+        });
+    }
+    
+    // Handle quantity increase/decrease buttons in cart
+    document.addEventListener('click', function(e) {
+        // Handle decrease button
+        if (e.target.classList.contains('button-minus')) {
+            const inputGroup = e.target.closest('.input-group');
+            const quantityField = inputGroup.querySelector('.quantity-field');
+            let currentValue = parseInt(quantityField.value);
+            if (currentValue > 1) {
+                quantityField.value = currentValue - 1;
+                // Update cart total after quantity change
+                if (typeof updateCartTotal === 'function') {
+                    updateCartTotal();
+                }
+            }
+        }
+        
+        // Handle increase button
+        if (e.target.classList.contains('button-plus')) {
+            const inputGroup = e.target.closest('.input-group');
+            const quantityField = inputGroup.querySelector('.quantity-field');
+            let currentValue = parseInt(quantityField.value);
+            const maxQuantity = parseInt(quantityField.max) || 10;
+            if (currentValue < maxQuantity) {
+                quantityField.value = currentValue + 1;
+                // Update cart total after quantity change
+                if (typeof updateCartTotal === 'function') {
+                    updateCartTotal();
+                }
+            }
+        }
+    });
+    
+    // Handle Quick View Modal - Dynamic Product Population
+    const quickViewModal = document.getElementById('quickViewModal');
+    if (quickViewModal) {
+        quickViewModal.addEventListener('show.bs.modal', function(event) {
+            // Get the button that triggered the modal
+            const button = event.relatedTarget;
+            
+            // Find the parent product card
+            const productCard = button.closest('.card-product');
+            if (!productCard) return;
+            
+            // Extract product data from data attributes OR from DOM structure
+            let productName = productCard.getAttribute('data-product-name');
+            let productCategory = productCard.getAttribute('data-product-category');
+            let productPrice = productCard.getAttribute('data-product-price');
+            let productOriginalPrice = productCard.getAttribute('data-product-original-price');
+            let productDiscount = productCard.getAttribute('data-product-discount');
+            let productRating = productCard.getAttribute('data-product-rating');
+            let productReviews = productCard.getAttribute('data-product-reviews');
+            let productCode = productCard.getAttribute('data-product-code');
+            let productType = productCard.getAttribute('data-product-type');
+            let productAvailability = productCard.getAttribute('data-product-availability');
+            let productShipping = productCard.getAttribute('data-product-shipping');
+            let productDescription = productCard.getAttribute('data-product-description');
+            let productImages = productCard.getAttribute('data-product-images');
+            let productSizes = productCard.getAttribute('data-product-sizes');
+            
+            // Fallback: Extract from DOM if data attributes don't exist
+            if (!productName) {
+                const nameElem = productCard.querySelector('h3 a') || productCard.querySelector('h3');
+                productName = nameElem ? nameElem.textContent.trim() : 'Product Name';
+            }
+            
+            if (!productCategory) {
+                const catElem = productCard.querySelector('a.text-decoration-none small');
+                productCategory = catElem ? catElem.textContent.trim() : 'Category';
+            }
+            
+            if (!productPrice) {
+                const priceElem = productCard.querySelector('.text-gray-900.font-semibold');
+                productPrice = priceElem ? priceElem.textContent.trim() : '₹0';
+            }
+            
+            if (!productOriginalPrice) {
+                const origPriceElem = productCard.querySelector('.line-through.text-gray-500');
+                productOriginalPrice = origPriceElem ? origPriceElem.textContent.trim() : productPrice;
+            }
+            
+            if (!productDiscount) {
+                const discountElem = productCard.querySelector('.bg-yellow-400 text-gray-900.text-white, .bg-red-600.text-white');
+                productDiscount = discountElem ? discountElem.textContent.trim() : '0%';
+            }
+            
+            if (!productRating) {
+                const ratingElem = productCard.querySelector('.text-gray-500.text-sm');
+                productRating = ratingElem ? ratingElem.textContent.trim() : '4.0';
+            }
+            
+            if (!productReviews) {
+                const reviewsElems = productCard.querySelectorAll('.text-gray-500.text-sm');
+                productReviews = reviewsElems.length > 1 ? reviewsElems[1].textContent.trim().replace(/[()]/g, '') : '0';
+            }
+            
+            if (!productImages) {
+                const mainImg = productCard.querySelector('img');
+                const imgSrc = mainImg ? mainImg.getAttribute('src') : 'assets/images/products/product-img-1.jpg';
+                productImages = `${imgSrc},${imgSrc},${imgSrc},${imgSrc},${imgSrc}`;
+            }
+            
+            if (!productCode) productCode = 'FBB' + Math.floor(Math.random() * 10000);
+            if (!productType) productType = productCategory + ' Product';
+            if (!productAvailability) productAvailability = 'In Stock';
+            if (!productShipping) productShipping = 'Standard shipping available';
+            if (!productDescription) productDescription = `High quality ${productName.toLowerCase()}. Fresh and premium quality product.`;
+            if (!productSizes) productSizes = '250g,500g,1kg';
+            
+            // Parse images array
+            const imagesArray = productImages.split(',');
+            const mainImage = imagesArray[0];
+            const slideImages = imagesArray.length > 1 ? imagesArray.slice(1) : imagesArray;
+            
+            // Parse sizes array
+            const sizesArray = productSizes.split(',');
+            
+            // Update modal content
+            // 1. Update category link
+            const categoryLink = quickViewModal.querySelector('a.block.text-yellow-600');
+            if (categoryLink) categoryLink.textContent = productCategory;
+            
+            // 2. Update product name
+            const productNameHeading = quickViewModal.querySelector('h1.text-xl');
+            if (productNameHeading) productNameHeading.textContent = productName;
+            
+            // 3. Update price
+            const priceSection = quickViewModal.querySelector('.text-sm.md\\:text-md');
+            if (priceSection) {
+                const currentPrice = priceSection.querySelector('.text-gray-900');
+                const originalPrice = priceSection.querySelector('.line-through');
+                const discountSpan = priceSection.querySelector('small.text-red-600');
+                
+                if (currentPrice) currentPrice.textContent = productPrice;
+                if (originalPrice) originalPrice.textContent = productOriginalPrice;
+                if (discountSpan) discountSpan.textContent = productDiscount + ' Off';
+            }
+            
+            // 4. Update reviews count
+            const reviewsLink = quickViewModal.querySelector('a.text-yellow-600.text-sm');
+            if (reviewsLink) reviewsLink.textContent = `(${productReviews} reviews)`;
+            
+            // 5. Update images
+            const mainImageContainer = quickViewModal.querySelector('.product .product-image');
+            if (mainImageContainer && mainImage) {
+                const mainImg = mainImageContainer.querySelector('img');
+                if (mainImg) mainImg.src = mainImage;
+            }
+            
+            // Update thumbnails
+            const thumbnails = quickViewModal.querySelectorAll('#productModalThumbnails .thumbnails-img img');
+            thumbnails.forEach((thumb, index) => {
+                if (slideImages[index]) {
+                    thumb.src = slideImages[index];
+                }
+            });
+            
+            // 6. Update sizes buttons
+            const sizeButtonsContainer = quickViewModal.querySelector('.flex.flex-wrap.gap-2');
+            if (sizeButtonsContainer) {
+                sizeButtonsContainer.innerHTML = '';
+                sizesArray.forEach(size => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'btn inline-flex items-center gap-x-2 bg-white text-gray-800 border-gray-300 border disabled:opacity-50 disabled:pointer-events-none hover:text-white hover:bg-gray-700 hover:border-gray-700 active:bg-gray-700 active:border-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300 text-sm md:text-base';
+                    button.textContent = size;
+                    sizeButtonsContainer.appendChild(button);
+                });
+            }
+            
+            // 7. Update product details table
+            const tableRows = quickViewModal.querySelectorAll('table tbody tr td:last-child');
+            if (tableRows.length >= 4) {
+                tableRows[0].textContent = productCode; // Product Code
+                tableRows[1].textContent = productAvailability; // Availability
+                tableRows[2].textContent = productType; // Type
+                tableRows[3].innerHTML = `<small>${productShipping}</small>`; // Shipping
+            }
+        });
+        
+        // Add click event to thumbnails for mobile image switching
+        quickViewModal.addEventListener('click', function(e) {
+            const thumbnailImg = e.target.closest('.thumbnails-img');
+            if (thumbnailImg) {
+                const img = thumbnailImg.querySelector('img');
+                if (img) {
+                    const newSrc = img.src;
+                    // Update main image
+                    const mainImageContainer = quickViewModal.querySelector('.product > div:first-child .product-image img');
+                    if (mainImageContainer) {
+                        mainImageContainer.src = newSrc;
+                    }
+                    
+                    // Highlight active thumbnail
+                    quickViewModal.querySelectorAll('.thumbnails-img').forEach(thumb => {
+                        thumb.style.borderColor = 'transparent';
+                    });
+                    thumbnailImg.style.borderColor = '#facc15';
+                }
+            }
+        });
+    }
+});
+
+function addToCartFromButton(button) {
+    // Find the parent product card
+    const productCard = button.closest('.card-product');
+    if (!productCard) return;
+    
+    // Extract product name from h3 tag
+    const productName = productCard.querySelector('h3 a')?.textContent?.trim() || 'Product';
+    
+    // Extract price from dataset or from price element
+    let usdPrice;
+    if (productCard.dataset.usdPrice) {
+        usdPrice = parseFloat(productCard.dataset.usdPrice);
+    } else {
+        const priceElement = productCard.querySelector('.font-semibold.text-gray-900');
+        const priceText = priceElement?.textContent?.trim() || '0';
+        usdPrice = parseFloat(priceText.replace(/[^0-9.]/g, '')) || 0;
+    }
+    
+    // Extract image
+    const imageElement = productCard.querySelector('img');
+    const image = imageElement?.src || 'assets/images/products/product-img-1.jpg';
+    
+    // Extract category from small tag
+    const categoryElement = productCard.querySelector('a.text-gray-500 small');
+    const category = categoryElement?.textContent?.trim() || 'Dates';
+    
+    // Call the addToCart function with price
+    addToCart(productName, usdPrice, image, category);
+}
+
+function addToCart(name, price, image, category) {
+    const cartList = document.querySelector('#cartItemsList');
+    
+    // Format price as INR
+    const USD_TO_INR_RATE = 83;
+    const formattedPrice = '₹' + Math.round(price * USD_TO_INR_RATE);
+    
+    // Remove "Your cart is empty" message if it exists
+    const emptyMessage = cartList.querySelector('li.text-center');
+    if (emptyMessage) {
+        emptyMessage.remove();
+    }
+    
+    // Create cart item HTML with formatted price and price stored in dataset
+    const cartItemHTML = `
+        <li class="py-3 border-t" data-usd-price="${price}">
+            <div class="flex items-center">
+                <div class="w-1/2 md:w-1/2 lg:w-3/5">
+                    <div class="flex">
+                        <img src="${image}" alt="${name}" class="w-16 h-16" />
+                        <div class="ml-3">
+                            <a href="#!" class="text-inherit">
+                                <h6>${name}</h6>
+                            </a>
+                            <span><small class="text-gray-500">${category}</small></span>
+                            <div class="mt-2 small leading-none">
+                                <a href="#!" class="text-yellow-600 flex items-center" onclick="removeCartItem(this)">
+                                    <span class="mr-1 align-text-bottom">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-trash" width="14" height="14"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M4 7l16 0" />
+                                            <path d="M10 11l0 6" />
+                                            <path d="M14 11l0 6" />
+                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                        </svg>
+                                    </span>
+                                    <span class="text-gray-500 text-sm">Remove</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-1/3 md:w-1/4 lg:w-1/5">
+                    <div class="input-group input-spinner rounded-lg flex justify-between items-center">
+                        <input type="button" value="-"
+                            class="button-minus w-8 py-1 border-r cursor-pointer border-gray-300"
+                            data-field="quantity" />
+                        <input type="number" step="1" max="10" value="1" name="quantity"
+                            class="quantity-field w-9 px-2 text-center h-7 border-0 bg-transparent" />
+                        <input type="button" value="+"
+                            class="button-plus w-8 py-1 border-l cursor-pointer border-gray-300"
+                            data-field="quantity" />
+                    </div>
+                </div>
+                <div class="w-1/5 text-center md:w-1/5">
+                    <span class="font-bold text-gray-800 cart-item-price">${formattedPrice}</span>
+                </div>
+            </div>
+        </li>
+    `;
+    
+    // Append to cart
+    cartList.insertAdjacentHTML('beforeend', cartItemHTML);
+    
+    // Update cart count
+    updateCartCount();
+    
+    // Update cart total
+    updateCartTotal();
+    
+    // Open cart offcanvas
+    const offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasRight'));
+    offcanvas.show();
+}
+
+function sendOrderToWhatsApp() {
+    // Check if user has saved their address first
+    const savedAddress = localStorage.getItem('deliveryAddress');
+    if (!savedAddress) {
+        alert('Please add your delivery location first before placing an order.\n\nClick on the "Location" button in the navigation bar to add your address.');
+        
+        // Open location modal
+        const locationModal = new bootstrap.Modal(document.getElementById('locationModal'));
+        locationModal.show();
+        return;
+    }
+    
+    // Format price as INR
+    const USD_TO_INR_RATE = 83;
+    
+    // Collect cart items
+    const cartItems = [];
+    const cartList = document.querySelectorAll('#offcanvasRight ul.list-none li[data-usd-price]');
+    
+    cartList.forEach(item => {
+        const titleElement = item.querySelector('h6');
+        const quantityElement = item.querySelector('.quantity-field');
+        const priceElement = item.querySelector('.cart-item-price');
+        const usdPrice = parseFloat(item.dataset.usdPrice) || 0;
+        
+        if (titleElement && quantityElement && priceElement) {
+            const name = titleElement.textContent.trim();
+            const quantity = quantityElement.value;
+            
+            // Format price as INR
+            const formattedPrice = '₹' + Math.round(usdPrice * USD_TO_INR_RATE);
+            
+            cartItems.push({
+                name: name,
+                quantity: quantity,
+                price: formattedPrice,
+                usdPrice: usdPrice
+            });
+        }
+    });
+    
+    if (cartItems.length === 0) {
+        alert('Your cart is empty. Please add items before ordering.');
+        return;
+    }
+    
+    // Calculate total from prices
+    let totalUSD = 0;
+    cartItems.forEach(item => {
+        totalUSD += item.usdPrice * parseInt(item.quantity);
+    });
+    
+    // Format total as INR
+    const formattedTotal = '₹' + Math.round(totalUSD * USD_TO_INR_RATE);
+    
+    // Get saved address from localStorage (already validated above)
+    const address = JSON.parse(savedAddress);
+    let addressSection = '';
+    
+    addressSection = '━━━━━━━━━━━━━━━━━━\n';
+    addressSection += 'Delivery Address\n';
+    addressSection += '━━━━━━━━━━━━━━━━━━\n\n';
+    addressSection += `Name: ${address.customerName}\n`;
+    addressSection += `Phone: ${address.phoneNumber}\n`;
+    addressSection += `Address: ${address.streetAddress}\n`;
+    addressSection += `City: ${address.city}\n`;
+    addressSection += `State: ${address.state}\n`;
+    addressSection += `PIN Code: ${address.pinCode}\n\n`;
+    
+    // Format WhatsApp message
+    let message = 'Client Order Confirmation – Nilco Bags\n\n';
+    message += 'Dear Valued Customer,\n\n';
+    message += 'Thank you for choosing Nilco Bags.\n';
+    message += 'We are pleased to confirm that your order has been successfully received and is currently being processed. Please find your order details below for your reference.\n\n';
+    
+    message += '━━━━━━━━━━━━━━━━━━\n';
+    message += 'Order Summary\n';
+    message += '━━━━━━━━━━━━━━━━━━\n\n';
+    
+    cartItems.forEach((item, index) => {
+        message += `Product: ${item.name}\n`;
+        message += `Quantity: ${item.quantity}\n`;
+        message += `Unit Price: ${item.price}\n\n`;
+    });
+    
+    message += '━━━━━━━━━━━━━━━━━━\n';
+    message += `Total Order Amount: ${formattedTotal}\n`;
+    message += '━━━━━━━━━━━━━━━━━━\n\n';
+    
+    // Add delivery information
+    message += '━━━━━━━━━━━━━━━━━━\n';
+    message += 'Delivery Information\n';
+    message += '━━━━━━━━━━━━━━━━━━\n\n';
+    message += `Customer Name: ${address.customerName}\n`;
+    message += `Contact Number: ${address.phoneNumber}\n`;
+    message += `Delivery Address: ${address.streetAddress}\n`;
+    message += `City: ${address.city}\n`;
+    message += `State: ${address.state}\n`;
+    message += `PIN Code: ${address.pinCode}\n\n`;
+    
+    message += '━━━━━━━━━━━━━━━━━━\n\n';
+    message += 'If you have any questions regarding your order, please feel free to contact our support team.\n\n';
+    message += 'Thank you for your trust in Nilco Bags.\n';
+    message += 'We sincerely appreciate your business and look forward to serving you again.\n\n';
+    message += 'Nilco Bags\n';
+    message += 'Customer Support Team';
+    message = encodeURIComponent(message);
+    
+    // Replace with your WhatsApp number (including country code, no + or dashes)
+    const whatsappNumber = '917871331144'; // CHANGE THIS TO YOUR WHATSAPP NUMBER
+    
+    // Open WhatsApp
+    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+}
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body p-6">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h5 class="mb-1" id="locationModalLabel">Choose your Location</h5>
+                        <p class="text-sm">Enter your address and we will specify the offer you area.</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x text-gray-700"
+                            width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M18 6l-12 12" />
+                            <path d="M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Address Entry Form -->
+                <form id="addressForm" class="mt-4">
+                    <div class="flex flex-col gap-4">
+                        <!-- Full Name -->
+                        <div>
+                            <label for="customerName" class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                            <input
+                                type="text"
+                                id="customerName"
+                                name="customerName"
+                                required
+                                placeholder="Enter your full name"
+                                class="border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                            />
+                        </div>
+                        
+                        <!-- Phone Number -->
+                        <div>
+                            <label for="phoneNumber" class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                            <input
+                                type="tel"
+                                id="phoneNumber"
+                                name="phoneNumber"
+                                required
+                                placeholder="Enter your phone number"
+                                class="border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                            />
+                        </div>
+                        
+                        <!-- Street Address -->
+                        <div>
+                            <label for="streetAddress" class="block text-sm font-medium text-gray-700 mb-1">Street Address *</label>
+                            <textarea
+                                id="streetAddress"
+                                name="streetAddress"
+                                required
+                                rows="2"
+                                placeholder="House no., Street name, Landmark"
+                                class="border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base resize-none"
+                            ></textarea>
+                        </div>
+                        
+                        <!-- City -->
+                        <div>
+                            <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City *</label>
+                            <input
+                                type="text"
+                                id="city"
+                                name="city"
+                                required
+                                placeholder="Enter your city"
+                                class="border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                            />
+                        </div>
+                        
+                        <!-- State -->
+                        <div>
+                            <label for="state" class="block text-sm font-medium text-gray-700 mb-1">State *</label>
+                            <input
+                                type="text"
+                                id="state"
+                                name="state"
+                                required
+                                placeholder="Enter your state"
+                                class="border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                            />
+                        </div>
+                        
+                        <!-- PIN Code -->
+                        <div>
+                            <label for="pinCode" class="block text-sm font-medium text-gray-700 mb-1">PIN Code *</label>
+                            <input
+                                type="text"
+                                id="pinCode"
+                                name="pinCode"
+                                required
+                                placeholder="Enter PIN code"
+                                class="border border-gray-300 text-gray-900 rounded-lg focus:shadow-[0_0_0_.25rem_rgba(250,204,21,.25)] focus:ring-yellow-400 focus:ring-0 focus:border-yellow-400 block p-2 px-3 disabled:opacity-50 disabled:pointer-events-none w-full text-base"
+                            />
+                        </div>
+                        
+                        <!-- Saved Address Display -->
+                        <div id="savedAddressInfo" class="hidden mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                            <div class="flex items-start gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check-circle text-yellow-600 flex-shrink-0" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M7 12l5 5l10 -10" />
+                                </svg>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-yellow-800">Address Saved</p>
+                                    <p id="savedAddressText" class="text-xs text-yellow-700 mt-1"></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="flex gap-2 mt-2">
+                            <button
+                                type="submit"
+                                class="btn flex-1 bg-yellow-400 text-gray-900 font-bold border-yellow-400 disabled:opacity-50 disabled:pointer-events-none hover:bg-yellow-300 hover:border-yellow-300 active:bg-yellow-400 active:border-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-200"
+                            >
+                                Save Address
+                            </button>
+                            <button
+                                type="button"
+                                id="clearAddressBtn"
+                                class="btn bg-white text-gray-700 border-gray-300 disabled:opacity-50 disabled:pointer-events-none hover:text-white hover:bg-gray-700 hover:border-gray-700 active:bg-gray-700 active:border-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300"
+                            >
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Synchronize and handle mobile quick search & desktop search
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileSearch = document.getElementById('mobileQuickSearch');
+        const desktopSearch = document.getElementById('searchProducts');
+        
+        function syncSearch(value, source) {
+            if (source !== 'mobile' && mobileSearch) mobileSearch.value = value;
+            if (source !== 'desktop' && desktopSearch) desktopSearch.value = value;
+            
+            // Custom search event
+            window.dispatchEvent(new CustomEvent('nilco:search', { detail: { query: value.toLowerCase().trim() } }));
+        }
+
+        if (mobileSearch) {
+            mobileSearch.addEventListener('input', function(e) {
+                syncSearch(e.target.value, 'mobile');
+            });
+        }
+        if (desktopSearch) {
+            desktopSearch.addEventListener('input', function(e) {
+                syncSearch(e.target.value, 'desktop');
+            });
+        }
+    });
+</script>

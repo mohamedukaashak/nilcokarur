@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Browse all premium bags, backpacks, tote bags, shoulder bags, wallets, and travel gear at Nilco Bags." />
+  <link href="@@webRoot/node_modules/tiny-slider/dist/tiny-slider.css" rel="stylesheet" />
+  <link rel="stylesheet" href="@@webRoot/node_modules/swiper/swiper-bundle.min.css" />
+  @@include("partials/head.html")
+  <title>All Products - Nilco Bags | Premium Bags Collection</title>
+  <style>
+    .ap-page-hero {
+      background: radial-gradient(circle at 10% 20%, #fef9c3 0%, #fef3c7 40%, #fde68a 90%);
+    }
+    .ap-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 18px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1.5px solid #e2e8f0;
+      background: #ffffff;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .ap-chip:hover {
+      border-color: #facc15;
+      color: #0f172a;
+      background: #fefce8;
+    }
+    .ap-chip.active {
+      background: #facc15;
+      border-color: #facc15;
+      color: #0f172a;
+      box-shadow: 0 4px 12px rgba(250, 204, 21, 0.4);
+    }
+    .ap-chips-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .ap-chips-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    #allProductsContainer {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      transition: opacity 0.2s ease;
+    }
+    @media (min-width: 640px) {
+      #allProductsContainer {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+    }
+    @media (min-width: 1024px) {
+      #allProductsContainer {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 20px;
+      }
+    }
+    @media (min-width: 1280px) {
+      #allProductsContainer {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 20px;
+      }
+    }
+    .card-product {
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+    }
+    .card-product:hover {
+      box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.1);
+    }
+    .line-clamp-1 {
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .ap-skeleton {
+      background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+      background-size: 200% 100%;
+      animation: apShimmer 1.4s infinite;
+      border-radius: 12px;
+    }
+    @keyframes apShimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .ap-empty {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 24px;
+      text-align: center;
+    }
+    /* Toast feedback notification */
+    #apToast {
+      position: fixed;
+      bottom: 85px;
+      right: 20px;
+      z-index: 9999;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 9999px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+    #apToast.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .wishlist-active svg {
+      fill: #ef4444 !important;
+      stroke: #ef4444 !important;
+    }
+    /* Mobile App Horizontal Banner Styling */
+    .ap-hero-slider {
+      border-radius: 18px !important;
+      overflow: hidden;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.07);
+    }
+    .ap-slide-item {
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+    }
+    @media (max-width: 767.98px) {
+      .ap-hero-slider .swiper-slide {
+        aspect-ratio: 16 / 7.2 !important;
+        min-height: 145px !important;
+        height: auto !important;
+        border-radius: 18px !important;
+      }
+      .ap-hero-slider .swiper-pagination {
+        bottom: 8px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+      }
+      .ap-hero-slider .swiper-pagination-bullet {
+        width: 5px;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.7);
+        opacity: 1;
+        border: none;
+        border-radius: 9999px;
+        margin: 0 !important;
+        transition: all 0.3s ease;
+      }
+      .ap-hero-slider .swiper-pagination-bullet-active {
+        width: 18px;
+        height: 5px;
+        background: #facc15;
+        border-radius: 9999px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+      }
+    }
+    @media (min-width: 768px) {
+      .ap-hero-slider {
+        border-radius: 24px !important;
+      }
+      .ap-hero-slider .swiper-slide {
+        min-height: 280px;
+        height: 320px;
+      }
+    }
+    .ap-banner-slide-1 {
+      background-image: url(@@webRoot/assets/images/slider/New/slide-01.png);
+    }
+    .ap-banner-slide-2 {
+      background-image: url(@@webRoot/assets/images/banner/banner1.png);
+    }
+    .ap-banner-slide-3 {
+      background-image: url(@@webRoot/assets/images/banner/banner2.png);
+    }
+  </style>
+</head>
+<body>
+  @@include("partials/navbar.html")
+  <script type="module" src="js/products.js"></script>
+
+  <main class="pb-12">
+    <!-- Mobile App Horizontal Hero Banner -->
+    <section class="mt-2.5 sm:mt-4 md:mt-6 mb-3">
+      <div class="container max-w-7xl mx-auto px-3 sm:px-4">
+        <div class="swiper-container swiper ap-hero-slider overflow-hidden" id="swiper-all-products" data-pagination-type="" data-speed="500"
+          data-space-between="20" data-pagination="true" data-navigation="false" data-autoplay="true"
+          data-autoplay-delay="3500" data-effect="slide"
+          data-breakpoints='{"480": {"slidesPerView": 1}, "768": {"slidesPerView": 1}, "1024": {"slidesPerView": 1}}'>
+          <div class="swiper-wrapper">
+            <div class="swiper-slide ap-slide-item ap-banner-slide-1"></div>
+            <div class="swiper-slide ap-slide-item ap-banner-slide-2"></div>
+            <div class="swiper-slide ap-slide-item ap-banner-slide-3"></div>
+          </div>
+          <!-- App Pill Pagination -->
+          <div class="swiper-pagination !bottom-3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sticky Filter & Controls Bar -->
+    <section class="sticky top-[56px] md:top-[72px] z-30 bg-white/95 backdrop-blur-md border-b border-gray-200/80 shadow-xs py-3">
+      <div class="container max-w-7xl mx-auto px-4">
+        <!-- Mobile Search Input -->
+        <div class="mb-3 md:hidden">
+          <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            </span>
+            <input id="apSearchInputMobile" type="search" placeholder="Search products..." class="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-full text-sm focus:outline-none focus:border-yellow-400 bg-gray-50 transition" />
+          </div>
+        </div>
+
+        <!-- Category Filter Chips -->
+        <div class="ap-chips-scroll flex-1 min-w-0">
+          <button class="ap-chip active" data-ap-category="all">All Bags</button>
+          <button class="ap-chip" data-ap-category="Backpacks">Backpacks</button>
+          <button class="ap-chip" data-ap-category="Tote Bags">Tote Bags</button>
+          <button class="ap-chip" data-ap-category="Shoulder Bags">Shoulder Bags</button>
+          <button class="ap-chip" data-ap-category="Handbags">Handbags</button>
+          <button class="ap-chip" data-ap-category="Travel Bags">Travel Bags</button>
+          <button class="ap-chip" data-ap-category="Laptop Bags">Laptop Bags</button>
+          <button class="ap-chip" data-ap-category="Crossbody Bags">Crossbody</button>
+          <button class="ap-chip" data-ap-category="Clutches">Clutches</button>
+          <button class="ap-chip" data-ap-category="Wallets">Wallets</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Products Listing Section -->
+    <section class="mt-6">
+      <div class="container max-w-7xl mx-auto px-4">
+        <div class="flex items-center justify-between mb-4">
+          <p class="text-sm text-gray-500">
+            Showing <span id="apResultCount" class="font-bold text-gray-900">...</span> products
+          </p>
+          <button id="apResetFilters" class="text-xs text-yellow-700 hover:text-yellow-800 font-semibold hidden whitespace-nowrap">
+            Clear filter
+          </button>
+        </div>
+
+        <!-- Skeleton Loading Placeholders -->
+        <div id="apSkeleton" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-5">
+          <div class="ap-skeleton h-72"></div>
+          <div class="ap-skeleton h-72"></div>
+          <div class="ap-skeleton h-72"></div>
+          <div class="ap-skeleton h-72"></div>
+          <div class="ap-skeleton h-72 hidden sm:block"></div>
+          <div class="ap-skeleton h-72 hidden lg:block"></div>
+        </div>
+
+        <!-- Real Products Grid -->
+        <div id="allProductsContainer" class="hidden"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="apToast">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="apToastMsg">Item updated</span>
+  </div>
+
+  @@include("partials/footer.html")
+  @@include("partials/modal-product.html")
+  @@include("partials/scripts.html")
+
+  <script src="@@webRoot/assets/js/vendors/countdown.js"></script>
+  <script src="@@webRoot/node_modules/tiny-slider/dist/min/tiny-slider.js"></script>
+  <script src="@@webRoot/assets/js/vendors/tns-slider.js"></script>
+  <script src="@@webRoot/assets/js/vendors/zoom.js"></script>
+  <script src="@@webRoot/assets/js/vendors/language.js"></script>
+  <script src="@@webRoot/node_modules/swiper/swiper-bundle.min.js"></script>
+  <script src="@@webRoot/assets/js/vendors/swiper.js"></script>
+  <script src="@@webRoot/assets/js/vendors/validation.js"></script>
+
+  <!-- Global Currency & Quick View & All-Products Logic -->
+  <script>
+    // Global currency rate
+    const USD_TO_INR_RATE = 83;
+
+    function formatPrice(usdAmount) {
+      return '₹' + Math.round(usdAmount * USD_TO_INR_RATE);
+    }
+
+    function priceToUSD(priceString) {
+      if (!priceString) return 0;
+      const cleanPrice = priceString.toString().replace(/[^0-9.]/g, '');
+      return parseFloat(cleanPrice) || 0;
+    }
+
+    function updateAllPrices() {
+      document.querySelectorAll('.card-product').forEach(card => {
+        const priceEl = card.querySelector('.card-price, .text-gray-900.font-semibold, .text-gray-900.font-bold, .text-base.font-bold.text-gray-900, .font-extrabold');
+        const originalPriceEl = card.querySelector('.card-original-price, .line-through');
+
+        if (priceEl && card.dataset.usdPrice) {
+          const usdPrice = parseFloat(card.dataset.usdPrice);
+          priceEl.textContent = formatPrice(usdPrice);
+        }
+        if (originalPriceEl && card.dataset.usdOriginalPrice) {
+          const usdOriginalPrice = parseFloat(card.dataset.usdOriginalPrice);
+          originalPriceEl.textContent = formatPrice(usdOriginalPrice);
+        }
+      });
+
+      // Update Quick View Modal prices if modal is open
+      const modal = document.getElementById('quickViewModal');
+      if (modal) {
+        const modalPrice = modal.querySelector('.text-gray-900.font-semibold.text-lg, .modal-price');
+        const modalOriginalPrice = modal.querySelector('.line-through.text-gray-500');
+        if (modalPrice && modal.dataset.usdPrice) {
+          modalPrice.textContent = formatPrice(parseFloat(modal.dataset.usdPrice));
+        }
+        if (modalOriginalPrice && modal.dataset.usdOriginalPrice) {
+          modalOriginalPrice.textContent = formatPrice(parseFloat(modal.dataset.usdOriginalPrice));
+        }
+      }
+    }
+
+    window.updateAllPrices = updateAllPrices;
+    window.formatPrice = formatPrice;
+
+    // DOMContentLoaded listener
+    document.addEventListener('DOMContentLoaded', () => {
+      // Highlight active Products button in bottom mobile navigation
+      const mobileNavProducts = document.querySelector('.mobile-nav-item[data-page="allproducts"], a.mobile-nav-item[href="all-products.html"]');
+      if (mobileNavProducts) {
+        document.querySelectorAll('.mobile-nav-item').forEach(el => el.classList.remove('active'));
+        mobileNavProducts.classList.add('active');
+      }
+    });
+
+    // Toast notification utility
+    function showToast(message) {
+      const toast = document.getElementById('apToast');
+      const toastMsg = document.getElementById('apToastMsg');
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+    window.showToast = showToast;
+  </script>
+
+  <!-- Product Catalog Module -->
+  <script type="module">
+    import { initSupabase, SUPABASE_CONFIG } from './js/supabase-config.js';
+    import { createProductCard, DEMO_BAG_PRODUCTS, setupQuickViewModalHandler } from './js/products.js';
+
+    let allProductsCache = [];
+    let currentCategory = 'all';
+    let currentSort = 'newest';
+    let searchQuery = '';
+
+    const skeleton = document.getElementById('apSkeleton');
+    const container = document.getElementById('allProductsContainer');
+    const resultCount = document.getElementById('apResultCount');
+    const resetFiltersBtn = document.getElementById('apResetFilters');
+
+    // Parse URL parameters for direct category or search links
+    function parseUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      const catParam = params.get('category');
+      const searchParam = params.get('search');
+      const sortParam = params.get('sort');
+
+      if (catParam) {
+        currentCategory = catParam;
+        document.querySelectorAll('[data-ap-category]').forEach(chip => {
+          if (chip.dataset.apCategory.toLowerCase() === catParam.toLowerCase()) {
+            document.querySelectorAll('[data-ap-category]').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+          }
+        });
+      }
+
+      if (searchParam) {
+        searchQuery = searchParam.toLowerCase().trim();
+        const ds = document.getElementById('apSearchInput');
+        const ms = document.getElementById('apSearchInputMobile');
+        if (ds) ds.value = searchParam;
+        if (ms) ms.value = searchParam;
+      }
+
+      if (sortParam) {
+        currentSort = sortParam;
+        const sortSel = document.getElementById('apSortSelect');
+        if (sortSel) sortSel.value = sortParam;
+      }
+    }
+
+    async function loadAllProducts() {
+      parseUrlParams();
+      console.log('[AllProducts] Starting loadAllProducts...');
+      console.log('[AllProducts] Supabase URL:', SUPABASE_CONFIG.url);
+      
+      try {
+        const sb = initSupabase(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+        console.log('[AllProducts] Supabase client initialized:', !!sb);
+        
+        if (!sb) {
+          throw new Error('Supabase client initialization failed');
+        }
+        
+        console.log('[AllProducts] Querying products table...');
+        const { data, error } = await sb.from('products').select('*').eq('is_active', true).order('created_at', { ascending: false });
+        
+        console.log('[AllProducts] Query result - data:', data, 'error:', error);
+        
+        if (error) throw error;
+        
+        if (!data || data.length === 0) {
+          console.warn('[AllProducts] No products found in Supabase database');
+          allProductsCache = [];
+        } else {
+          allProductsCache = data;
+          console.log('[AllProducts] Loaded', data.length, 'products from Supabase');
+        }
+      } catch (e) {
+        console.error('[AllProducts] Error loading products:', e);
+        console.error('[AllProducts] Error details:', e.message, e.stack);
+        allProductsCache = [];
+      }
+      renderProducts();
+    }
+
+    function renderProducts() {
+      let p = [...allProductsCache];
+
+      // Category filter
+      if (currentCategory !== 'all') {
+        p = p.filter(x => (x.category || '').toLowerCase() === currentCategory.toLowerCase());
+      }
+
+      // Search query filter
+      if (searchQuery) {
+        p = p.filter(x =>
+          (x.name || '').toLowerCase().includes(searchQuery) ||
+          (x.category || '').toLowerCase().includes(searchQuery) ||
+          (x.description || '').toLowerCase().includes(searchQuery)
+        );
+      }
+
+      // Sort
+      if (currentSort === 'price_asc') {
+        p.sort((a, b) => (a.price || 0) - (b.price || 0));
+      } else if (currentSort === 'price_desc') {
+        p.sort((a, b) => (b.price || 0) - (a.price || 0));
+      } else if (currentSort === 'rating') {
+        p.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      } else if (currentSort === 'name_asc') {
+        p.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+      }
+
+      // Hide skeleton, show container
+      if (skeleton) skeleton.classList.add('hidden');
+      if (container) container.classList.remove('hidden');
+
+      // Update reset button visibility
+      const hasActiveFilters = currentCategory !== 'all' || searchQuery;
+      if (resetFiltersBtn) {
+        resetFiltersBtn.classList.toggle('hidden', !hasActiveFilters);
+      }
+
+      if (p.length === 0) {
+        container.innerHTML = `
+          <div class="ap-empty bg-white rounded-2xl border border-dashed border-gray-300">
+            <div class="w-16 h-16 rounded-full bg-yellow-50 flex items-center justify-center mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="#facc15" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-1">No products match your filter</h3>
+            <p class="text-sm text-gray-500 mb-4 max-w-sm">Try searching for a different bag style, changing category, or clearing active filters.</p>
+            <button id="apEmptyReset" class="btn bg-yellow-400 text-gray-900 font-bold px-5 py-2 rounded-full hover:bg-yellow-300 transition text-sm">
+              Clear Filter
+            </button>
+          </div>
+        `;
+        resultCount.textContent = '0';
+        const emptyReset = document.getElementById('apEmptyReset');
+        if (emptyReset) emptyReset.addEventListener('click', resetAllFilters);
+        return;
+      }
+
+      container.innerHTML = p.map(x => createProductCard(x)).join('');
+      resultCount.textContent = p.length;
+
+      // Update wishlist active hearts from localStorage
+      updateWishlistIcons();
+
+      // Trigger global price updater
+      if (window.updateAllPrices) window.updateAllPrices();
+    }
+
+    function resetAllFilters() {
+      currentCategory = 'all';
+      searchQuery = '';
+      currentSort = 'newest';
+
+      document.querySelectorAll('[data-ap-category]').forEach(c => c.classList.remove('active'));
+      const allChip = document.querySelector('[data-ap-category="all"]');
+      if (allChip) allChip.classList.add('active');
+
+      const ds = document.getElementById('apSearchInput');
+      const ms = document.getElementById('apSearchInputMobile');
+      if (ds) ds.value = '';
+      if (ms) ms.value = '';
+
+      const sortSel = document.getElementById('apSortSelect');
+      if (sortSel) sortSel.value = 'newest';
+
+      renderProducts();
+    }
+
+    // Category chips click handler
+    document.querySelectorAll('[data-ap-category]').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('[data-ap-category]').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        currentCategory = chip.dataset.apCategory;
+        renderProducts();
+      });
+    });
+
+    if (resetFiltersBtn) {
+      resetFiltersBtn.addEventListener('click', resetAllFilters);
+    }
+
+    // Search sync handler
+    function syncSearch(v) {
+      searchQuery = v.toLowerCase().trim();
+      renderProducts();
+    }
+    const ds = document.getElementById('apSearchInput');
+    const ms = document.getElementById('apSearchInputMobile');
+    if (ds) ds.addEventListener('input', e => { if (ms) ms.value = e.target.value; syncSearch(e.target.value); });
+    if (ms) ms.addEventListener('input', e => { if (ds) ds.value = e.target.value; syncSearch(e.target.value); });
+    window.addEventListener('nilco:search', e => syncSearch(e.detail.query));
+
+    // Interactive Wishlist storage & toggle
+    function getWishlist() {
+      try {
+        return JSON.parse(localStorage.getItem('nilco_wishlist')) || [];
+      } catch (e) {
+        return [];
+      }
+    }
+    function saveWishlist(list) {
+      localStorage.setItem('nilco_wishlist', JSON.stringify(list));
+      updateWishlistBadge(list.length);
+    }
+    function updateWishlistBadge(count) {
+      document.querySelectorAll('[title="Wishlist"] span, .wishlist-badge').forEach(badge => {
+        badge.textContent = count;
+      });
+    }
+    function updateWishlistIcons() {
+      const list = getWishlist();
+      updateWishlistBadge(list.length);
+      document.querySelectorAll('.card-product').forEach(card => {
+        const name = card.dataset.productName;
+        const heartBtn = card.querySelector('[title="Wishlist"]');
+        if (heartBtn && name) {
+          if (list.includes(name)) {
+            heartBtn.classList.add('wishlist-active');
+            heartBtn.querySelector('svg')?.setAttribute('fill', '#ef4444');
+          } else {
+            heartBtn.classList.remove('wishlist-active');
+            heartBtn.querySelector('svg')?.setAttribute('fill', 'none');
+          }
+        }
+      });
+    }
+
+    // Event delegation for Wishlist and Quick View
+    document.addEventListener('click', e => {
+      // Wishlist toggle button
+      const wishlistBtn = e.target.closest('[title="Wishlist"]');
+      if (wishlistBtn) {
+        const card = wishlistBtn.closest('.card-product');
+        if (card) {
+          e.preventDefault();
+          e.stopPropagation();
+          const name = card.dataset.productName || 'Bag';
+          let list = getWishlist();
+          if (list.includes(name)) {
+            list = list.filter(item => item !== name);
+            window.showToast?.(`Removed "${name}" from Wishlist`);
+          } else {
+            list.push(name);
+            window.showToast?.(`Added "${name}" to Wishlist ❤️`);
+          }
+          saveWishlist(list);
+          updateWishlistIcons();
+        }
+      }
+    });
+
+    // Setup Quick View Modal handler from products.js
+    setupQuickViewModalHandler();
+
+    // Direct Quick View Modal "Add to Cart" integration
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('quickViewModal');
+      if (modal) {
+        const modalAddToCartBtn = modal.querySelector('.modal-add-to-cart, button[type="button"].bg-yellow-400');
+        if (modalAddToCartBtn && !modalAddToCartBtn.dataset.bound) {
+          modalAddToCartBtn.dataset.bound = 'true';
+          modalAddToCartBtn.addEventListener('click', () => {
+            const name = modal.querySelector('h1')?.textContent?.trim() || 'Nilco Bag';
+            const price = parseFloat(modal.dataset.usdPrice) || 25.00;
+            const img = modal.querySelector('#modalMainImage')?.src || 'assets/images/products/new-products/p1.png';
+            const cat = modal.querySelector('a.text-yellow-600')?.textContent?.trim() || 'Bags';
+            
+            if (typeof window.addToCart === 'function') {
+              window.addToCart(name, price, img, cat);
+            }
+            window.showToast?.(`Added "${name}" to Cart! 🛍️`);
+          });
+        }
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => loadAllProducts());
+  </script>
+  @@include("partials/buy-template.html")
+  @@include("partials/ad-modal.html")
+</body>
+</html>

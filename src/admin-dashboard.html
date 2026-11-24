@@ -1,0 +1,1030 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Libs CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Google+Sans+Display:wght@500;700&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Enterprise Dashboard - Nilco Bags Admin</title>
+    <style>
+        :root {
+            --corp-bg: #f8fafc;
+            --corp-surface: #ffffff;
+            --corp-border: #e2e8f0;
+            --corp-text-main: #0f172a;
+            --corp-text-muted: #64748b;
+            --corp-accent: #f59e0b;
+            --corp-sidebar-width: 260px;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--corp-bg);
+            font-family: 'Google Sans', 'Product Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--corp-text-main);
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Corporate Left Sidebar */
+        .admin-sidebar {
+            width: var(--corp-sidebar-width);
+            background: #ffffff;
+            border-right: 1px solid var(--corp-border);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .admin-sidebar-header {
+            padding: 1.25rem 1.35rem;
+            border-bottom: 1px solid var(--corp-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .admin-sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--corp-text-main);
+        }
+
+        .admin-sidebar-logo-box {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: #0f172a;
+            color: #facc15;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            flex-shrink: 0;
+        }
+
+        .admin-sidebar-brand-text h2 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin: 0;
+            color: #0f172a;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .admin-sidebar-brand-text p {
+            margin: 0;
+            font-size: 0.725rem;
+            color: var(--corp-text-muted);
+            font-weight: 500;
+        }
+        
+        .admin-nav {
+            padding: 1rem 0.75rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .admin-nav-section {
+            padding: 0.85rem 0.75rem 0.35rem;
+            font-size: 0.675rem;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        
+        .admin-nav-item {
+            display: flex;
+            align-items: center;
+            padding: 0.6rem 0.85rem;
+            color: #475569;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.875rem;
+            border-radius: 8px;
+            transition: all 0.15s ease;
+            gap: 10px;
+        }
+        
+        .admin-nav-item:hover {
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+
+        .admin-nav-item.active {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-weight: 600;
+        }
+        
+        .admin-nav-item svg, .admin-nav-item i {
+            font-size: 1.15rem;
+            color: #64748b;
+            flex-shrink: 0;
+        }
+
+        .admin-nav-item.active svg, .admin-nav-item.active i {
+            color: #0f172a;
+        }
+        
+        .admin-sidebar-footer {
+            padding: 0.85rem;
+            border-top: 1px solid var(--corp-border);
+            margin-top: auto;
+        }
+
+        /* Main Content Container */
+        .admin-main {
+            flex: 1;
+            margin-left: var(--corp-sidebar-width);
+            transition: margin-left 0.25s ease;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Sticky Corporate Header */
+        .admin-header {
+            background: #ffffff;
+            border-bottom: 1px solid var(--corp-border);
+            padding: 0.85rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .admin-header-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .admin-header-title h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+            color: #0f172a;
+            letter-spacing: -0.015em;
+        }
+        
+        .admin-header-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .admin-user-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 4px 10px 4px 4px;
+            background: #f8fafc;
+            border: 1px solid var(--corp-border);
+            border-radius: 9999px;
+        }
+
+        .admin-avatar-sm {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #0f172a;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .admin-user-name {
+            font-weight: 600;
+            color: #0f172a;
+            font-size: 0.825rem;
+            line-height: 1.2;
+        }
+        
+        .admin-user-role {
+            font-size: 0.7rem;
+            color: var(--corp-text-muted);
+            line-height: 1;
+        }
+        
+        .btn-live-store {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.45rem 0.85rem;
+            border-radius: 8px;
+            border: 1px solid var(--corp-border);
+            background: #ffffff;
+            color: #475569;
+            font-size: 0.825rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+
+        .btn-live-store:hover {
+            background: #f8fafc;
+            color: #0f172a;
+            border-color: #cbd5e1;
+        }
+
+        .admin-content {
+            padding: 2rem;
+            flex: 1;
+        }
+        
+        /* Corporate Cards */
+        .corp-card {
+            background: var(--corp-surface);
+            border: 1px solid var(--corp-border);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .corp-card-header {
+            padding: 1rem 1.35rem;
+            border-bottom: 1px solid var(--corp-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffff;
+        }
+        
+        .corp-card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0;
+            color: #0f172a;
+            letter-spacing: -0.01em;
+        }
+        
+        .corp-card-body {
+            padding: 1.35rem;
+        }
+        
+        /* Metric Stat Cards */
+        .stat-card {
+            background: var(--corp-surface);
+            border: 1px solid var(--corp-border);
+            border-radius: 12px;
+            padding: 1.25rem 1.35rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+            transition: border-color 0.15s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #cbd5e1;
+        }
+        
+        .stat-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            border: 1px solid var(--corp-border);
+            color: #0f172a;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        
+        .stat-info h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin: 0;
+            color: #0f172a;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+        
+        .stat-info p {
+            margin: 0.2rem 0 0 0;
+            color: var(--corp-text-muted);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .btn-corp-primary {
+            background: #0f172a;
+            border: 1px solid #0f172a;
+            color: #ffffff;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-corp-primary:hover {
+            background: #1e293b;
+            border-color: #1e293b;
+            color: #ffffff;
+        }
+        
+        /* Table Styles */
+        .table-admin {
+            margin-bottom: 0;
+        }
+        
+        .table-admin th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #475569;
+            border-bottom: 1px solid var(--corp-border);
+            padding: 0.75rem 1.25rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+        }
+        
+        .table-admin td {
+            padding: 0.85rem 1.25rem;
+            vertical-align: middle;
+            font-size: 0.875rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .badge-corp-active {
+            background: #ffffff;
+            color: #047857;
+            font-weight: 600;
+            border: none;
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            font-size: 0.725rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.10), 0 0.5px 2px rgba(0,0,0,0.07);
+        }
+
+        .badge-corp-active::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #10b981;
+        }
+        
+        .badge-corp-inactive {
+            background: #ffffff;
+            color: #be123c;
+            font-weight: 600;
+            border: none;
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            font-size: 0.725rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.10), 0 0.5px 2px rgba(0,0,0,0.07);
+        }
+
+        .badge-corp-inactive::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #f43f5e;
+        }
+
+        .badge-admin {
+            background: #ffffff;
+            color: #047857;
+            font-weight: 600;
+            border: none;
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            font-size: 0.725rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.10), 0 0.5px 2px rgba(0,0,0,0.07);
+        }
+
+        .badge-admin-inactive {
+            background: #ffffff;
+            color: #be123c;
+            font-weight: 600;
+            border: none;
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            font-size: 0.725rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.10), 0 0.5px 2px rgba(0,0,0,0.07);
+        }
+        
+        .action-btn {
+            padding: 0.35rem 0.65rem;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            background: #f8fafc;
+            border: 1px solid var(--corp-border);
+            border-radius: 8px;
+            padding: 0.4rem 0.55rem;
+            cursor: pointer;
+            color: #0f172a;
+        }
+        
+        @media (max-width: 1024px) {
+            .admin-sidebar {
+                transform: translateX(-100%);
+                box-shadow: 0 0 35px rgba(0, 0, 0, 0.15);
+            }
+            
+            .admin-sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .admin-main {
+                margin-left: 0;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .admin-header {
+                padding: 0.75rem 1.25rem;
+            }
+            
+            .admin-content {
+                padding: 1.25rem 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .admin-header h1 {
+                font-size: 1.1rem;
+            }
+            .admin-user-info {
+                display: none;
+            }
+            .stat-card {
+                padding: 1rem;
+            }
+        }
+        
+        /* Modals */
+        .modal-admin .modal-content {
+            border-radius: 14px;
+            border: 1px solid var(--corp-border);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .modal-admin .modal-header {
+            border-bottom: 1px solid var(--corp-border);
+            padding: 1.15rem 1.5rem;
+            background: #ffffff;
+        }
+        
+        .modal-admin .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .modal-admin .modal-footer {
+            border-top: 1px solid var(--corp-border);
+            padding: 1rem 1.5rem;
+            background: #f8fafc;
+        }
+        
+        .form-label-admin {
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 0.35rem;
+            font-size: 0.825rem;
+        }
+        
+        .form-control-admin {
+            border: 1px solid var(--corp-border);
+            padding: 0.6rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+        }
+        
+        .form-control-admin:focus {
+            border-color: #0f172a;
+            box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Mobile Sidebar Overlay -->
+    <div id="sidebarOverlay" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.5); backdrop-filter:blur(2px); z-index:999;"></div>
+
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="admin-sidebar-header">
+                <a href="admin-dashboard.html" class="admin-sidebar-brand">
+                    <img src="assets/images/logo/logo.png" alt="Nilco Bags" style="max-height: 38px; width: auto; object-fit: contain;" />
+                </a>
+                <button id="sidebarCloseBtn" style="display:none; background:none; border:none; color:#64748b; font-size:1.25rem; line-height:1; cursor:pointer; padding:0.25rem;" aria-label="Close sidebar">&times;</button>
+            </div>
+            
+            <nav class="admin-nav">
+                <div class="admin-nav-section">Overview</div>
+                <a href="#dashboard" class="admin-nav-item active" data-section="dashboard">
+                    <i class="ti ti-dashboard"></i>
+                    <span>Dashboard</span>
+                </a>
+                
+                <div class="admin-nav-section">Catalog</div>
+                <a href="admin-products.html" class="admin-nav-item">
+                    <i class="ti ti-box"></i>
+                    <span>Products</span>
+                </a>
+
+                <div class="admin-nav-section">Access & Security</div>
+                <a href="admin-users.html" class="admin-nav-item">
+                    <i class="ti ti-users"></i>
+                    <span>Admin Users</span>
+                </a>
+                
+                <div class="admin-nav-section">System</div>
+                <a href="#settings" class="admin-nav-item" data-section="settings">
+                    <i class="ti ti-settings"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="admin-sidebar-footer">
+                <a href="#" id="adminLogoutBtn" class="admin-nav-item text-danger w-100">
+                    <i class="ti ti-logout text-danger"></i>
+                    <span>Sign Out</span>
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="d-flex align-items-center gap-2">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                        <i class="ti ti-menu-2 fs-5"></i>
+                    </button>
+                    <div class="admin-header-title">
+                        <h1 id="pageTitle">Dashboard Overview</h1>
+                    </div>
+                </div>
+                
+                <div class="admin-header-user">
+                    <a href="index.html" target="_blank" class="btn-live-store">
+                        <i class="ti ti-external-link"></i>
+                        <span class="d-none d-sm-inline">Live Store</span>
+                    </a>
+                    <div class="admin-user-pill">
+                        <div class="admin-avatar-sm" style="background: transparent; overflow: hidden;">
+                            <img src="assets/user-profile.png" alt="Admin Profile" style="width: 24px; height: 24px; object-fit: contain;" />
+                        </div>
+                        <div class="admin-user-info">
+                            <div class="admin-user-name" id="adminName">Admin User</div>
+                            <div class="admin-user-role" id="adminRole">Administrator</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="admin-content" id="adminDashboard">
+                <!-- Dashboard Section -->
+                <div id="dashboard-section" class="content-section">
+
+                    <!-- Recent Products -->
+                    <div class="corp-card">
+                        <div class="corp-card-header">
+                            <h3 class="corp-card-title">Recent Inventory</h3>
+                            <a href="admin-products.html" class="btn btn-sm btn-outline-secondary">Manage All</a>
+                        </div>
+                        <div class="corp-card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-admin align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th>Product Details</th>
+                                            <th>Category</th>
+                                            <th>Price</th>
+                                            <th>Stock</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recentProductsTable">
+                                        <tr>
+                                            <td colspan="5" class="text-center py-4 text-muted">Loading inventory from Supabase...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Products Section -->
+                <div id="products-section" class="content-section d-none">
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3 class="admin-card-title">Products Management</h3>
+                            <button class="btn btn-admin btn-sm" id="addProductBtn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 0.5rem;">
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                                Add Product
+                            </button>
+                        </div>
+                        <div class="admin-card-body">
+                            <div class="table-responsive">
+                                <table class="table table-admin">
+                                    <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Product Name</th>
+                                            <th>Category</th>
+                                            <th>Price</th>
+                                            <th>Stock</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="productsTable">
+                                        <tr>
+                                            <td colspan="7" class="text-center text-muted">Loading...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Add Product Section -->
+                <div id="add-product-section" class="content-section d-none">
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3 class="admin-card-title">Add New Product</h3>
+                        </div>
+                        <div class="admin-card-body">
+                            <form id="addProductForm">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label form-label-admin">Product Name</label>
+                                        <input type="text" class="form-control form-control-admin" id="productName" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label form-label-admin">Category</label>
+                                        <select class="form-control form-control-admin" id="productCategory" required>
+                                            <option value="">Select Category</option>
+                                            <option value="Backpacks">Backpacks</option>
+                                            <option value="Handbags">Handbags</option>
+                                            <option value="Shoulder Bags">Shoulder Bags</option>
+                                            <option value="Tote Bags">Tote Bags</option>
+                                            <option value="Crossbody Bags">Crossbody Bags</option>
+                                            <option value="Clutch Bags">Clutch Bags</option>
+                                            <option value="Wallets">Wallets</option>
+                                            <option value="Travel Bags">Travel Bags</option>
+                                            <option value="Laptop Bags">Laptop Bags</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label form-label-admin">Price (₹)</label>
+                                        <input type="number" class="form-control form-control-admin" id="productPrice" step="0.01" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label form-label-admin">Original Price (₹)</label>
+                                        <input type="number" class="form-control form-control-admin" id="productOriginalPrice" step="0.01">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label form-label-admin">Stock Quantity</label>
+                                        <input type="number" class="form-control form-control-admin" id="productStock" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label form-label-admin">Discount (%)</label>
+                                        <input type="number" class="form-control form-control-admin" id="productDiscount" max="100">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label form-label-admin">Description</label>
+                                        <textarea class="form-control form-control-admin" id="productDescription" rows="3"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label form-label-admin">Image URLs (comma separated)</label>
+                                        <input type="text" class="form-control form-control-admin" id="productImages" placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label form-label-admin">Sizes (comma separated)</label>
+                                        <input type="text" class="form-control form-control-admin" id="productSizes" placeholder="Small, Medium, Large">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label form-label-admin">Colors (comma separated)</label>
+                                        <input type="text" class="form-control form-control-admin" id="productColors" placeholder="Black, Brown, Tan">
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="productFeatured">
+                                            <label class="form-check-label" for="productFeatured">
+                                                Featured Product
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-admin">Add Product</button>
+                                        <button type="button" class="btn btn-outline-secondary" id="cancelAddProduct">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Admin Users Section -->
+                <div id="admin-users-section" class="content-section d-none">
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3 class="admin-card-title">Admin Users Management</h3>
+                            <button class="btn btn-admin btn-sm" id="addAdminBtn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 0.5rem;">
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                                Add Admin
+                            </button>
+                        </div>
+                        <div class="admin-card-body">
+                            <div class="table-responsive">
+                                <table class="table table-admin">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th>Status</th>
+                                            <th>Last Login</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="adminUsersTable">
+                                        <tr>
+                                            <td colspan="6" class="text-center text-muted">Loading...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Settings Section -->
+                <div id="settings-section" class="content-section d-none">
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3 class="admin-card-title">System Settings</h3>
+                        </div>
+                        <div class="admin-card-body">
+                            <div class="alert alert-info">
+                                <strong>Settings Panel</strong>
+                                <p class="mb-0">Configure your admin panel settings here. This section is ready for future customization.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Product Edit Modal -->
+    <div class="modal fade modal-admin" id="productModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProductForm">
+                        <input type="hidden" id="editProductId">
+                        <div class="row g-3">
+                            <div class="col-12 col-md-6">
+                                <label class="form-label form-label-admin">Product Name</label>
+                                <input type="text" class="form-control form-control-admin" id="editProductName" required>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label form-label-admin">Category</label>
+                                <select class="form-control form-control-admin" id="editProductCategory" required>
+                                    <option value="">Select Category</option>
+                                    <option value="Backpacks">Backpacks</option>
+                                    <option value="Handbags">Handbags</option>
+                                    <option value="Shoulder Bags">Shoulder Bags</option>
+                                    <option value="Tote Bags">Tote Bags</option>
+                                    <option value="Crossbody Bags">Crossbody Bags</option>
+                                    <option value="Clutch Bags">Clutch Bags</option>
+                                    <option value="Wallets">Wallets</option>
+                                    <option value="Travel Bags">Travel Bags</option>
+                                    <option value="Laptop Bags">Laptop Bags</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label form-label-admin">Price (₹)</label>
+                                <input type="number" class="form-control form-control-admin" id="editProductPrice" step="0.01" required>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label form-label-admin">Original Price (₹)</label>
+                                <input type="number" class="form-control form-control-admin" id="editProductOriginalPrice" step="0.01">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label form-label-admin">Stock Quantity</label>
+                                <input type="number" class="form-control form-control-admin" id="editProductStock" required>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label form-label-admin">Discount (%)</label>
+                                <input type="number" class="form-control form-control-admin" id="editProductDiscount" max="100">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label form-label-admin">Description</label>
+                                <textarea class="form-control form-control-admin" id="editProductDescription" rows="3"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label form-label-admin">Image URLs (comma separated)</label>
+                                <input type="text" class="form-control form-control-admin" id="editProductImages">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label form-label-admin">Sizes (comma separated)</label>
+                                <input type="text" class="form-control form-control-admin" id="editProductSizes">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label form-label-admin">Colors (comma separated)</label>
+                                <input type="text" class="form-control form-control-admin" id="editProductColors">
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="editProductFeatured">
+                                    <label class="form-check-label" for="editProductFeatured">
+                                        Featured Product
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-admin" id="saveProductBtn">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Admin User Modal -->
+    <div class="modal fade modal-admin" id="adminUserModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminUserModalTitle">Add Admin User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminUserForm">
+                        <input type="hidden" id="editAdminUserId">
+                        <div class="mb-3">
+                            <label class="form-label form-label-admin">Full Name</label>
+                            <input type="text" class="form-control form-control-admin" id="adminFullName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label form-label-admin">Email</label>
+                            <input type="email" class="form-control form-control-admin" id="adminUserEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label form-label-admin">Password</label>
+                            <input type="password" class="form-control form-control-admin" id="adminUserPassword">
+                            <small class="text-muted">Leave blank to keep existing password</small>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label form-label-admin">Role</label>
+                            <select class="form-control form-control-admin" id="adminUserRole" required>
+                                <option value="admin">Admin</option>
+                                <option value="super_admin">Super Admin</option>
+                            </select>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="adminUserActive" checked>
+                            <label class="form-check-label" for="adminUserActive">
+                                Active
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-admin" id="saveAdminUserBtn">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Admin Auth JS -->
+    <script type="module" src="js/admin-auth.js"></script>
+    
+    <!-- Admin Dashboard JS -->
+    <script type="module" src="js/admin-dashboard.js"></script>
+
+    <!-- Product Form Handling Script -->
+    <script>
+        // Handle Add Product Form - Convert INR to storage format
+        document.getElementById('addProductForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const priceInput = parseFloat(document.getElementById('productPrice').value);
+            const origPriceInput = document.getElementById('productOriginalPrice').value;
+            const originalPrice = origPriceInput ? parseFloat(origPriceInput) : null;
+            
+            // Convert INR to storage format (1 USD = 83 INR)
+            const USD_TO_INR_RATE = 83;
+            const priceUSD = priceInput / USD_TO_INR_RATE;
+            const originalPriceUSD = originalPrice ? originalPrice / USD_TO_INR_RATE : null;
+            
+            // Update form values with storage amounts
+            document.getElementById('productPrice').value = priceUSD.toFixed(2);
+            if (originalPriceUSD) {
+                document.getElementById('productOriginalPrice').value = originalPriceUSD.toFixed(2);
+            }
+            
+            // Submit the form
+            this.submit();
+        });
+
+        // Handle Edit Product Form - Convert INR to storage format
+        const editProductForm = document.getElementById('editProductForm');
+        if (editProductForm) {
+            editProductForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const priceInput = parseFloat(document.getElementById('editProductPrice').value);
+                const origPriceInput = document.getElementById('editProductOriginalPrice').value;
+                const originalPrice = origPriceInput ? parseFloat(origPriceInput) : null;
+                
+                // Convert INR to storage format (1 USD = 83 INR)
+                const USD_TO_INR_RATE = 83;
+                const priceUSD = priceInput / USD_TO_INR_RATE;
+                const originalPriceUSD = originalPrice ? originalPrice / USD_TO_INR_RATE : null;
+                
+                // Update form values with storage amounts
+                document.getElementById('editProductPrice').value = priceUSD.toFixed(2);
+                if (originalPriceUSD) {
+                    document.getElementById('editProductOriginalPrice').value = originalPriceUSD.toFixed(2);
+                }
+                
+                // Submit the form
+                this.submit();
+            });
+        }
+    </script>
+</body>
+
+</html>

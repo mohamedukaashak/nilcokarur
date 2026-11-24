@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"="Compare products side by side at Nilco Bags - Find the perfect bag for your needs." />
+  <link rel="stylesheet" href="@@webRoot/node_modules/swiper/swiper-bundle.min.css" />
+  @@include("partials/head.html")
+  <title>Compare Products - Nilco Bags</title>
+  <style>
+    .compare-page-hero {
+      background: radial-gradient(circle at 10% 20%, #fef9c3 0%, #fef3c7 40%, #fde68a 90%);
+    }
+    .compare-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .compare-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.1);
+    }
+    .feature-row {
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .feature-row:last-child {
+      border-bottom: none;
+    }
+    .feature-label {
+      background: #f9fafb;
+      font-weight: 600;
+    }
+    .empty-compare {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    @media (max-width: 767px) {
+      .empty-compare {
+        padding: 32px 16px;
+      }
+    }
+    @media (max-width: 767px) {
+      .compare-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  @@include("partials/navbar.html")
+  <script type="module" src="js/products.js"></script>
+
+  <main class="pb-12">
+    <!-- Empty State -->
+    <div id="emptyCompareState" class="empty-compare">
+      <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-2">No products to compare</h2>
+      <p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">Add products from the shop to compare them side by side</p>
+      <a href="all-products.html" class="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-yellow-400 text-gray-900 font-bold rounded-full hover:bg-yellow-300 transition text-sm sm:text-base">
+        Browse Products
+      </a>
+    </div>
+
+    <!-- Comparison Table -->
+    <div id="comparisonSection" class="hidden mt-8">
+      <div class="container max-w-7xl mx-auto px-4">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-xl font-bold text-gray-900">Product Comparison</h2>
+          <button id="clearAllCompare" class="px-4 py-2 rounded-full bg-red-50 text-red-600 hover:bg-red-100 font-medium text-sm transition">
+            Clear All
+          </button>
+        </div>
+        
+        <div class="compare-table bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+          <div id="comparisonContent">
+            <!-- Comparison content will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  @@include("partials/footer.html")
+
+  <script src="@@webRoot/assets/js/vendors/countdown.js"></script>
+  <script src="@@webRoot/node_modules/tiny-slider/dist/min/tiny-slider.js"></script>
+  <script src="@@webRoot/assets/js/vendors/tns-slider.js"></script>
+  <script src="@@webRoot/assets/js/vendors/zoom.js"></script>
+  <script src="@@webRoot/assets/js/vendors/language.js"></script>
+  <script src="@@webRoot/node_modules/swiper/swiper-bundle.min.js"></script>
+  <script src="@@webRoot/assets/js/vendors/swiper.js"></script>
+
+  <script type="module">
+    import { createProductCard, fetchProductsFromSupabase } from './js/products.js';
+
+    let compareProducts = [];
+    const MAX_COMPARE = 3;
+
+    // Load comparison from localStorage
+    function loadComparison() {
+      const saved = localStorage.getItem('compareProducts');
+      if (saved) {
+        compareProducts = JSON.parse(saved);
+      }
+      updateComparisonUI();
+    }
+
+    // Save comparison to localStorage
+    function saveComparison() {
+      localStorage.setItem('compareProducts', JSON.stringify(compareProducts));
+    }
+
+    // Add product to comparison
+    function addToCompare(product) {
+      if (compareProducts.length >= MAX_COMPARE) {
+        alert(`You can only compare up to ${MAX_COMPARE} products at a time`);
+        return false;
+      }
+      
+      const exists = compareProducts.find(p => p.id === product.id);
+      if (exists) {
+        alert('This product is already in comparison');
+        return false;
+      }
+      
+      compareProducts.push(product);
+      saveComparison();
+      updateComparisonUI();
+      return true;
+    }
+
+    // Remove product from comparison
+    function removeFromCompare(productId) {
+      compareProducts = compareProducts.filter(p => p.id !== productId);
+      saveComparison();
+      updateComparisonUI();
+    }
+
+    // Clear all comparisons
+    function clearAllComparison() {
+      compareProducts = [];
+      saveComparison();
+      updateComparisonUI();
+    }
+
+    // Update comparison UI
+    function updateComparisonUI() {
+      const emptyState = document.getElementById('emptyCompareState');
+      const comparisonSection = document.getElementById('comparisonSection');
+      const comparisonContent = document.getElementById('comparisonContent');
+
+      if (compareProducts.length === 0) {
+        emptyState.classList.remove('hidden');
+        comparisonSection.classList.add('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      comparisonSection.classList.remove('hidden');
+
+      // Build comparison table
+      let html = '<div class="grid">';
+      
+      // Header row with product images and names
+      html += '<div class="feature-row p-4 bg-gray-50">';
+      html += '<div class="font-semibold text-gray-900">Product</div>';
+      compareProducts.forEach(product => {
+        const primaryImage = product.thumbnail_url || (product.images && product.images.length > 0 ? product.images[0] : 'assets/images/products/new-products/p1.png');
+        const price = typeof product.price === 'number' ? product.price : parseFloat(product.price) || 0;
+        const displayPrice = window.currentCurrency === 'INR' ? `₹${Math.round(price * 83)}` : `$${price.toFixed(2)}`;
+        
+        html += `
+          <div class="text-center">
+            <button class="absolute top-2 right-2 text-red-500 hover:text-red-700 text-sm" onclick="window.removeFromCompare('${product.id}')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6l-12 12"/>
+                <path d="M6 6l12 12"/>
+              </svg>
+            </button>
+            <img src="${primaryImage}" alt="${product.name}" class="w-24 h-24 object-contain mx-auto mb-2" onerror="this.src='assets/images/products/new-products/p1.png'" />
+            <h3 class="font-semibold text-gray-900 text-sm mb-1">${product.name}</h3>
+            <p class="text-yellow-600 font-bold">${displayPrice}</p>
+          </div>
+        `;
+      });
+      html += '</div>';
+
+      // Features to compare
+      const features = [
+        { label: 'Category', key: 'category' },
+        { label: 'Price', key: 'price', format: (val) => window.currentCurrency === 'INR' ? `₹${Math.round(val * 83)}` : `$${parseFloat(val).toFixed(2)}` },
+        { label: 'Rating', key: 'rating', format: (val) => val ? `${val} ★` : 'N/A' },
+        { label: 'Stock', key: 'stock_quantity', format: (val) => val > 0 ? `In Stock (${val})` : 'Out of Stock' },
+        { label: 'Sizes', key: 'sizes', format: (val) => Array.isArray(val) ? val.join(', ') : val },
+        { label: 'Colors', key: 'colors', format: (val) => Array.isArray(val) ? val.join(', ') : val },
+        { label: 'Description', key: 'description', format: (val) => val ? val.substring(0, 100) + '...' : 'N/A' },
+      ];
+
+      features.forEach(feature => {
+        html += '<div class="feature-row grid p-4">';
+        html += `<div class="feature-label text-gray-700">${feature.label}</div>`;
+        compareProducts.forEach(product => {
+          let value = product[feature.key];
+          if (feature.format && value !== undefined) {
+            value = feature.format(value);
+          } else if (value === undefined || value === null || value === '') {
+            value = 'N/A';
+          }
+          html += `<div class="text-gray-900 text-sm">${value}</div>`;
+        });
+        html += '</div>';
+      });
+
+      // Action row
+      html += '<div class="feature-row grid p-4 bg-gray-50">';
+      html += '<div class="feature-label text-gray-700">Action</div>';
+      compareProducts.forEach(product => {
+        html += `
+          <div class="text-center">
+            <button class="w-full py-2 px-4 bg-yellow-400 text-gray-900 font-bold rounded-full hover:bg-yellow-300 transition text-sm">
+              Add to Cart
+            </button>
+          </div>
+        `;
+      });
+      html += '</div>';
+
+      html += '</div>';
+      comparisonContent.innerHTML = html;
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      loadComparison();
+      
+      // Clear all button
+      document.getElementById('clearAllCompare').addEventListener('click', clearAllComparison);
+      
+      // Make functions globally accessible
+      window.addToCompare = addToCompare;
+      window.removeFromCompare = removeFromCompare;
+      window.loadComparison = loadComparison;
+    });
+  </script>
+  @@include("partials/buy-template.html")
+  @@include("partials/ad-modal.html")
+</body>
+</html>

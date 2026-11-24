@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Libs CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Google+Sans+Display:wght@500;700&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Enterprise Admin Portal - Nilco Bags</title>
+    <style>
+        :root {
+            --corp-bg: #f8fafc;
+            --corp-surface: #ffffff;
+            --corp-border: #e2e8f0;
+            --corp-text-main: #0f172a;
+            --corp-text-muted: #64748b;
+            --corp-primary: #0f172a;
+            --corp-accent: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Google Sans', 'Product Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--corp-bg);
+            color: var(--corp-text-main);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .login-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            background: 
+                radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.08) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(15, 23, 42, 0.05) 0px, transparent 50%),
+                #f8fafc;
+        }
+
+        .login-card {
+            background: var(--corp-surface);
+            border: 1px solid var(--corp-border);
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+            max-width: 440px;
+            width: 100%;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .login-header {
+            padding: 2.5rem 2.25rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            background: #0f172a;
+            color: #ffffff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.25rem;
+        }
+
+        .brand-badge i {
+            color: #facc15;
+            font-size: 1.1rem;
+        }
+
+        .login-header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--corp-text-main);
+            letter-spacing: -0.02em;
+            margin: 0 0 0.35rem;
+        }
+
+        .login-header p {
+            color: var(--corp-text-muted);
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .login-body {
+            padding: 2rem 2.25rem 2.25rem;
+        }
+
+        .form-label {
+            font-size: 0.825rem;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .input-group {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        .input-group-text {
+            background-color: #f8fafc;
+            border: 1px solid var(--corp-border);
+            border-right: none;
+            color: #94a3b8;
+            padding: 0.7rem 0.9rem;
+        }
+
+        .form-control {
+            border: 1px solid var(--corp-border);
+            border-left: none;
+            font-size: 0.9rem;
+            padding: 0.7rem 0.9rem;
+            color: #0f172a;
+            background-color: #ffffff;
+            font-weight: 500;
+        }
+
+        .form-control:focus {
+            background-color: #ffffff;
+            border-color: #0f172a;
+            box-shadow: none;
+            color: #0f172a;
+        }
+
+        .input-group:focus-within .input-group-text {
+            border-color: #0f172a;
+            color: #0f172a;
+        }
+
+        .btn-corporate-primary {
+            background: #0f172a;
+            color: #ffffff;
+            border: 1px solid #0f172a;
+            padding: 0.75rem 1.25rem;
+            font-weight: 600;
+            font-size: 0.925rem;
+            border-radius: 10px;
+            width: 100%;
+            transition: all 0.15s ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-corporate-primary:hover {
+            background: #1e293b;
+            color: #ffffff;
+            border-color: #1e293b;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+        }
+
+        .btn-corporate-primary:active {
+            transform: scale(0.99);
+        }
+
+        .login-footer {
+            padding: 1.15rem 2.25rem;
+            background: #f8fafc;
+            border-top: 1px solid #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-footer a {
+            color: var(--corp-text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.15s;
+        }
+
+        .login-footer a:hover {
+            color: #0f172a;
+        }
+
+        @media (max-width: 576px) {
+            .login-header {
+                padding: 2rem 1.5rem 1.25rem;
+            }
+            .login-body {
+                padding: 1.5rem 1.5rem 1.75rem;
+            }
+            .login-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="mb-3">
+                    <img src="assets/images/logo/logo.png" alt="Nilco Bags" style="max-height: 48px; width: auto; object-fit: contain;" />
+                </div>
+                <h1>Admin Portal</h1>
+                <p>Sign in to manage catalog, inventory & access controls</p>
+            </div>
+            
+            <div class="login-body">
+                <form id="adminLoginForm">
+                    <div class="mb-3">
+                        <label for="adminEmail" class="form-label">Work Email</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="ti ti-mail"></i>
+                            </span>
+                            <input type="email" class="form-control" id="adminEmail" placeholder="admin@nilcobags.com" required autocomplete="email">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="adminPassword" class="form-label">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="ti ti-lock"></i>
+                            </span>
+                            <input type="password" class="form-control" id="adminPassword" placeholder="••••••••" required autocomplete="current-password">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-corporate-primary" id="adminLoginBtn">
+                            <span>Sign In</span>
+                            <i class="ti ti-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="login-footer">
+                <a href="index.html">
+                    <i class="ti ti-arrow-left"></i>
+                    <span>Return to Storefront</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/admin-auth.js"></script>
+</body>
+
+</html>

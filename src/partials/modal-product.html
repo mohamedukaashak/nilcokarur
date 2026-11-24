@@ -1,0 +1,777 @@
+<!-- Modal -->
+<div class="modal fade" id="quickViewModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-fullscreen-md-down lg:min-w-[1140px]">
+		<div class="modal-content">
+			<div class="modal-body p-4 md:p-6 lg:p-8">
+				<div class="absolute top-0 right-0 p-2 md:p-3 z-50">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="icon icon-tabler icon-tabler-x text-gray-700"
+							width="20"
+							height="20"
+							viewBox="0 0 24 24"
+							stroke-width="2"
+							stroke="currentColor"
+							fill="none"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+							<path d="M18 6l-12 12" />
+							<path d="M6 6l12 12" />
+						</svg>
+					</button>
+				</div>
+				<div class="flex flex-wrap">
+					<!-- Left Column: Modern Auto-Slide Product Image Gallery -->
+					<div class="w-full md:w-1/2">
+						<div class="product-gallery-wrapper flex flex-col gap-3">
+							<!-- Main Slider Viewport -->
+							<div class="relative w-full rounded-2xl overflow-hidden bg-gradient-to-b from-gray-50/90 via-gray-100/60 to-gray-50/90 border border-gray-200/90 shadow-inner group" id="modalSliderViewport">
+								<!-- Autoplay Progress Bar -->
+								<div class="absolute top-0 left-0 right-0 h-1 bg-gray-200/70 z-30 overflow-hidden">
+									<div id="modalSliderProgressBar" class="h-full bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 w-0"></div>
+								</div>
+
+								<!-- Photo Counter Badge (Top Left) -->
+								<div class="absolute top-3 left-3 z-30 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-bold flex items-center gap-1.5 shadow-sm select-none">
+									<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+										<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+										<circle cx="12" cy="13" r="4"></circle>
+									</svg>
+									<span><span id="modalSlideCurrent">1</span> / <span id="modalSlideTotal">4</span></span>
+								</div>
+
+								<!-- Auto-Play Status Chip (Top Right) -->
+								<button type="button" id="modalAutoPlayToggle" class="absolute top-3 right-3 z-30 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-gray-700 text-[11px] font-bold flex items-center gap-1.5 shadow-sm border border-gray-200/80 hover:bg-yellow-400 hover:text-gray-900 transition-all select-none cursor-pointer" title="Click to Pause / Resume Auto-Slide">
+									<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" id="modalAutoPlayIndicator"></span>
+									<span id="modalAutoPlayLabel">Auto-Slide</span>
+								</button>
+
+								<!-- Track Container with 4 Slides -->
+								<div class="relative w-full overflow-hidden" style="height: 380px;">
+									<div id="modalSliderTrack" class="flex h-full w-full transition-transform duration-500 ease-out" style="transform: translateX(0%);">
+										<!-- Slide 1 -->
+										<div class="modal-slide w-full h-full flex-shrink-0 flex items-center justify-center p-3 sm:p-5">
+											<img id="modalMainImage" src="assets/images/products/new-products/p1.png" alt="Product Photo 1" class="max-h-full max-w-full object-contain filter drop-shadow-sm transition-transform duration-300 hover:scale-105 pointer-events-none" />
+										</div>
+										<!-- Slide 2 -->
+										<div class="modal-slide w-full h-full flex-shrink-0 flex items-center justify-center p-3 sm:p-5">
+											<img id="modalImage2" src="assets/images/products/new-products/p2.png" alt="Product Photo 2" class="max-h-full max-w-full object-contain filter drop-shadow-sm transition-transform duration-300 hover:scale-105 pointer-events-none" />
+										</div>
+										<!-- Slide 3 -->
+										<div class="modal-slide w-full h-full flex-shrink-0 flex items-center justify-center p-3 sm:p-5">
+											<img id="modalImage3" src="assets/images/products/new-products/p3.png" alt="Product Photo 3" class="max-h-full max-w-full object-contain filter drop-shadow-sm transition-transform duration-300 hover:scale-105 pointer-events-none" />
+										</div>
+										<!-- Slide 4 -->
+										<div class="modal-slide w-full h-full flex-shrink-0 flex items-center justify-center p-3 sm:p-5">
+											<img id="modalImage4" src="assets/images/products/new-products/p4.png" alt="Product Photo 4" class="max-h-full max-w-full object-contain filter drop-shadow-sm transition-transform duration-300 hover:scale-105 pointer-events-none" />
+										</div>
+									</div>
+								</div>
+
+								<!-- Prev / Next Navigation Arrows -->
+								<button type="button" id="modalPrevSlide" class="absolute left-2.5 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/95 backdrop-blur-md shadow-md border border-gray-200/80 flex items-center justify-center text-gray-700 hover:bg-yellow-400 hover:text-gray-900 active:scale-95 transition-all opacity-85 group-hover:opacity-100 cursor-pointer" aria-label="Previous Photo">
+									<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+								</button>
+								<button type="button" id="modalNextSlide" class="absolute right-2.5 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/95 backdrop-blur-md shadow-md border border-gray-200/80 flex items-center justify-center text-gray-700 hover:bg-yellow-400 hover:text-gray-900 active:scale-95 transition-all opacity-85 group-hover:opacity-100 cursor-pointer" aria-label="Next Photo">
+									<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+								</button>
+							</div>
+
+							<!-- Thumbnails Navigation Bar (4 slots) -->
+							<div class="thumbnails grid grid-cols-4 gap-2 sm:gap-3" id="productModalThumbnails">
+								<div class="modal-thumb-item aspect-square rounded-xl overflow-hidden bg-white border-2 cursor-pointer transition-all duration-200 p-1.5 flex items-center justify-center border-yellow-400 ring-2 ring-yellow-400/40 shadow-xs active" data-slide-index="0">
+									<img id="modalThumb1" src="assets/images/products/new-products/p1.png" alt="Thumb 1" class="max-h-full max-w-full object-contain pointer-events-none" />
+								</div>
+								<div class="modal-thumb-item aspect-square rounded-xl overflow-hidden bg-gray-50 border-2 cursor-pointer transition-all duration-200 p-1.5 flex items-center justify-center border-gray-200 opacity-60 hover:opacity-100 hover:border-gray-300" data-slide-index="1">
+									<img id="modalThumb2" src="assets/images/products/new-products/p2.png" alt="Thumb 2" class="max-h-full max-w-full object-contain pointer-events-none" />
+								</div>
+								<div class="modal-thumb-item aspect-square rounded-xl overflow-hidden bg-gray-50 border-2 cursor-pointer transition-all duration-200 p-1.5 flex items-center justify-center border-gray-200 opacity-60 hover:opacity-100 hover:border-gray-300" data-slide-index="2">
+									<img id="modalThumb3" src="assets/images/products/new-products/p3.png" alt="Thumb 3" class="max-h-full max-w-full object-contain pointer-events-none" />
+								</div>
+								<div class="modal-thumb-item aspect-square rounded-xl overflow-hidden bg-gray-50 border-2 cursor-pointer transition-all duration-200 p-1.5 flex items-center justify-center border-gray-200 opacity-60 hover:opacity-100 hover:border-gray-300" data-slide-index="3">
+									<img id="modalThumb4" src="assets/images/products/new-products/p4.png" alt="Thumb 4" class="max-h-full max-w-full object-contain pointer-events-none" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="w-full md:w-1/2 mt-4 md:mt-0 md:pr-4 md:pl-4">
+						<div class="lg:pl-10">
+							<div class="flex flex-col gap-3 md:gap-4">
+								<!-- content -->
+								<a href="#!" class="block text-yellow-600 font-medium text-sm md:text-base">Backpacks</a>
+								<!-- heading -->
+								<h1 class="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900">Premium Leather Backpack</h1>
+								<div class="flex flex-col gap-2">
+									<div class="flex items-center flex-wrap gap-2">
+										<!-- rating -->
+										<small class="text-yellow-500 inline-flex items-center">
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												class="icon icon-tabler icon-tabler-star-filled"
+												width="14"
+												height="14"
+												viewBox="0 0 24 24"
+												stroke-width="2"
+												stroke="currentColor"
+												fill="currentColor"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+												<path
+													d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+													stroke-width="0"
+													fill="currentColor"
+												></path>
+											</svg>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												class="icon icon-tabler icon-tabler-star-filled"
+												width="14"
+												height="14"
+												viewBox="0 0 24 24"
+												stroke-width="2"
+												stroke="currentColor"
+												fill="currentColor"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+												<path
+													d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+													stroke-width="0"
+													fill="currentColor"
+												></path>
+											</svg>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												class="icon icon-tabler icon-tabler-star-filled"
+												width="14"
+												height="14"
+												viewBox="0 0 24 24"
+												stroke-width="2"
+												stroke="currentColor"
+												fill="currentColor"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+												<path
+													d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+													stroke-width="0"
+													fill="currentColor"
+												></path>
+											</svg>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												class="icon icon-tabler icon-tabler-star-filled"
+												width="14"
+												height="14"
+												viewBox="0 0 24 24"
+												stroke-width="2"
+												stroke="currentColor"
+												fill="currentColor"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+												<path
+													d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+													stroke-width="0"
+													fill="currentColor"
+												></path>
+											</svg>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												class="icon icon-tabler icon-tabler-star-filled"
+												width="14"
+												height="14"
+												viewBox="0 0 24 24"
+												stroke-width="2"
+												stroke="currentColor"
+												fill="currentColor"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+												<path
+													d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+													stroke-width="0"
+													fill="currentColor"
+												></path>
+											</svg>
+										</small>
+										<a href="#" class="text-yellow-600 text-sm hover:underline">(30 reviews)</a>
+									</div>
+									<div class="text-sm md:text-md">
+										<span class="text-gray-900 font-semibold text-lg md:text-xl">₹1,494</span>
+										<span class="line-through text-gray-500 text-sm md:text-base">₹1,992</span>
+
+										<span><small class="text-red-600 font-bold text-xs md:text-sm">26% Off</small></span>
+									</div>
+								</div>
+								<!-- hr -->
+								<div class="flex flex-col gap-4 md:gap-6">
+									<hr />
+									<div class="flex flex-wrap gap-2">
+										<button
+											type="button"
+											class="btn inline-flex items-center gap-x-2 bg-white text-gray-800 border-gray-300 border disabled:opacity-50 disabled:pointer-events-none hover:text-gray-900 hover:bg-yellow-300 hover:border-yellow-300 active:bg-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-200 text-sm md:text-base"
+										>
+											Small
+										</button>
+										<!-- btn -->
+										<button
+											type="button"
+											class="btn inline-flex items-center gap-x-2 bg-white text-gray-800 border-gray-300 border disabled:opacity-50 disabled:pointer-events-none hover:text-gray-900 hover:bg-yellow-300 hover:border-yellow-300 active:bg-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-200 text-sm md:text-base"
+										>
+											Medium
+										</button>
+										<!-- btn -->
+										<button
+											type="button"
+											class="btn inline-flex items-center gap-x-2 bg-white text-gray-800 border-gray-300 border disabled:opacity-50 disabled:pointer-events-none hover:text-gray-900 hover:bg-yellow-300 hover:border-yellow-300 active:bg-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-200 text-sm md:text-base"
+										>
+											Large
+										</button>
+									</div>
+									<div>
+										<!-- input -->
+										<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+											<!-- input -->
+											<div class="input-group input-spinner rounded-lg flex justify-between items-center">
+												<input type="button" value="-" class="button-minus w-8 py-1 border-r cursor-pointer border-gray-300 hover:bg-gray-100" data-field="quantity" />
+												<input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field w-9 px-2 text-center h-7 border-0 bg-transparent" />
+												<input type="button" value="+" class="button-plus w-8 py-1 border-l cursor-pointer border-gray-300 hover:bg-gray-100" data-field="quantity" />
+											</div>
+										</div>
+									</div>
+									<div class="flex flex-wrap justify-start gap-2 items-center">
+										<div class="w-full sm:w-auto grid">
+											<!-- Add to cart button with luxury yellow theme -->
+											<button
+												type="button"
+												class="btn bg-yellow-400 text-gray-900 font-bold border-yellow-400 disabled:opacity-50 disabled:pointer-events-none hover:bg-yellow-300 hover:border-yellow-300 active:bg-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-200 justify-center w-full sm:w-auto shadow-sm"
+											>
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													class="icon icon-tabler icon-tabler-plus mr-2"
+													width="14"
+													height="14"
+													viewBox="0 0 24 24"
+													stroke-width="3"
+													stroke="currentColor"
+													fill="none"
+													stroke-linecap="round"
+													stroke-linejoin="round"
+												>
+													<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+													<path d="M12 5l0 14"></path>
+													<path d="M5 12l14 0"></path>
+												</svg>
+												Add to cart
+											</button>
+										</div>
+										<div class="w-full sm:w-auto flex gap-2 mt-2 sm:mt-0">
+											<!-- btn -->
+											<a
+												href="#"
+												class="btn inline-flex items-center gap-x-2 px-0 h-10 w-10 justify-center bg-white text-gray-800 border-gray-300 border disabled:opacity-50 disabled:pointer-events-none hover:text-gray-900 hover:bg-yellow-300 hover:border-yellow-300 active:bg-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-200 flex-shrink-0"
+											>
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													class="icon icon-tabler icon-tabler-arrows-exchange"
+													width="18"
+													height="18"
+													viewBox="0 0 24 24"
+													stroke-width="2"
+													stroke="currentColor"
+													fill="none"
+													stroke-linecap="round"
+													stroke-linejoin="round"
+												>
+													<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+													<path d="M7 10h14l-4 -4"></path>
+													<path d="M17 14h-14l4 4"></path>
+												</svg>
+											</a>
+											<a
+												href="#"
+												class="btn inline-flex items-center gap-x-2 px-0 h-10 w-10 justify-center bg-white text-gray-800 border-gray-300 border disabled:opacity-50 disabled:pointer-events-none hover:text-gray-900 hover:bg-yellow-300 hover:border-yellow-300 active:bg-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-200 flex-shrink-0"
+											>
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													class="icon icon-tabler icon-tabler-heart"
+													width="18"
+													height="18"
+													viewBox="0 0 24 24"
+													stroke-width="2"
+													stroke="currentColor"
+													fill="none"
+													stroke-linecap="round"
+													stroke-linejoin="round"
+												>
+													<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+													<path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
+												</svg>
+											</a>
+										</div>
+									</div>
+									<!-- hr -->
+									<hr />
+								</div>
+								<div>
+									<!-- table -->
+									<table class="text-left w-full text-sm md:text-base">
+										<tbody>
+											<tr>
+												<td class="px-2 py-2 md:px-6 md:py-3 font-medium">Product Code:</td>
+												<td class="px-2 py-2 md:px-6 md:py-3 text-gray-600">NBG00155</td>
+											</tr>
+											<tr>
+												<td class="px-2 py-2 md:px-6 md:py-3 font-medium">Availability:</td>
+												<td class="px-2 py-2 md:px-6 md:py-3 text-yellow-700 font-semibold">In Stock</td>
+											</tr>
+											<tr>
+												<td class="px-2 py-2 md:px-6 md:py-3 font-medium">Type:</td>
+												<td class="px-2 py-2 md:px-6 md:py-3 text-gray-600">Backpack</td>
+											</tr>
+											<tr>
+												<td class="px-2 py-2 md:px-6 md:py-3 font-medium">Shipping:</td>
+												<td class="px-2 py-2 md:px-6 md:py-3">
+													<small>
+														01 day shipping.
+														<span class="text-gray-700">( Free pickup today)</span>
+													</small>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div>
+									<!-- dropdown -->
+									<div class="relative">
+										<a
+											class="dropdown-toggle btn inline-flex items-center gap-x-2 bg-white text-gray-800 border-gray-300 border disabled:opacity-50 disabled:pointer-events-none hover:text-gray-900 hover:bg-yellow-300 hover:border-yellow-300 active:bg-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-200"
+											href="#"
+											role="button"
+											data-bs-toggle="dropdown"
+											aria-expanded="false"
+										>
+											Share
+										</a>
+
+										<ul class="dropdown-menu">
+											<li>
+												<a class="dropdown-item hover:bg-yellow-50 hover:text-yellow-700" href="#">
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														class="icon icon-tabler icon-tabler-brand-facebook inline-block"
+														width="18"
+														height="18"
+														viewBox="0 0 24 24"
+														stroke-width="2"
+														stroke="currentColor"
+														fill="none"
+														stroke-linecap="round"
+														stroke-linejoin="round"
+													>
+														<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+														<path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+													</svg>
+													Facebook
+												</a>
+											</li>
+											<li>
+												<a class="dropdown-item hover:bg-yellow-50 hover:text-yellow-700" href="#">
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														class="icon icon-tabler icon-tabler-brand-x"
+														width="18"
+														height="18"
+														viewBox="0 0 24 24"
+														stroke-width="2"
+														stroke="currentColor"
+														fill="none"
+														stroke-linecap="round"
+														stroke-linejoin="round"
+													>
+														<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+														<path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+														<path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+													</svg>
+													Twitter
+												</a>
+											</li>
+											<li>
+												<a class="dropdown-item hover:bg-yellow-50 hover:text-yellow-700" href="#">
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														class="icon icon-tabler icon-tabler-brand-instagram"
+														width="18"
+														height="18"
+														viewBox="0 0 24 24"
+														stroke-width="2"
+														stroke="currentColor"
+														fill="none"
+														stroke-linecap="round"
+														stroke-linejoin="round"
+													>
+														<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+														<path d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" />
+														<path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+														<path d="M16.5 7.5l0 .01" />
+													</svg>
+													Instagram
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Auto-Slider Styles & Responsive Enhancements for Product Modal -->
+<style>
+	#modalSliderViewport {
+		position: relative;
+		user-select: none;
+		touch-action: pan-y pinch-zoom;
+	}
+
+	@media (max-width: 640px) {
+		#modalSliderViewport,
+		#modalSliderViewport > div.relative {
+			height: 280px !important;
+		}
+	}
+
+	@media (min-width: 641px) and (max-width: 1024px) {
+		#modalSliderViewport,
+		#modalSliderViewport > div.relative {
+			height: 340px !important;
+		}
+	}
+
+	#modalSliderTrack {
+		will-change: transform;
+	}
+
+	.modal-thumb-item {
+		transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.modal-thumb-item.active {
+		border-color: #facc15 !important;
+		box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.35);
+		transform: scale(1.04);
+		opacity: 1 !important;
+		background-color: #ffffff !important;
+	}
+
+	/* Mobile fullscreen modal */
+	@media (max-width: 767px) {
+		#quickViewModal .modal-dialog {
+			margin: 0;
+			max-height: 100vh;
+			height: 100vh;
+		}
+		
+		#quickViewModal .modal-content {
+			height: 100vh;
+			border-radius: 0;
+		}
+		
+		#quickViewModal .modal-body {
+			overflow-y: auto;
+			-webkit-overflow-scrolling: touch;
+			padding-bottom: 2.5rem;
+		}
+
+		/* Make buttons touch-friendly */
+		#quickViewModal .btn {
+			min-height: 44px;
+		}
+		
+		/* Improve table readability */
+		#quickViewModal table td {
+			word-break: break-word;
+		}
+	}
+	
+	/* Tablet and above */
+	@media (min-width: 768px) {
+		#quickViewModal .modal-body {
+			max-height: 85vh;
+			overflow-y: auto;
+		}
+	}
+</style>
+
+<!-- Product Modal Auto-Slider Controller Script -->
+<script>
+(function() {
+	let currentSlide = 0;
+	const totalSlides = 4;
+	let autoSlideInterval = null;
+	let isPaused = false;
+	let isUserPaused = false;
+	const SLIDE_DURATION = 2800; // 2.8s per slide for brisk, dynamic presentation
+
+	function updateSlide(index, animate = true) {
+		currentSlide = ((index % totalSlides) + totalSlides) % totalSlides;
+		const track = document.getElementById('modalSliderTrack');
+		if (track) {
+			track.style.transition = animate ? 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
+			track.style.transform = `translateX(-${currentSlide * 100}%)`;
+		}
+
+		// Update slide counter
+		const currentEl = document.getElementById('modalSlideCurrent');
+		if (currentEl) currentEl.textContent = currentSlide + 1;
+
+		// Update thumbnails
+		const thumbs = document.querySelectorAll('#productModalThumbnails .modal-thumb-item');
+		thumbs.forEach((thumb, idx) => {
+			if (idx === currentSlide) {
+				thumb.classList.add('active');
+				thumb.classList.remove('opacity-60');
+				thumb.classList.add('opacity-100');
+			} else {
+				thumb.classList.remove('active');
+				thumb.classList.add('opacity-60');
+				thumb.classList.remove('opacity-100');
+			}
+		});
+
+		// Reset progress bar
+		restartProgressBar();
+	}
+
+	function startAutoSlide() {
+		stopAutoSlide();
+		if (isUserPaused) return;
+
+		updateAutoPlayUI(true);
+		restartProgressBar();
+
+		autoSlideInterval = setInterval(() => {
+			if (!isPaused && !isUserPaused) {
+				updateSlide(currentSlide + 1, true);
+			}
+		}, SLIDE_DURATION);
+	}
+
+	function stopAutoSlide() {
+		if (autoSlideInterval) {
+			clearInterval(autoSlideInterval);
+			autoSlideInterval = null;
+		}
+		resetProgressBar();
+	}
+
+	function restartProgressBar() {
+		const bar = document.getElementById('modalSliderProgressBar');
+		if (!bar) return;
+
+		bar.style.transition = 'none';
+		bar.style.width = '0%';
+
+		if (isPaused || isUserPaused) return;
+
+		// Trigger reflow to restart CSS transition
+		void bar.offsetWidth;
+
+		bar.style.transition = `width ${SLIDE_DURATION}ms linear`;
+		bar.style.width = '100%';
+	}
+
+	function resetProgressBar() {
+		const bar = document.getElementById('modalSliderProgressBar');
+		if (!bar) return;
+		bar.style.transition = 'none';
+		bar.style.width = '0%';
+	}
+
+	function updateAutoPlayUI(active) {
+		const indicator = document.getElementById('modalAutoPlayIndicator');
+		const label = document.getElementById('modalAutoPlayLabel');
+		if (indicator) {
+			indicator.className = active ? 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse' : 'w-2 h-2 rounded-full bg-gray-400';
+		}
+		if (label) {
+			label.textContent = active ? 'Auto-Slide' : 'Paused';
+		}
+	}
+
+	// Global API to update images and kick off auto-slide
+	window.setModalSliderImages = function(images) {
+		if (!Array.isArray(images) || images.length === 0) return;
+
+		const imgIds = ['modalMainImage', 'modalImage2', 'modalImage3', 'modalImage4'];
+		const thumbIds = ['modalThumb1', 'modalThumb2', 'modalThumb3', 'modalThumb4'];
+
+		for (let i = 0; i < 4; i++) {
+			const src = images[i] || images[0];
+			const imgEl = document.getElementById(imgIds[i]);
+			const thumbEl = document.getElementById(thumbIds[i]);
+			if (imgEl) imgEl.src = src;
+			if (thumbEl) thumbEl.src = src;
+		}
+
+		currentSlide = 0;
+		updateSlide(0, false);
+		isPaused = false;
+		isUserPaused = false;
+		startAutoSlide();
+	};
+
+	window.initModalSlider = function() {
+		currentSlide = 0;
+		updateSlide(0, false);
+		isPaused = false;
+		isUserPaused = false;
+		startAutoSlide();
+	};
+
+	window.stopModalSlider = function() {
+		stopAutoSlide();
+	};
+
+	// Bind controls on DOM ready
+	function initEvents() {
+		const viewport = document.getElementById('modalSliderViewport');
+		const prevBtn = document.getElementById('modalPrevSlide');
+		const nextBtn = document.getElementById('modalNextSlide');
+		const autoPlayToggle = document.getElementById('modalAutoPlayToggle');
+		const modal = document.getElementById('quickViewModal');
+
+		if (prevBtn) {
+			prevBtn.addEventListener('click', (e) => {
+				e.preventDefault();
+				e.stopPropagation();
+				updateSlide(currentSlide - 1);
+				if (!isUserPaused) startAutoSlide();
+			});
+		}
+
+		if (nextBtn) {
+			nextBtn.addEventListener('click', (e) => {
+				e.preventDefault();
+				e.stopPropagation();
+				updateSlide(currentSlide + 1);
+				if (!isUserPaused) startAutoSlide();
+			});
+		}
+
+		// Thumbnail click navigation
+		document.querySelectorAll('#productModalThumbnails .modal-thumb-item').forEach((thumb) => {
+			thumb.addEventListener('click', (e) => {
+				e.preventDefault();
+				const idx = parseInt(thumb.dataset.slideIndex, 10);
+				if (!isNaN(idx)) {
+					updateSlide(idx);
+					if (!isUserPaused) startAutoSlide();
+				}
+			});
+		});
+
+		// Hover to pause auto-slide
+		if (viewport) {
+			viewport.addEventListener('mouseenter', () => {
+				isPaused = true;
+				const bar = document.getElementById('modalSliderProgressBar');
+				if (bar) {
+					const computedWidth = window.getComputedStyle(bar).width;
+					bar.style.transition = 'none';
+					bar.style.width = computedWidth;
+				}
+			});
+
+			viewport.addEventListener('mouseleave', () => {
+				isPaused = false;
+				if (!isUserPaused) {
+					restartProgressBar();
+				}
+			});
+
+			// Touch swipe gestures for mobile
+			let touchStartX = 0;
+			let touchEndX = 0;
+			viewport.addEventListener('touchstart', (e) => {
+				touchStartX = e.changedTouches[0].screenX;
+			}, { passive: true });
+
+			viewport.addEventListener('touchend', (e) => {
+				touchEndX = e.changedTouches[0].screenX;
+				const diff = touchEndX - touchStartX;
+				if (Math.abs(diff) > 40) {
+					if (diff < 0) {
+						updateSlide(currentSlide + 1);
+					} else {
+						updateSlide(currentSlide - 1);
+					}
+					if (!isUserPaused) startAutoSlide();
+				}
+			}, { passive: true });
+		}
+
+		// Manual Auto-Play toggle button
+		if (autoPlayToggle) {
+			autoPlayToggle.addEventListener('click', (e) => {
+				e.preventDefault();
+				e.stopPropagation();
+				isUserPaused = !isUserPaused;
+				if (isUserPaused) {
+					stopAutoSlide();
+					updateAutoPlayUI(false);
+				} else {
+					updateAutoPlayUI(true);
+					startAutoSlide();
+				}
+			});
+		}
+
+		// Bootstrap modal lifecycle hooks
+		if (modal) {
+			modal.addEventListener('shown.bs.modal', () => {
+				updateSlide(0, false);
+				isUserPaused = false;
+				isPaused = false;
+				startAutoSlide();
+			});
+
+			modal.addEventListener('hidden.bs.modal', () => {
+				stopAutoSlide();
+			});
+		}
+
+		// Keyboard arrow keys navigation
+		document.addEventListener('keydown', (e) => {
+			if (!modal || !modal.classList.contains('show')) return;
+			if (e.key === 'ArrowLeft') {
+				updateSlide(currentSlide - 1);
+				if (!isUserPaused) startAutoSlide();
+			} else if (e.key === 'ArrowRight') {
+				updateSlide(currentSlide + 1);
+				if (!isUserPaused) startAutoSlide();
+			}
+		});
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initEvents);
+	} else {
+		initEvents();
+	}
+})();
+</script>

@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Libs CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Display:wght@400;700&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Admin Users Management - Nilco Bags Admin</title>
+    <style>
+        :root {
+            --admin-primary: #facc15;
+            --admin-primary-dark: #eab308;
+            --admin-dark: #0f172a;
+            --admin-secondary: #64748b;
+            --admin-bg: #f8fafc;
+        }
+
+        body {
+            background-color: var(--admin-bg);
+            font-family: 'Google Sans', 'Product Sans', sans-serif;
+            color: #0f172a;
+        }
+
+        .admin-header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1.15rem 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .admin-header h1 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin: 0;
+            color: #0f172a;
+            letter-spacing: -0.01em;
+        }
+
+        .admin-brand-icon {
+            background: #0f172a;
+            color: #facc15;
+            border-radius: 0.75rem;
+            padding: 0.55rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .admin-card {
+            background: white;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .admin-card-header {
+            padding: 1.15rem 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffff;
+        }
+
+        .admin-card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 0;
+            color: #0f172a;
+        }
+
+        .admin-card-body {
+            padding: 1.5rem;
+        }
+
+        .btn-admin {
+            background: #facc15;
+            border-color: #facc15;
+            color: #0f172a;
+            font-weight: 700;
+            border-radius: 0.6rem;
+            padding: 0.45rem 1rem;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-admin:hover {
+            background: #eab308;
+            border-color: #eab308;
+            color: #0f172a;
+            transform: translateY(-1px);
+        }
+
+        .table-responsive {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .table-admin th {
+            background: #f8fafc;
+            font-weight: 700;
+            color: #475569;
+            border-bottom: 2px solid #e2e8f0;
+            padding: 0.85rem 1rem;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .table-admin td {
+            padding: 0.85rem 1rem;
+            vertical-align: middle;
+            font-size: 0.875rem;
+        }
+
+        .badge-admin-active {
+            background: #ffffff;
+            color: #047857;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.35rem 0.65rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            border: none;
+            white-space: nowrap;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.10), 0 0.5px 2px rgba(0,0,0,0.07);
+        }
+
+        .badge-admin-inactive {
+            background: #ffffff;
+            color: #b91c1c;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.35rem 0.65rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            border: none;
+            white-space: nowrap;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.10), 0 0.5px 2px rgba(0,0,0,0.07);
+        }
+
+        .user-avatar-circle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #fefce8;
+            color: #854d0e;
+            border: 1px solid #fef08a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            padding: 0.85rem 1.25rem;
+            border-radius: 0.75rem;
+            color: white;
+            font-weight: 600;
+            z-index: 99999;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease;
+            max-width: calc(100vw - 40px);
+        }
+
+        .notification.success { background: #0f172a; border-left: 4px solid #facc15; color: #fff; }
+        .notification.error { background: #dc2626; }
+        .notification.info { background: #0284c7; }
+
+        .modal-content {
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+        }
+
+        .modal-header {
+            background: #0f172a;
+            color: #ffffff;
+            border-top-left-radius: 1rem;
+            border-top-right-radius: 1rem;
+            padding: 1.15rem 1.5rem;
+        }
+
+        .modal-header .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #facc15;
+            box-shadow: 0 0 0 0.2rem rgba(250,204,21,0.25);
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* ── Sidebar layout (matches admin-dashboard) ── */
+        :root {
+            --corp-bg: #f8fafc;
+            --corp-surface: #ffffff;
+            --corp-border: #e2e8f0;
+            --corp-text-main: #0f172a;
+            --corp-text-muted: #64748b;
+            --corp-sidebar-width: 260px;
+        }
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+        .admin-sidebar {
+            width: var(--corp-sidebar-width);
+            background: #ffffff;
+            border-right: 1px solid var(--corp-border);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+            transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+            display: flex;
+            flex-direction: column;
+        }
+        .admin-sidebar-header {
+            padding: 1.25rem 1.35rem;
+            border-bottom: 1px solid var(--corp-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .admin-sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--corp-text-main);
+        }
+        .admin-nav {
+            padding: 1rem 0.75rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .admin-nav-section {
+            padding: 0.85rem 0.75rem 0.35rem;
+            font-size: 0.675rem;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .admin-nav-item {
+            display: flex;
+            align-items: center;
+            padding: 0.6rem 0.85rem;
+            color: #475569;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.875rem;
+            border-radius: 8px;
+            transition: all 0.15s ease;
+            gap: 10px;
+        }
+        .admin-nav-item:hover { background: #f1f5f9; color: #0f172a; }
+        .admin-nav-item.active { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .admin-nav-item svg, .admin-nav-item i { font-size: 1.15rem; color: #64748b; flex-shrink: 0; }
+        .admin-nav-item.active i { color: #0f172a; }
+        .admin-sidebar-footer {
+            padding: 0.85rem;
+            border-top: 1px solid var(--corp-border);
+            margin-top: auto;
+        }
+        .admin-main {
+            flex: 1;
+            margin-left: var(--corp-sidebar-width);
+            transition: margin-left 0.25s ease;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .corp-page-header {
+            background: #ffffff;
+            border-bottom: 1px solid var(--corp-border);
+            padding: 0.85rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .corp-page-header h1 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0;
+            color: #0f172a;
+            letter-spacing: -0.015em;
+        }
+        .corp-page-header p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--corp-text-muted);
+        }
+        .admin-user-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 4px 10px 4px 4px;
+            background: #f8fafc;
+            border: 1px solid var(--corp-border);
+            border-radius: 9999px;
+        }
+        .admin-avatar-sm {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: #0f172a;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .admin-user-name { font-weight: 600; color: #0f172a; font-size: 0.825rem; line-height: 1.2; }
+        .admin-user-role { font-size: 0.7rem; color: var(--corp-text-muted); line-height: 1; }
+        .btn-live-store {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 0.45rem 0.85rem; border-radius: 8px;
+            border: 1px solid var(--corp-border);
+            background: #ffffff; color: #475569;
+            font-size: 0.825rem; font-weight: 600;
+            text-decoration: none; transition: all 0.15s ease;
+        }
+        .btn-live-store:hover { background: #f8fafc; color: #0f172a; border-color: #cbd5e1; }
+        .mobile-menu-toggle {
+            display: none;
+            background: #f8fafc;
+            border: 1px solid var(--corp-border);
+            border-radius: 8px;
+            padding: 0.4rem 0.55rem;
+            cursor: pointer;
+            color: #0f172a;
+        }
+        .corp-content { padding: 2rem; flex: 1; }
+        @media (max-width: 1024px) {
+            .admin-sidebar { transform: translateX(-100%); box-shadow: 0 0 35px rgba(0,0,0,0.15); }
+            .admin-sidebar.open { transform: translateX(0); }
+            .admin-main { margin-left: 0; }
+            .mobile-menu-toggle { display: block; }
+            .corp-page-header { padding: 0.75rem 1.25rem; }
+            .corp-content { padding: 1.25rem 1rem; }
+        }
+        @media (max-width: 576px) {
+            .corp-page-header h1 { font-size: 1rem; }
+            .admin-user-info { display: none; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Mobile Sidebar Overlay -->
+    <div id="sidebarOverlay" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.5); backdrop-filter:blur(2px); z-index:999;"></div>
+
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="admin-sidebar-header">
+                <a href="admin-dashboard.html" class="admin-sidebar-brand">
+                    <img src="assets/images/logo/logo.png" alt="Nilco Bags" style="max-height: 38px; width: auto; object-fit: contain;" />
+                </a>
+                <button id="sidebarCloseBtn" style="display:none; background:none; border:none; color:#64748b; font-size:1.25rem; line-height:1; cursor:pointer; padding:0.25rem;" aria-label="Close sidebar">&times;</button>
+            </div>
+
+            <nav class="admin-nav">
+                <div class="admin-nav-section">Overview</div>
+                <a href="admin-dashboard.html" class="admin-nav-item">
+                    <i class="ti ti-dashboard"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <div class="admin-nav-section">Catalog</div>
+                <a href="admin-products.html" class="admin-nav-item">
+                    <i class="ti ti-box"></i>
+                    <span>Products</span>
+                </a>
+
+                <div class="admin-nav-section">Access &amp; Security</div>
+                <a href="admin-users.html" class="admin-nav-item active">
+                    <i class="ti ti-users"></i>
+                    <span>Admin Users</span>
+                </a>
+
+                <div class="admin-nav-section">System</div>
+                <a href="admin-dashboard.html#settings" class="admin-nav-item">
+                    <i class="ti ti-settings"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="admin-sidebar-footer">
+                <a href="#" id="adminLogoutBtn" class="admin-nav-item text-danger w-100">
+                    <i class="ti ti-logout text-danger"></i>
+                    <span>Sign Out</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Page Header -->
+            <header class="corp-page-header">
+                <div class="d-flex align-items-center gap-2">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                        <i class="ti ti-menu-2 fs-5"></i>
+                    </button>
+                    <div>
+                        <h1>Team &amp; Access Control</h1>
+                        <p class="d-none d-sm-block">Manage administrator access, roles &amp; security credentials</p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="index.html" target="_blank" class="btn-live-store d-none d-sm-flex">
+                        <i class="ti ti-external-link"></i>
+                        <span>Live Store</span>
+                    </a>
+                    <button class="btn btn-sm btn-dark d-inline-flex align-items-center gap-1" id="addAdminBtn">
+                        <i class="ti ti-user-plus"></i>
+                        <span>Add Admin</span>
+                    </button>
+                    <div class="admin-user-pill d-none d-md-flex">
+                        <div class="admin-avatar-sm" style="background:transparent; overflow:hidden;">
+                            <img src="assets/user-profile.png" alt="Admin" style="width:24px; height:24px; object-fit:contain;" />
+                        </div>
+                        <div class="admin-user-info">
+                            <div class="admin-user-name" id="currentAdminName">Admin User</div>
+                            <div class="admin-user-role" id="currentAdminRole">Administrator</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="corp-content">
+                <!-- Admins Table Card -->
+                <div class="admin-card">
+                    <div class="admin-card-header flex-wrap gap-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <h3 class="admin-card-title">Authorized Administrators</h3>
+                            <span class="badge bg-success rounded-pill" id="adminsCountBadge">0</span>
+                        </div>
+
+                        <!-- Filters & Search Toolbar (hidden, kept for JS) -->
+                        <div style="display:none;">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text bg-white border-end-0"><i class="ti ti-search text-muted"></i></span>
+                                <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Search by name or email...">
+                            </div>
+                            <select id="roleFilter" class="form-select form-select-sm">
+                                <option value="all">All Roles</option>
+                                <option value="super_admin">Super Admin</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                            <button class="btn btn-sm btn-outline-secondary" id="refreshBtn" title="Refresh Table">
+                                <i class="ti ti-refresh"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="admin-card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-admin align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 50px;">Avatar</th>
+                                        <th style="min-width: 180px;">Admin Profile</th>
+                                        <th style="min-width: 130px;">Role</th>
+                                        <th style="min-width: 110px;">Status</th>
+                                        <th style="min-width: 140px;">Last Login</th>
+                                        <th style="min-width: 120px;">Created</th>
+                                        <th style="width: 110px;" class="text-end">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminsTable">
+                                    <tr>
+                                        <td colspan="7" class="text-center py-5 text-muted">
+                                            <div class="spinner-border spinner-border-sm text-success me-2" role="status"></div>
+                                            Loading admin profiles from Supabase...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Admin Add / Edit Modal -->
+    <div class="modal fade" id="adminModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content border-0 shadow-lg rounded-3">
+                <div class="modal-header bg-light border-bottom py-3 px-3 px-md-4">
+                    <h5 class="modal-title fw-bold fs-5" id="adminModalTitle">Add Admin User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-3 p-md-4">
+                    <form id="adminForm">
+                        <input type="hidden" id="editAdminId">
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Full Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="adminFullName" placeholder="e.g. Sarah Jenkins" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Email Address <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="adminEmail" placeholder="sarah@nilcobags.com" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">
+                                Password <span id="passwordRequiredStar" class="text-danger">*</span>
+                            </label>
+                            <input type="password" class="form-control" id="adminPassword" placeholder="••••••••">
+                            <small class="text-muted" id="passwordHelpText">Minimum 6 characters</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Role <span class="text-danger">*</span></label>
+                            <select class="form-select" id="adminRole" required>
+                                <option value="admin">Admin (Standard Access)</option>
+                                <option value="super_admin">Super Admin (Full Access)</option>
+                            </select>
+                        </div>
+
+                        <div class="mt-4 pt-2 border-top">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="adminActive" checked>
+                                <label class="form-check-label fw-medium" for="adminActive">Account Active &amp; Enabled</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer bg-light border-top d-flex justify-content-end py-2 px-3 px-md-4 gap-2">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-admin btn-sm px-3" id="saveAdminBtn">Save Admin User</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/admin-users.js"></script>
+    <script>
+        // Sidebar toggle (mirrors admin-dashboard behaviour)
+        (function() {
+            const sidebar = document.getElementById('adminSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            const closeBtn = document.getElementById('sidebarCloseBtn');
+            const toggle  = document.getElementById('mobileMenuToggle');
+
+            function openSidebar() {
+                sidebar.classList.add('open');
+                overlay.style.display = 'block';
+                if (closeBtn) closeBtn.style.display = 'block';
+            }
+            function closeSidebar() {
+                sidebar.classList.remove('open');
+                overlay.style.display = 'none';
+                if (closeBtn) closeBtn.style.display = 'none';
+            }
+            if (toggle) toggle.addEventListener('click', () => sidebar.classList.contains('open') ? closeSidebar() : openSidebar());
+            if (overlay) overlay.addEventListener('click', closeSidebar);
+            if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+        })();
+    </script>
+</body>
+
+</html>
+

@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Find Nilco Bags shop location on Covai Road. Visit our store for premium bags collection." />
+  <link rel="stylesheet" href="node_modules/swiper/swiper-bundle.min.css" />
+  @@include("partials/head.html")
+  <title>Our Physical Locations - Nilco Bags</title>
+  <style>
+    .ap-slide-item {
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+    }
+    .ap-hero-slider {
+      border-radius: 18px !important;
+      overflow: hidden;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.07);
+    }
+    @media (max-width: 767.98px) {
+      .ap-hero-slider .swiper-slide {
+        aspect-ratio: 16 / 7.2 !important;
+        min-height: 145px !important;
+        height: auto !important;
+        border-radius: 18px !important;
+      }
+      .ap-hero-slider .swiper-pagination {
+        bottom: 8px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+      }
+      .ap-hero-slider .swiper-pagination-bullet {
+        width: 5px;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.7);
+        opacity: 1;
+        border: none;
+        border-radius: 9999px;
+        margin: 0 !important;
+        transition: all 0.3s ease;
+      }
+      .ap-hero-slider .swiper-pagination-bullet-active {
+        width: 18px;
+        height: 5px;
+        background: #facc15;
+        border-radius: 9999px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+      }
+    }
+    @media (min-width: 768px) {
+      .ap-hero-slider {
+        border-radius: 24px !important;
+      }
+      .ap-hero-slider .swiper-slide {
+        height: auto;
+        aspect-ratio: 16 / 7;
+      }
+    }
+    .ap-banner-slide-1 {
+      background-image: url(assets/images/bannerimg.png);
+    }
+    .ap-banner-slide-2 {
+      background-image: url(assets/images/bannerimg.png);
+    }
+    .ap-banner-slide-3 {
+      background-image: url(assets/images/bannerimg.png);
+    }
+  </style>
+</head>
+<body>
+  @@include("partials/navbar.html")
+
+  <main class="pb-12">
+    <!-- Mobile App Horizontal Hero Banner -->
+    <section class="mt-2.5 sm:mt-4 md:mt-6 mb-3">
+      <div class="container max-w-7xl mx-auto px-3 sm:px-4">
+        <div class="swiper-container swiper ap-hero-slider overflow-hidden" id="swiper-location" data-pagination-type="" data-speed="500"
+          data-space-between="20" data-pagination="true" data-navigation="false" data-autoplay="true"
+          data-autoplay-delay="3500" data-effect="slide"
+          data-breakpoints='{"480": {"slidesPerView": 1}, "768": {"slidesPerView": 1}, "1024": {"slidesPerView": 1}}'>
+          <div class="swiper-wrapper">
+            <div class="swiper-slide ap-slide-item ap-banner-slide-1"></div>
+            <div class="swiper-slide ap-slide-item ap-banner-slide-2"></div>
+            <div class="swiper-slide ap-slide-item ap-banner-slide-3"></div>
+          </div>
+          <!-- App Pill Pagination -->
+          <div class="swiper-pagination !bottom-3"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-8 sm:py-12">
+      <div class="container max-w-6xl mx-auto px-4">
+        <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- Map Section -->
+          <div class="order-2 lg:order-1">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+              <div class="aspect-video w-full">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3912.123456789!2d78.0609816!3d10.9602712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa2f43a3fc739d:0x8af472da0f5d3fc3!2sNilco+Bags!5e0!3m2!1sen!2sin!4v1693740800000!5m2!1sen!2sin" 
+                  width="100%" 
+                  height="100%" 
+                  style="border:0;" 
+                  allowfullscreen="" 
+                  loading="lazy" 
+                  referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+              </div>
+            </div>
+          </div>
+
+          <!-- Location Details -->
+          <div class="order-1 lg:order-2">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+              <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Store Information</h2>
+              
+              <div class="space-y-3 sm:space-y-4">
+                <div class="flex items-start gap-3 sm:gap-4">
+                  <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                    <img src="assets/images/store.png" alt="Store" width="16" height="16" class="sm:w-5 sm:h-5" />
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-gray-900 text-sm sm:text-base mb-0.5">Store Name</h3>
+                    <p class="text-gray-600 text-xs sm:text-sm">Nilco Bags</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3 sm:gap-4">
+                  <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                    <img src="assets/images/map.png" alt="Map" width="16" height="16" class="sm:w-5 sm:h-5" />
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-gray-900 text-sm sm:text-base mb-0.5">Address</h3>
+                    <p class="text-gray-600 text-xs sm:text-sm">Karur Covai Road, Tamil Nadu, India</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3 sm:gap-4">
+                  <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                    <img src="assets/images/clock.png" alt="Clock" width="16" height="16" class="sm:w-5 sm:h-5" />
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-gray-900 text-sm sm:text-base mb-0.5">Business Hours</h3>
+                    <p class="text-gray-600 text-xs sm:text-sm">Mon - Sat: 10:00 AM - 8:00 PM</p>
+                    <p class="text-gray-600 text-xs sm:text-sm">Sunday: 11:00 AM - 6:00 PM</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3 sm:gap-4">
+                  <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                    <img src="assets/images/call.png" alt="Call" width="16" height="16" class="sm:w-5 sm:h-5" />
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-gray-900 text-sm sm:text-base mb-0.5">Contact</h3>
+                    <p class="text-gray-600 text-xs sm:text-sm">WhatsApp: +91 78713 31144, +91 78713 31155</p>
+                    <p class="text-gray-600 text-xs sm:text-sm">Phone: +91 78713 31144, +91 78713 31155</p>
+                  </div>
+                </div>
+
+                <div class="pt-3 sm:pt-4 border-t border-gray-200">
+                  <a href="https://www.google.com/maps/place/Nilco+Bags+covai+road/@10.9602712,78.0609816,16z/data=!4m10!1m2!2m1!1sNilco+Bags!3m6!1s0x3baa2f43a3fc739d:0x8af472da0f5d3fc3!8m2!3d10.9602712!4d78.0699938!15sCgpOaWxjbyBCYWdzWgwiCm5pbGNvIGJhZ3OSAQhiYWdfc2hvcOABAA!16s%2Fg%2F11rvwcc6q6?entry=ttu&g_ep=EgoyMDI2MDgzMS4wIKXMDSoASAFQAw%3D%3D" 
+                     target="_blank" 
+                     rel="noopener noreferrer"
+                     class="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 text-gray-900 font-bold rounded-full hover:bg-gray-200 transition text-sm sm:text-base"
+                     style="background-color: #f1f1f1;">
+                    <img src="assets/images/map.png" alt="Map" width="16" height="16" class="sm:w-5 sm:h-5" />
+                    Open in Google Maps
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  @@include("partials/footer.html")
+  <script src="node_modules/swiper/swiper-bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      new Swiper('#swiper-location', {
+        pagination: {
+          el: '#swiper-location .swiper-pagination',
+          clickable: true,
+        },
+        autoplay: {
+          delay: 3500,
+          disableOnInteraction: false,
+        },
+        effect: 'slide',
+        speed: 500,
+        spaceBetween: 20,
+      });
+    });
+  </script>
+  @@include("partials/buy-template.html")
+  @@include("partials/ad-modal.html")
+</body>
+</html>

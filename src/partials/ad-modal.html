@@ -1,0 +1,201 @@
+<!-- Ad Modal Slider -->
+<div id="adModal" class="fixed inset-0 z-[100] hidden items-center justify-center">
+  <!-- Backdrop with blur -->
+  <div id="adModalBackdrop" class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
+  
+  <!-- Modal Content -->
+  <div class="relative z-10 flex items-center justify-center w-full h-full p-4">
+    <div class="relative bg-white rounded-2xl shadow-2xl overflow-hidden max-w-md w-full max-h-[80vh] flex flex-col">
+      
+      <!-- Close Button -->
+      <button id="closeAdModal" class="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Vertical Slider Container -->
+      <div class="relative w-full h-full overflow-hidden">
+        <div id="adSlider" class="flex transition-transform duration-500 ease-in-out h-full">
+          <!-- Ad Slide 1 -->
+          <div class="w-full h-full flex-shrink-0">
+            <img src="assets/images/modal-slide/ad1.png" alt="Advertisement 1" class="w-full h-full object-cover" />
+          </div>
+          <!-- Ad Slide 2 -->
+          <div class="w-full h-full flex-shrink-0">
+            <img src="assets/images/modal-slide/ad2.png" alt="Advertisement 2" class="w-full h-full object-cover" />
+          </div>
+        </div>
+
+        <!-- Slider Indicators -->
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+          <button class="ad-indicator w-2 h-2 rounded-full bg-white/50 hover:bg-white transition-colors" data-slide="0"></button>
+          <button class="ad-indicator w-2 h-2 rounded-full bg-white/50 hover:bg-white transition-colors" data-slide="1"></button>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <button id="prevAd" class="absolute left-3 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 text-white flex items-center justify-center transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button id="nextAd" class="absolute right-3 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 text-white flex items-center justify-center transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Mobile Adaptive */
+  @media (max-width: 640px) {
+    #adModal .relative.bg-white {
+      max-width: 95%;
+      max-height: 85vh;
+    }
+    #adModal button.w-8.h-8 {
+      width: 32px;
+      height: 32px;
+    }
+    #adModal button.w-10.h-10 {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  /* Active indicator */
+  .ad-indicator.active {
+    background-color: white;
+  }
+</style>
+
+<script>
+  (function() {
+    const adModal = document.getElementById('adModal');
+    const adModalBackdrop = document.getElementById('adModalBackdrop');
+    const closeAdModal = document.getElementById('closeAdModal');
+    const adSlider = document.getElementById('adSlider');
+    const prevAd = document.getElementById('prevAd');
+    const nextAd = document.getElementById('nextAd');
+    const indicators = document.querySelectorAll('.ad-indicator');
+
+    let currentSlide = 0;
+    const totalSlides = 2;
+    let slideInterval;
+    let modalInterval;
+
+    // Show modal
+    function showModal() {
+      adModal.classList.remove('hidden');
+      adModal.classList.add('flex');
+      setTimeout(() => {
+        adModalBackdrop.classList.remove('opacity-0');
+        adModalBackdrop.classList.add('opacity-100');
+      }, 10);
+      startSlideShow();
+    }
+
+    // Hide modal
+    function hideModal() {
+      adModalBackdrop.classList.remove('opacity-100');
+      adModalBackdrop.classList.add('opacity-0');
+      setTimeout(() => {
+        adModal.classList.remove('flex');
+        adModal.classList.add('hidden');
+      }, 300);
+      stopSlideShow();
+    }
+
+    // Go to specific slide
+    function goToSlide(index) {
+      currentSlide = index;
+      if (currentSlide >= totalSlides) currentSlide = 0;
+      if (currentSlide < 0) currentSlide = totalSlides - 1;
+      
+      adSlider.style.transform = `translateX(-${currentSlide * 100}%)`;
+      
+      // Update indicators
+      indicators.forEach((ind, i) => {
+        if (i === currentSlide) {
+          ind.classList.add('active');
+        } else {
+          ind.classList.remove('active');
+        }
+      });
+    }
+
+    // Next slide
+    function nextSlide() {
+      goToSlide(currentSlide + 1);
+    }
+
+    // Previous slide
+    function prevSlide() {
+      goToSlide(currentSlide - 1);
+    }
+
+    // Start slideshow
+    function startSlideShow() {
+      stopSlideShow();
+      slideInterval = setInterval(nextSlide, 3000);
+    }
+
+    // Stop slideshow
+    function stopSlideShow() {
+      if (slideInterval) {
+        clearInterval(slideInterval);
+      }
+    }
+
+    // Event listeners
+    closeAdModal.addEventListener('click', hideModal);
+    adModalBackdrop.addEventListener('click', hideModal);
+    prevAd.addEventListener('click', () => {
+      prevSlide();
+      stopSlideShow();
+      startSlideShow();
+    });
+    nextAd.addEventListener('click', () => {
+      nextSlide();
+      stopSlideShow();
+      startSlideShow();
+    });
+
+    indicators.forEach((ind, index) => {
+      ind.addEventListener('click', () => {
+        goToSlide(index);
+        stopSlideShow();
+        startSlideShow();
+      });
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !adModal.classList.contains('hidden')) {
+        hideModal();
+      }
+    });
+
+    // Show modal every 1.5 minutes (90,000ms)
+    function scheduleModal() {
+      modalInterval = setInterval(() => {
+        if (adModal.classList.contains('hidden')) {
+          showModal();
+        }
+      }, 90000);
+    }
+
+    // Initialize
+    goToSlide(0);
+    scheduleModal();
+
+    // Show modal after 3 seconds on first load
+    setTimeout(() => {
+      showModal();
+    }, 3000);
+  })();
+</script>
